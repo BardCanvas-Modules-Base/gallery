@@ -33,7 +33,7 @@
     <record_nav>
         <modes>
             <tiles>Switch to tiles mode</tiles>
-            <table>Switch to able mode</table>
+            <table>Switch to table mode</table>
         </modes>
         <search_placeholder>Search by id, parent, slug, title or description</search_placeholder>
         <columns>
@@ -93,7 +93,7 @@
     </status_labels>
     
     <form>
-        <add_title>New media item</add_title>
+        <add_title>Upload media item</add_title>
         <edit_title>Editing media item details</edit_title>
         <fields>
             <title>

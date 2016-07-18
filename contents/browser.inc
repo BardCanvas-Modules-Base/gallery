@@ -102,7 +102,7 @@ if( empty($account->engine_prefs["gallery_browser_layout"]) )
     </span>
     
     <button onclick="prepare_media_addition()">
-        <span class="fa fa-plus-circle"></span>
+        <span class="fa fa-upload"></span>
         <?= $current_module->language->index->buttons->add ?>
     </button>
 </h1>
