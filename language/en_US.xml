@@ -31,6 +31,10 @@
     </pages>
     
     <record_nav>
+        <modes>
+            <tiles>Switch to tiles mode</tiles>
+            <table>Switch to able mode</table>
+        </modes>
         <search_placeholder>Search by id, parent, slug, title or description</search_placeholder>
         <columns>
             <title>

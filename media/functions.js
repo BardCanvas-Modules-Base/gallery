@@ -1,4 +1,17 @@
 
+function switch_media_browser_mode(new_mode)
+{
+    var $container = $('#media_browser_mode_switches');
+    
+    if( $container.attr('data-current-mode') == new_mode ) return;
+    
+    $container.attr('data-current-mode', new_mode);
+    set_engine_pref('gallery_browser_layout', new_mode, function()
+    {
+        $('#refresh_media_browser').click();
+    });
+}
+
 function prepare_media_addition()
 {
     var $workarea = $('#form_workarea');
@@ -116,7 +129,7 @@ function trash_media(id_media)
         'wasuuup':  parseInt(Math.random() * 1000000000000000)
     };
     
-    var $row = $('#media_browser_table').find('tr[data-record-id="' + id_media + '"]');
+    var $row = $('#media_browser_table').find('.record[data-record-id="' + id_media + '"]');
     
     $row.block(blockUI_smallest_params);
     $.get(url, params, function(response)
@@ -130,7 +143,7 @@ function trash_media(id_media)
         }
         
         $row.unblock();
-        $('#refresh_media_browser').click();
+        $row.remove();
     });
 }
 

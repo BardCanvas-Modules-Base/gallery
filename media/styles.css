@@ -7,3 +7,25 @@
  */
 
 .post_buttons button { font-size: 12pt; line-height: 24pt; }
+
+#media_browser_mode_switches[data-current-mode="table"] span[data-trigger-for="tiles"] { border-color: transparent; }
+#media_browser_mode_switches[data-current-mode="table"] span[data-trigger-for="table"] { cursor: auto; }
+
+#media_browser_mode_switches[data-current-mode="tiles"] span[data-trigger-for="table"] { border-color: transparent; }
+#media_browser_mode_switches[data-current-mode="tiles"] span[data-trigger-for="tiles"] { cursor: auto; }
+
+.tiles_container .tile           { display: inline-block; vertical-align: top;
+                                   border: 1px solid; text-decoration: none; cursor: auto;
+                                   background-repeat: no-repeat; background-size: cover; }
+.tiles_container .tile .contents { display: table-cell; vertical-align: bottom;
+                                   color: white; font-weight: bold; font-size: 8pt;
+                                   font-family: Arial, Helvetica, sans-serif;
+                                   text-shadow: 2px 2px 2px black; }
+
+.tiles_container .tile .contents .emojione    { height: 8pt; }
+.tiles_container .tile .contents a            ,
+.tiles_container .tile .contents .pseudo_link { color: white; text-decoration: none; }
+
+.tiles_container .tile                  { width: 155px; height: 155px; margin:  5px; }
+.tiles_container .tile .contents        { width: 155px; height: 155px; padding: 5px; }
+.tiles_container .tile .contents .title { width: 145px; overflow: hidden; }
