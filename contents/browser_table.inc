@@ -62,7 +62,7 @@ use hng2_base\repository\media_record;
                     echo "<br>";
                     ?>
                     
-                    <span class="framed_content"><?= $current_module->language->status_labels->{$row->status} ?></span>
+                    <span class="framed_content inlined"><?= $current_module->language->status_labels->{$row->status} ?></span>
                     <?
                     foreach($repository->get_attached_categories($row->id_media) as $category)
                         echo "<span class='category'><span class='fa fa-folder fa-fw'></span>{$category->title}</span> ";
