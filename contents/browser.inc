@@ -5,6 +5,8 @@
  * @package    BardCanvas
  * @subpackage gallery
  * @author     Alejandro Caballero - lava.caballero@gmail.com
+ *             
+ * $_GET params:
  */
 
 use hng2_base\config;
@@ -20,6 +22,8 @@ $repository = new media_repository();
  * @var int    $order
  * @var string $search_state
  * @var string $search_for
+ * @var string $search_type
+ * 
  */
 #region Nav filters
 $built_vars = $browser->build_vars(20, 4);
@@ -59,6 +63,8 @@ if( ! empty($search_for) )
         ;
     }
 }
+
+if( ! empty($search_type) ) $where[] = "type = '$search_type'";
 #endregion
 
 #region Nav pointers
@@ -128,10 +134,21 @@ if( empty($account->engine_prefs["gallery_browser_layout"]) )
                value="<?= htmlspecialchars($search_for) ?>" size="46"
                placeholder="<?= $current_module->language->record_nav->search_placeholder ?>">
         
+        <select name="search_type">
+            <option <? if($search_type == "") echo "selected"; ?> value="">
+                &lt;<?= $current_module->language->media_types->all ?>&gt;
+            </option>
+            <? foreach($current_module->language->media_types->media as $item): ?>
+                <option <? if($item["type"] == $search_type) echo "selected" ?> value="<?= $item["type"] ?>">
+                    <?= trim($item->plural) ?>
+                </option>
+            <? endforeach; ?>
+        </select>
+        
         <?= $language->record_nav->show ?>
         <select name="limit">
             <? foreach(array(5, 10, 20, 30, 40, 50, 100, 200, 300, 400, 500) as $recs): ?>
-                <option <? if($limit == $recs) echo "selected" ?>><?= $recs ?></option>
+                <option <? if($limit == $recs) echo "selected" ?> value="<?= $recs ?>"><?= $recs ?></option>
             <? endforeach; ?>
         </select>
         <?= $language->record_nav->recs_per_page ?>

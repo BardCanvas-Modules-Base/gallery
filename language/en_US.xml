@@ -30,6 +30,18 @@
         </by_author>
     </pages>
     
+    <media_types>
+        <all>All media types</all>
+        <media type="image">
+            <caption>Image</caption>
+            <plural>Images</plural>
+        </media>
+        <media type="video">
+            <caption>Video</caption>
+            <plural>Videos</plural>
+        </media>
+    </media_types>
+    
     <record_nav>
         <modes>
             <tiles>Switch to tiles mode</tiles>

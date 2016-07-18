@@ -19,7 +19,7 @@
     
     <template_includes>
         <pre_rendering>pre_rendering_presets.inc</pre_rendering>
-        <!--<html_head></html_head>-->
+        <html_head>global_header.inc</html_head>
         <!--<pre_header></pre_header>-->
         <!--<header_top></header_top>-->
         <header_menu>header_buttons.inc</header_menu>

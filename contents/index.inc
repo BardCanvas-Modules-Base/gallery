@@ -23,7 +23,8 @@
     {
         var $form = $('#filter_form');
         $form.find('input[name="search_for"]').val('');
-        $form.find('select[name="limit"] options:first').prop('selected', true);
+        $form.find('select[name="limit"] option[value="20"]').prop('selected', true);
+        $form.find('select[name="search_type"] option:first').prop('selected', true);
         $form.find('input[name="offset"]').val('0');
         $form.find('input[name="order"]').val('');
     }
