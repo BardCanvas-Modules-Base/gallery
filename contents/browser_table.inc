@@ -52,6 +52,16 @@ use hng2_base\repository\media_record;
                 </td>
                 <td>
                     <?= empty($row->description) ? "―" : convert_emojis(make_excerpt_of($row->description, 100)) ?><br>
+                    
+                    <?
+                    echo $row->dimensions;
+                    $amount = number_format($row->size / 1000, 1);
+                    $amount = rtrim($amount, "0");
+                    $amount = rtrim($amount, ".");
+                    echo " • $amount KB";
+                    echo "<br>";
+                    ?>
+                    
                     <span class="framed_content"><?= $current_module->language->status_labels->{$row->status} ?></span>
                     <?
                     foreach($repository->get_attached_categories($row->id_media) as $category)

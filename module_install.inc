@@ -28,7 +28,10 @@ $tables = array(
             # Absolute> /mediaserver/year/month/username_mediatitle_randomseed.png
             # /media_server is located in /data/uploaded_media
             path              varchar(255) not null default '',
-            content_type      varchar(64) not null default '',
+            type              varchar(64) not null default '',
+            mime_type         varchar(64) not null default '',
+            dimensions        varchar(64) not null default '',
+            size              int unsigned not null default 0,
             title             varchar(255) not null default '',
             thumbnail         varchar(255) not null default '',
             

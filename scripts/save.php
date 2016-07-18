@@ -24,7 +24,10 @@ if( empty($_POST["id_media"]) && empty($_FILES) )
 $media_manager = null;
 $media_path    = "";
 $thumbnail     = "";
+$media_type    = "";
 $mime_type     = "";
+$dimensions    = "";
+$size          = 0;
 if( empty($_POST["id_media"]) && ! empty($_FILES["file"]) )
 {
     if( ! is_uploaded_file($_FILES["file"]["tmp_name"]) )
@@ -56,7 +59,10 @@ if( empty($_POST["id_media"]) && ! empty($_FILES["file"]) )
         $media_manager->move_to_repository($new_file_name);
         $media_path = $media_manager->get_relative_path();
         $thumbnail  = $media_manager->get_thumbnail();
+        $media_type = $media_manager->get_type();
         $mime_type  = $_FILES["file"]["type"];
+        $dimensions = $media_manager->get_dimensions();
+        $size       = $media_manager->get_size();
     }
     catch(\Exception $e)
     {
@@ -78,7 +84,10 @@ $item->set_from_post();
 if( empty($item->id_media) )
 {
     $item->set_new_id();
-    $item->content_type      = $mime_type;
+    $item->type              = $media_type;
+    $item->mime_type         = $mime_type;
+    $item->dimensions        = $dimensions;
+    $item->size              = $size;
     $item->path              = $media_path;
     $item->thumbnail         = $thumbnail;
     $item->id_author         = $account->id_account;
