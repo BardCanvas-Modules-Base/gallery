@@ -137,6 +137,7 @@ function trash_media(id_media)
 function reset_media_form()
 {
     var $form = $('#media_form');
+    $form.find('input[name="id_media"]').val('');
     $form[0].reset();
 }
 

@@ -167,7 +167,7 @@ $records = $repository->find($where, $limit, $offset, $sqlorder);
         <? foreach( $records as $row ): ?>
             <tr data-record-id="<?= $row->id_media ?>">
                 <td width="25%">
-                    <div class="principal_data"><?= $row->title ?></div>
+                    <div class="principal_data"><?= convert_emojis($row->title) ?></div>
                     
                     <div class="actions">
                         <span class="action pseudo_link" onclick="edit_media('<?= $row->id_media ?>')">
@@ -181,7 +181,7 @@ $records = $repository->find($where, $limit, $offset, $sqlorder);
                     </div>
                 </td>
                 <td>
-                    <?= empty($row->description) ? "―" : make_excerpt_of($row->description, 100) ?><br>
+                    <?= empty($row->description) ? "―" : convert_emojis(make_excerpt_of($row->description, 100)) ?><br>
                     <span class="framed_content"><?= $current_module->language->status_labels->{$row->status} ?></span>
                     <?
                     foreach($repository->get_attached_categories($row->id_media) as $category)
@@ -193,7 +193,7 @@ $records = $repository->find($where, $limit, $offset, $sqlorder);
                     ?>
                 </td>
                 <td>
-                    <?= $row->author_display_name ?>
+                    <?= convert_emojis($row->author_display_name) ?>
                 </td>
                 <td>
                     <?= time_elapsed_string($row->publishing_date) ?>
