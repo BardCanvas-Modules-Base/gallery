@@ -40,11 +40,27 @@
 <style type="text/css">
     @media all and (max-width: 800px)
     {
-        /*#media_browser_table tr th:nth-child(4) { display: none; }*/
-        /*#media_browser_table tr td:nth-child(4) { display: none; }*/
+        #media_browser_table tr th:nth-child(4) { display: none; }
+        #media_browser_table tr td:nth-child(4) { display: none; }
+        #media_browser_table tr th:nth-child(5) { display: none; }
+        #media_browser_table tr td:nth-child(5) { display: none; }
     }
     @media all and (max-width: 600px)
     {
+        #media_browser_table tr th:nth-child(1) { width: 100%; }
+        #media_browser_table tr td:nth-child(1) { width: 100%; }
+        #media_browser_table tr th:nth-child(2) { display: none; }
+        #media_browser_table tr td:nth-child(2) { display: none; }
+        #media_browser_table tr th:nth-child(3) { display: none; }
+        #media_browser_table tr td:nth-child(3) { display: none; }
+        #media_browser_table tr th:nth-child(4) { display: none; }
+        #media_browser_table tr td:nth-child(4) { display: none; }
+        #media_browser_table tr th:nth-child(5) { display: none; }
+        #media_browser_table tr td:nth-child(5) { display: none; }
+        #media_browser_table tr th:nth-child(6) { display: none; }
+        #media_browser_table tr td:nth-child(6) { display: none; }
+        #media_browser_table tr th:nth-child(7) { display: none; }
+        #media_browser_table tr td:nth-child(7) { display: none; }
     }
 </style>
 
