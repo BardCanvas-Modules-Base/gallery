@@ -108,7 +108,7 @@
                 ]]></info>
             </file>
             <description>
-                <caption>Item description (optional):</caption>
+                <placeholder>Type a short description for the item. Use the icons below this editor to tag users and add hashtags.</placeholder>
             </description>
         </fields>
         

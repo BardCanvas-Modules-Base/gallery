@@ -65,10 +65,8 @@ $types_list = implode(", ", $types_list);
     </div>
     
     <div class="field" data-field="description">
-        <div class="caption"><?= $current_module->language->form->fields->description->caption ?></div>
-        <div class="input">
-            <textarea name="description" id="media_description_editor" class="tinymce"></textarea>
-        </div>
+        <textarea name="description" id="media_description_editor" class="tinymce"
+                  placeholder="<?= $current_module->language->form->fields->description->placeholder ?>"></textarea>
     </div>
     
     <p class="post_buttons" style="text-align: right;">
