@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<language>
+    
+    <display_name>Media Gallery</display_name>
+    <icon>fa-picture-o</icon>
+    <description>
+        Subsystem for images/videos management, embedding and delivery.
+    </description>
+    
+    <index>
+        <title>Media Gallery</title>
+        <menu_caption>Media</menu_caption>
+        <buttons>
+            <add>Upload</add>
+        </buttons>
+    </index>
+    
+    <pages>
+        <by_category>
+            <title>Media in {$category}</title>
+            <no_records>No items have been found for this category.</no_records>
+        </by_category>
+        <by_date>
+            <title>Media published on {$date}</title>
+            <no_records>No items have been found for this date range.</no_records>
+        </by_date>
+        <by_author>
+            <title>Media published by {$author}</title>
+            <no_records>No items have been published by this author.</no_records>
+        </by_author>
+    </pages>
+    
+    <record_nav>
+        <search_placeholder>Search by id, parent, slug, title or description</search_placeholder>
+        <columns>
+            <title>
+                <caption>Title</caption>
+                <layout xnowrap="true" />
+            </title>
+            <description>
+                <caption><![CDATA[ Description &amp; details ]]></caption>
+                <layout xnowrap="true" />
+            </description>
+            <author>
+                <caption>Author</caption>
+                <layout xnowrap="true" />
+            </author>
+            <publishing_date>
+                <caption>Published</caption>
+                <layout xnowrap="true" />
+                <order_asc  id="1">Order by publishing date ascending</order_asc>
+                <order_desc id="2">Order by publishing date descending</order_desc>
+            </publishing_date>
+            <last_update>
+                <caption>Last activity</caption>
+                <layout xnowrap="true" />
+                <order_asc  id="3">Order by last activity update ascending</order_asc>
+                <order_desc id="4">Order by last activity update descending</order_desc>
+            </last_update>
+            <views>
+                <caption><![CDATA[ <span class="fa fa-eye fa-fw"></span> ]]></caption>
+                <layout xnowrap="true" />
+                <order_asc  id="5">Order by views ascending</order_asc>
+                <order_desc id="6">Order by views descending</order_desc>
+            </views>
+            <comments>
+                <caption><![CDATA[ <span class="fa fa-comments-o fa-fw"></span> ]]></caption>
+                <layout xnowrap="true" />
+                <order_asc  id="7">Order by comments count ascending</order_asc>
+                <order_desc id="8">Order by comments count descending</order_desc>
+            </comments>
+            <featured_image>
+                <caption>Preview</caption>
+                <layout xnowrap="true" xalign="center" xwidth="200"/>
+            </featured_image>
+        </columns>
+        <actions>
+            <edit>Edit</edit>
+            <trash>Trash</trash>
+        </actions>
+    </record_nav>
+    
+    <status_labels>
+        <draft>Draft</draft>
+        <published>Published</published>
+        <reviewing>Reviewing</reviewing>
+        <hidden>Hidden</hidden>
+        <trashed>Trashed</trashed>
+    </status_labels>
+    
+    <form>
+        <add_title>New media item</add_title>
+        <edit_title>Editing media item details</edit_title>
+        <fields>
+            <title>
+                <placeholder>Enter a title for the item</placeholder>
+            </title>
+            <file>
+                <caption>Select a file to upload:</caption>
+                <info><![CDATA[
+                    Select the file to upload.
+                    Maximum upload size is <span class="framed_content inlined">{$size} MB</span>
+                    and file types allowed are {$types}
+                ]]></info>
+            </file>
+            <description>
+                <caption>Item description (optional):</caption>
+            </description>
+        </fields>
+        
+        <buttons>
+            <save_draft>Save draft</save_draft>
+            <publish>Publish</publish>
+        </buttons>
+    </form>
+    
+    <messages>
+        <missing>
+            <id>Please provide an item id</id>
+            <title>Please specify a title for the item</title>
+            <main_category>Please specify a main category for the item</main_category>
+            <file>YOu haven't chosen a file to upload.</file>
+        </missing>
+        <invalid>
+            <file>The file you uploiaded isn't valid. Please make sure you're uploading a valid file type.</file>
+            <upload>Invalid upload detected. Please try again.</upload>
+        </invalid>
+        <item_not_found>The item wasn't found in the database</item_not_found>
+        <media_manager_exception><![CDATA[
+            The media manager has thrown an exception:
+             
+            Invoked class:
+                {$class}
+             
+            Message:
+                {$exception}
+             
+            Please contact the tech support staff.
+        ]]></media_manager_exception>
+    </messages>
+    
+    <settings_data>
+        <title>Media options</title>
+        <specs key="items_per_page">
+            <title>Items to show per index page</title>
+            <description><![CDATA[
+                Amount of media items to show per index (home, archives, etc.).
+                Defaults to 30.
+            ]]></description>
+            <type>number</type>
+            <options>
+                <min>1</min>
+                <max>255</max>
+            </options>
+        </specs>
+        <specs key="excerpt_length">
+            <title>Description excerpt length</title>
+            <description><![CDATA[
+                Amount of characters to show from the item description on index pages.
+                Defaults to 30.
+            ]]></description>
+            <type>number</type>
+            <options>
+                <min>30</min>
+                <max>255</max>
+            </options>
+        </specs>
+        
+    </settings_data>
+    
+</language>
