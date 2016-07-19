@@ -5,8 +5,9 @@
  * @package    BardCanvas
  * @subpackage gallery
  * @author     Alejandro Caballero - lava.caballero@gmail.com
- *             
- * $_GET params:
+ *
+ * $_GET params
+ * @param tinymce_mode
  */
 
 use hng2_base\config;
@@ -114,8 +115,9 @@ if( empty($account->engine_prefs["gallery_browser_layout"]) )
 </h1>
 
 <div class="filtering clearfix">
-    <form name="filter_form" id="filter_form" action="<?= $_SERVER["PHP_SELF"] ?>?wasuuup=<? echo mt_rand(1, 65535); ?>"
-          method="get">
+    <? $url = $_SERVER["PHP_SELF"] . "?wasuuup=" . mt_rand(1, 65535); ?>
+    <? if( $_GET["tinymce_mode"] == "true" ) $url .= "&tinymce_mode=true"; ?>
+    <form name="filter_form" id="filter_form" method="get" action="<?= $url ?>">
         
         <input type="hidden" name="mode"   value="set_filter">
         <input type="hidden" name="order"  value="<?= $order ?>">

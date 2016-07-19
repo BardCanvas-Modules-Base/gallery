@@ -5,11 +5,22 @@
  * @package    BardCanvas
  * @subpackage gallery
  * @author     Alejandro Caballero - lava.caballero@gmail.com
+ *             
+ * $_GET params
+ * @param tinymce_mode
  */
 
 include "../config.php";
 include "../includes/bootstrap.inc";
 
-$template->page_contents_include = "contents/index.inc";
 $template->set_page_title($current_module->language->index->title);
-include "{$template->abspath}/admin.php";
+if( $_GET["tinymce_mode"] != "true" )
+{
+    $template->page_contents_include = "contents/index.inc";
+    include "{$template->abspath}/admin.php";
+}
+else
+{
+    $template->page_contents_include = "index.inc";
+    include "{$template->abspath}/popup.php";
+}

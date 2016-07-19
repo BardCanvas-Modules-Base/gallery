@@ -155,6 +155,11 @@
         ]]></media_manager_exception>
     </messages>
     
+    <tinymce_strings>
+        <browser_dialog_title>Select an image to embed in the editor</browser_dialog_title>
+        <media_type_not_supported>Sorry, but the item type you selected isn't currently supported. It can't be inserted.</media_type_not_supported>
+    </tinymce_strings>
+    
     <settings_data>
         <title>Media options</title>
         <specs key="items_per_page">
@@ -180,6 +185,16 @@
                 <min>30</min>
                 <max>255</max>
             </options>
+        </specs>
+        <specs key="max_item_width">
+            <title>Maximum item display width</title>
+            <description><![CDATA[
+                This number is the default set to
+                images and videos at the time they're inserted in the HTML editor.<br>
+                <span class="fa fa-info-circle"></span>
+                Defaults to 720px. This 
+            ]]></description>
+            <type>number</type>
         </specs>
         
     </settings_data>
