@@ -5,6 +5,10 @@
  * @package    BardCanvas
  * @subpackage gallery
  * @author     Alejandro Caballero - lava.caballero@gmail.com
+ *
+ * $_GET params
+ * @param embedded_mode
+ * @param callback
  */
 
 include "../config.php";

@@ -158,6 +158,7 @@
     <tinymce_strings>
         <browser_dialog_title>Select an image to embed in the editor</browser_dialog_title>
         <media_type_not_supported>Sorry, but the item type you selected isn't currently supported. It can't be inserted.</media_type_not_supported>
+        <invalid_type_selected>The item type is invalid. Please select an image.</invalid_type_selected>
     </tinymce_strings>
     
     <settings_data>

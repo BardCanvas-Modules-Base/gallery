@@ -41,15 +41,19 @@
     }
 </script>
 
-<? if( $_GET["tinymce_mode"] == "true" ): ?>
+<? if( $_GET["embedded_mode"] == "true" ): ?>
+    <!--suppress BadExpressionStatementJS, CommaExpressionJS -->
     <script type="text/javascript">
-        function inject_selected_item_in_active_editor(clicked_item)
+        function prepare_item_for_embedded_callback(clicked_item)
         {
             var $strings = $('#gallery_strings_for_tinymce');
             
-            var id    = $(clicked_item).attr('data-record-id');
-            var src   = $(clicked_item).attr('data-href');
-            var type  = $(clicked_item).attr('data-type');
+            var id         = $(clicked_item).attr('data-record-id');
+            var src        = $(clicked_item).attr('data-href');
+            var type       = $(clicked_item).attr('data-type');
+            var thumbnail  = $(clicked_item).attr('data-thumbnail-url');
+            var src_width  = $(clicked_item).attr('data-width');
+            var src_height = $(clicked_item).attr('data-height');
             
             var default_width = parseInt($strings.find('.max_item_width').text());
             
@@ -59,11 +63,8 @@
                 var max_width = default_width;
                 if( max_width == 0 ) max_width = 720;
                 if( width > 0 && width < max_width ) max_width = width;
-    
-                var html  = '<img data-media-id="' + id + '" src="' + src + '" style="width: ' + max_width + 'px">';
-    
-                top.tinymce.activeEditor.insertContent(html);
-                top.tinymce.activeEditor.windowManager.close();
+                
+                <?= $_GET["callback"] ?>( id, type, src, thumbnail, src_width, src_height, max_width );
                 
                 return;
             }
@@ -74,38 +75,10 @@
     </script>
 <? endif; ?>
 
-<style type="text/css">
-    @media all and (max-width: 800px)
-    {
-        #media_browser_table tr th:nth-child(4) { display: none; }
-        #media_browser_table tr td:nth-child(4) { display: none; }
-        #media_browser_table tr th:nth-child(5) { display: none; }
-        #media_browser_table tr td:nth-child(5) { display: none; }
-    }
-    @media all and (max-width: 600px)
-    {
-        #media_browser_table tr th:nth-child(1) { width: 100%; }
-        #media_browser_table tr td:nth-child(1) { width: 100%; }
-        #media_browser_table tr th:nth-child(2) { display: none; }
-        #media_browser_table tr td:nth-child(2) { display: none; }
-        #media_browser_table tr th:nth-child(3) { display: none; }
-        #media_browser_table tr td:nth-child(3) { display: none; }
-        #media_browser_table tr th:nth-child(4) { display: none; }
-        #media_browser_table tr td:nth-child(4) { display: none; }
-        #media_browser_table tr th:nth-child(5) { display: none; }
-        #media_browser_table tr td:nth-child(5) { display: none; }
-        #media_browser_table tr th:nth-child(6) { display: none; }
-        #media_browser_table tr td:nth-child(6) { display: none; }
-        #media_browser_table tr th:nth-child(7) { display: none; }
-        #media_browser_table tr td:nth-child(7) { display: none; }
-    }
-    .tinymce_mode .record { cursor: pointer; }
-</style>
-
 <div id="main_workarea">
     
     <? $url = "browser.php?wasuuup=" . md5(mt_rand(1, 65535)); ?>
-    <? if( $_GET["tinymce_mode"] == "true" ) $url .= "&tinymce_mode=true"; ?>
+    <? if( $_GET["embedded_mode"] == "true" ) $url .= "&embedded_mode=true"; ?>
     <div id="media_browser" class="ajax_record_browser" data-src="<?= $url ?>">
         <div class="framed_content state_highlight" style="padding: 100px 0; text-align: center;">
             <span class="fa fa-spinner fa-pulse"></span>

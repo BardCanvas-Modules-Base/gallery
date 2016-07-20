@@ -6,15 +6,15 @@
  * @var string         $order
  *
  * $_GET params
- * @param tinymce_mode
+ * @param embedded_mode
  */
 
 use hng2_base\repository\media_record;
 ?>
 
-<? $tinymce_mode_class = $_GET["tinymce_mode"] == "true" ? "tinymce_mode" : ""; ?>
+<? $embedded_mode_class = $_GET["embedded_mode"] == "true" ? "embedded_mode" : ""; ?>
 <div class="table_wrapper">
-    <table id="media_browser_table" class="nav_table evened <?= $tinymce_mode_class ?>">
+    <table id="media_browser_table" class="nav_table evened <?= $embedded_mode_class ?>">
         
         <thead>
         <tr>
@@ -40,13 +40,15 @@ use hng2_base\repository\media_record;
         <tbody>
         <? foreach( $records as $row ): ?>
             <tr class="record"
-                <? if( $_GET["tinymce_mode"] == "true" ): ?>onclick="inject_selected_item_in_active_editor(this)"<? endif; ?>
+                <? if( $_GET["embedded_mode"] == "true" ): ?>onclick="prepare_item_for_embedded_callback(this)"<? endif; ?>
                 data-record-id="<?= $row->id_media ?>" data-type="<?= $row->type ?>"
-                data-width="<?= $row->get_item_width() ?>" data-href="<?= $row->get_item_url(false) ?>">
+                data-width="<?= $row->get_item_width() ?>" data-height="<?= $row->get_item_height() ?>" 
+                data-href="<?= $row->get_item_url(false) ?>"
+                data-thumbnail-url="<?= $row->get_thumbnail_url() ?>">
                 <td width="25%">
                     <div class="principal_data"><?= convert_emojis($row->title) ?></div>
                     
-                    <? if( $_GET["tinymce_mode"] != "true" ): ?>
+                    <? if( $_GET["embedded_mode"] != "true" ): ?>
                         <div class="actions">
                             <span class="action pseudo_link" onclick="edit_media('<?= $row->id_media ?>')">
                                 <span class="fa fa-pencil"></span>
@@ -97,7 +99,7 @@ use hng2_base\repository\media_record;
                     <?= $row->comments_count ?>
                 </td>
                 <td>
-                    <? if( $_GET["tinymce_mode"] != "true" ): ?>
+                    <? if( $_GET["embedded_mode"] != "true" ): ?>
                         <? if($row->type == "image"): ?>
                             <a class="thumbnail prettyPhoto" href="<?= $row->get_item_url(false) ?>">
                                 <img src="<?= $row->get_thumbnail_url(false) ?>">

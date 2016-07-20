@@ -6,26 +6,28 @@
  * @var string         $order
  *
  * $_GET params
- * @param tinymce_mode
+ * @param embedded_mode
  */
 
 use hng2_base\repository\media_record;
 ?>
 
-<? $tinymce_mode_class = $_GET["tinymce_mode"] == "true" ? "tinymce_mode" : ""; ?>
-<div id="media_browser_table" class="tiles_container clearfix <?= $tinymce_mode_class ?>">
+<? $embedded_mode_class = $_GET["embedded_mode"] == "true" ? "embedded_mode" : ""; ?>
+<div id="media_browser_table" class="tiles_container clearfix <?= $embedded_mode_class ?>">
     <? foreach( $records as $row ): ?>
         
         <div class="tile record pseudo_link"
-             <? if( $_GET["tinymce_mode"] == "true" ): ?>onclick="inject_selected_item_in_active_editor(this)"<? endif; ?>
+             <? if( $_GET["embedded_mode"] == "true" ): ?>onclick="prepare_item_for_embedded_callback(this)"<? endif; ?>
              data-record-id="<?= $row->id_media ?>" data-type="<?= $row->type ?>"
-             data-width="<?= $row->get_item_width() ?>" data-href="<?= $row->get_item_url(false) ?>"
+             data-width="<?= $row->get_item_width() ?>" data-height="<?= $row->get_item_height() ?>"
+             data-href="<?= $row->get_item_url(false) ?>"
+             data-thumbnail-url="<?= $row->get_thumbnail_url() ?>"
              style="background-image: url('<?= $row->get_thumbnail_url() ?>')">
             <div class="contents">
                 <div class="title">
                     <?= convert_emojis($row->title) ?>
                 </div>
-                <? if( $_GET["tinymce_mode"] != "true" ): ?>
+                <? if( $_GET["embedded_mode"] != "true" ): ?>
                     <div class="actions alignright">
                         <? if($row->type == "image"): ?>
                             <a class="action prettyPhoto" href="<?= $row->get_item_url() ?>">

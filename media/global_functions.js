@@ -19,8 +19,9 @@ function load_media_browser_in_tinymce_dialog(editor, width, height, media_type_
     
     var url = $_FULL_ROOT_PATH
         + '/gallery/index.php' 
-        + '?tinymce_mode=true'
+        + '?embedded_mode=true'
         + '&search_type=' + media_type_filter
+        + '&callback=inject_selected_gallery_image_in_post_editor'
         + '&wasuuup=' + parseInt(Math.random() * 1000000000000000);
     
     editor.windowManager.open({
@@ -29,4 +30,36 @@ function load_media_browser_in_tinymce_dialog(editor, width, height, media_type_
         width:  width,
         height: height
     });
+}
+
+//noinspection JSUnusedGlobalSymbols,JSUnusedLocalSymbols
+/**
+ * This function is the callback made by the browser in "embedded mode".
+ * It is called from within the browser iframe.
+ * 
+ * @param id_media
+ * @param type
+ * @param file_url
+ * @param thumbnail_url
+ * @param width
+ * @param height
+ * @param embed_width
+ */
+function inject_selected_gallery_image_in_post_editor(
+    id_media, type, file_url, thumbnail_url, width, height, embed_width
+) {
+    var $strings = $('#gallery_strings_for_tinymce');
+    
+    if( type != 'image' )
+    {
+        var message = $strings.find('.invalid_type_selected').text();
+        alert( message );
+        
+        return;
+    }
+    
+    var html  = '<img data-media-id="' + id_media + '" src="' + file_url + '" style="width: ' + embed_width + 'px">';
+    
+    top.tinymce.activeEditor.insertContent(html);
+    top.tinymce.activeEditor.windowManager.close();
 }

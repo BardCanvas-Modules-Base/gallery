@@ -7,7 +7,7 @@
  * @author     Alejandro Caballero - lava.caballero@gmail.com
  *
  * $_GET params
- * @param tinymce_mode
+ * @param embedded_mode
  */
 
 use hng2_base\config;
@@ -65,6 +65,7 @@ if( ! empty($search_for) )
     }
 }
 
+if( ! empty($_GET["search_type"]) ) $search_type = $_GET["search_type"];
 if( ! empty($search_type) ) $where[] = "type = '$search_type'";
 #endregion
 
@@ -116,7 +117,7 @@ if( empty($account->engine_prefs["gallery_browser_layout"]) )
 
 <div class="filtering clearfix">
     <? $url = $_SERVER["PHP_SELF"] . "?wasuuup=" . mt_rand(1, 65535); ?>
-    <? if( $_GET["tinymce_mode"] == "true" ) $url .= "&tinymce_mode=true"; ?>
+    <? if( $_GET["embedded_mode"] == "true" ) $url .= "&embedded_mode=true&callback={$_GET["callback"]}"; ?>
     <form name="filter_form" id="filter_form" method="get" action="<?= $url ?>">
         
         <input type="hidden" name="mode"   value="set_filter">
