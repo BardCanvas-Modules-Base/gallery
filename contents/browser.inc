@@ -8,6 +8,8 @@
  *
  * $_GET params
  * @param embedded_mode
+ * @param callback
+ * @param search_type
  */
 
 use hng2_base\config;
@@ -65,7 +67,10 @@ if( ! empty($search_for) )
     }
 }
 
+# This one is an override from the embedded mode
 if( ! empty($_GET["search_type"]) ) $search_type = $_GET["search_type"];
+
+# Standard evaluation
 if( ! empty($search_type) ) $where[] = "type = '$search_type'";
 #endregion
 

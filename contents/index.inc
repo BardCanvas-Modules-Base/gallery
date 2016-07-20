@@ -7,7 +7,9 @@
  * @author     Alejandro Caballero - lava.caballero@gmail.com
  *
  * $_GET params
- * @param tinymce_mode
+ * @param embedded_mode
+ * @param callback
+ * @param search_type
  */
 ?>
 
@@ -57,10 +59,12 @@
             
             var default_width = parseInt($strings.find('.max_item_width').text());
             
-            if( type == 'image')
+            var width, max_width;
+            
+            if( type == 'image' || type == 'video' )
             {
-                var width     = parseInt($(clicked_item).attr('data-width'));
-                var max_width = default_width;
+                width     = parseInt($(clicked_item).attr('data-width'));
+                max_width = default_width;
                 if( max_width == 0 ) max_width = 720;
                 if( width > 0 && width < max_width ) max_width = width;
                 
@@ -78,7 +82,8 @@
 <div id="main_workarea">
     
     <? $url = "browser.php?wasuuup=" . md5(mt_rand(1, 65535)); ?>
-    <? if( $_GET["embedded_mode"] == "true" ) $url .= "&embedded_mode=true"; ?>
+    <? if( $_GET["embedded_mode"] == "true" ) $url .= "&embedded_mode=true&callback={$_GET["callback"]}"; ?>
+    <? if( $_GET["search_type"] ) $url .= "&search_type={$_GET["search_type"]}"; ?>
     <div id="media_browser" class="ajax_record_browser" data-src="<?= $url ?>">
         <div class="framed_content state_highlight" style="padding: 100px 0; text-align: center;">
             <span class="fa fa-spinner fa-pulse"></span>

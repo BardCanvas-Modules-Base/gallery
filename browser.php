@@ -9,6 +9,7 @@
  * $_GET params
  * @param embedded_mode
  * @param callback
+ * @param search_type
  */
 
 include "../config.php";

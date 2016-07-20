@@ -9,19 +9,20 @@
  * $_GET params
  * @param embedded_mode
  * @param callback
+ * @param search_type
  */
 
 include "../config.php";
 include "../includes/bootstrap.inc";
 
 $template->set_page_title($current_module->language->index->title);
-if( $_GET["embedded_mode"] != "true" )
-{
-    $template->page_contents_include = "contents/index.inc";
-    include "{$template->abspath}/admin.php";
-}
-else
+
+if( $_GET["embedded_mode"] == "true" )
 {
     $template->page_contents_include = "index.inc";
     include "{$template->abspath}/popup.php";
+    die();
 }
+
+$template->page_contents_include = "contents/index.inc";
+include "{$template->abspath}/admin.php";
