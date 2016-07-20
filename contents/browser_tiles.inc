@@ -27,9 +27,16 @@ use hng2_base\repository\media_record;
                 </div>
                 <? if( $_GET["tinymce_mode"] != "true" ): ?>
                     <div class="actions alignright">
-                        <a class="action lightbox" href="<?= $row->get_item_url() ?>">
-                            <span class="fa fa-search fa-2x fa-fw"></span>
-                        </a>
+                        <? if($row->type == "image"): ?>
+                            <a class="action prettyPhoto" href="<?= $row->get_item_url() ?>">
+                                <span class="fa fa-search fa-2x fa-fw"></span>
+                            </a>
+                        <? else: ?>
+                            <? $url = "{$row->get_item_embeddable_url()}?ajax=true&width={$row->get_item_width()}&height={$row->get_item_height()}"; ?>
+                            <a class="action prettyPhoto" href="<?= $url ?>">
+                                <span class="fa fa-search fa-2x fa-fw"></span>
+                            </a>
+                        <? endif; ?>
                         <span class="action pseudo_link" onclick="edit_media('<?= $row->id_media ?>')">
                             <span class="fa fa-pencil fa-2x fa-fw"></span>
                         </span>

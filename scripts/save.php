@@ -54,7 +54,7 @@ if( empty($_POST["id_media"]) && ! empty($_FILES["file"]) )
         $parts         = explode(".", $_FILES["file"]["name"]); array_pop($parts);
         $file_name     = sanitize_file_name(implode(".", $parts));
         $date          = date("dHis");
-        $new_file_name = "{$account->user_name}-{$file_name}-{$date}.{$extension}";
+        $new_file_name = "{$account->user_name}-{$date}-{$file_name}.{$extension}";
         
         $media_manager->move_to_repository($new_file_name);
         $media_path = $media_manager->get_relative_path();

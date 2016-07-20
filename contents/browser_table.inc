@@ -98,9 +98,16 @@ use hng2_base\repository\media_record;
                 </td>
                 <td>
                     <? if( $_GET["tinymce_mode"] != "true" ): ?>
-                        <a class="thumbnail lightbox" href="<?= $row->get_item_url(false) ?>">
-                            <img src="<?= $row->get_thumbnail_url(false) ?>">
-                        </a>
+                        <? if($row->type == "image"): ?>
+                            <a class="thumbnail prettyPhoto" href="<?= $row->get_item_url(false) ?>">
+                                <img src="<?= $row->get_thumbnail_url(false) ?>">
+                            </a>
+                        <? else: ?>
+                            <? $url = "{$row->get_item_embeddable_url()}?ajax=true&width={$row->get_item_width()}&height={$row->get_item_height()}"; ?>
+                            <a class="thumbnail prettyPhoto" href="<?= $url ?>">
+                                <img src="<?= $row->get_thumbnail_url(false) ?>">
+                            </a>
+                        <? endif; ?>
                     <? else: ?>
                         <span class="thumbnail">
                             <img src="<?= $row->get_thumbnail_url(false) ?>">
