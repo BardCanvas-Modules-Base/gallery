@@ -8,11 +8,31 @@
 
 .post_buttons button { font-size: 12pt; line-height: 24pt; }
 
-#media_browser_mode_switches[data-current-mode="table"] span[data-trigger-for="tiles"] { border-color: transparent; }
-#media_browser_mode_switches[data-current-mode="table"] span[data-trigger-for="table"] { cursor: auto; }
+/* Switches: base */
+#media_browser_mode_switches span[data-trigger-for] {
+    color:            ButtonText;
+    background-color: ButtonFace;
+    border:           1px solid ButtonFace;
+    border-radius:    3px;
+    padding:          3px 4px;
+}
 
-#media_browser_mode_switches[data-current-mode="tiles"] span[data-trigger-for="table"] { border-color: transparent; }
-#media_browser_mode_switches[data-current-mode="tiles"] span[data-trigger-for="tiles"] { cursor: auto; }
+/* Switches: selectable */
+#media_browser_mode_switches[data-current-mode="table"] span[data-trigger-for="tiles"]:hover ,
+#media_browser_mode_switches[data-current-mode="tiles"] span[data-trigger-for="table"]:hover {
+    background-color: Highlight;
+    color:            HighlightText;
+    border-style:     outset;
+}
+
+/* Switches: currently selected */
+#media_browser_mode_switches[data-current-mode="table"] span[data-trigger-for="table"] ,
+#media_browser_mode_switches[data-current-mode="tiles"] span[data-trigger-for="tiles"] {
+    cursor:           auto;
+    color:            ButtonHighlight;
+    background-color: ButtonShadow;
+    border-style:     inset;
+}
 
 .tiles_container .tile           { display: inline-block; vertical-align: top;
                                    border: 1px solid; text-decoration: none; cursor: auto;

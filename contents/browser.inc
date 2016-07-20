@@ -102,9 +102,9 @@ if( empty($account->engine_prefs["gallery_browser_layout"]) )
     <?= $current_module->language->index->title; ?>
     
     <span id="media_browser_mode_switches" data-current-mode="<?= $account->engine_prefs["gallery_browser_layout"] ?>">
-        <span class="pseudo_link fa fa-th-large fa-border" onclick="switch_media_browser_mode('tiles')"
+        <span class="pseudo_link fa fa-th-large" onclick="switch_media_browser_mode('tiles')"
               data-trigger-for="tiles" title="<?= $current_module->language->record_nav->modes->tiles ?>"></span>
-        <span class="pseudo_link fa fa-th-list fa-border" onclick="switch_media_browser_mode('table')"
+        <span class="pseudo_link fa fa-th-list" onclick="switch_media_browser_mode('table')"
               data-trigger-for="table" title="<?= $current_module->language->record_nav->modes->table ?>"></span>
     </span>
     
