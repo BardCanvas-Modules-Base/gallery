@@ -11,11 +11,9 @@
         <disable>true</disable>
     </working_flags>
     
-    <!--
     <php_includes>
-        <bootstrap></bootstrap>
+        <bootstrap>extenders/media_functions.inc</bootstrap>
     </php_includes>
-    -->
     
     <template_includes>
         <pre_rendering>pre_rendering_presets.inc</pre_rendering>

@@ -118,7 +118,7 @@ function inject_selected_gallery_video_in_post_editor(
     var pixel_url       = $_FULL_ROOT_PATH + '/gallery/media/pixel.png';
     var placeholder_url = $_FULL_ROOT_PATH + '/gallery/media/video-play-3-xxl.png';
     
-    var html  = '<img data-id-media="' + id_media + '" class="video" src="' + pixel_url + '" data-href="' + file_url + '" '
+    var html  = '<img data-id-media="' + id_media + '" data-media-type="video" src="' + pixel_url + '" data-href="' + file_url + '" '
               + '     width="' + width + '" height="' + height + '" '
               + '     style="background-image: url(' + placeholder_url + '), url(' + thumbnail_url + ')">';
     

@@ -6,7 +6,7 @@
  * @author     Alejandro Caballero - lava.caballero@gmail.com
  */
 
-img.video {
+img[data-media-type="video"] {
     background-position: center, center;
     background-repeat: no-repeat, no-repeat;
     background-size: 25%, contain;
