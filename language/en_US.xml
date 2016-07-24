@@ -200,4 +200,14 @@
         
     </settings_data>
     
+    <tinymce_addon function="insert_gallery_image_in_tinymce" icon="fa-file-image-o">
+        <caption>Image</caption>
+        <title>Insert image from media gallery</title>
+    </tinymce_addon>
+    
+    <tinymce_addon function="insert_gallery_video_in_tinymce" icon="fa-file-video-o">
+        <caption>Video</caption>
+        <title>Insert video from media gallery</title>
+    </tinymce_addon>
+    
 </language>

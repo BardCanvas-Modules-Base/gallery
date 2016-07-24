@@ -1,15 +1,9 @@
 
-// TODO: Move stuff here to a forging API
-
 // Styles to add to tinymce
 tinymce_default_css_files[tinymce_default_css_files.length]
     = $_FULL_ROOT_PATH + '/gallery/media/tinymce_internal_styles~v' + $_SCRIPTS_VERSION + '.css';
 
-// Buttons collection below the post editor
-if( typeof $_POST_ADDON_FUNCTIONS == 'undefined' )
-    var $_POST_ADDON_FUNCTIONS = {};
-
-$_POST_ADDON_FUNCTIONS['insert_gallery_image_in_post_editor'] = function($trigger, $form)
+$_TINYMCE_ADDON_FUNCTIONS['insert_gallery_image_in_tinymce'] = function($trigger, $form)
 {
     var editor_id = $form.find('textarea.tinymce').attr('id');
     var editor    = tinymce.get(editor_id);
@@ -19,11 +13,11 @@ $_POST_ADDON_FUNCTIONS['insert_gallery_image_in_post_editor'] = function($trigge
         $(window).width() - 20,
         $(window).height() - 60,
         'image',
-        'inject_selected_gallery_image_in_post_editor'
+        'inject_selected_gallery_image_in_tinymce'
     );
 };
 
-$_POST_ADDON_FUNCTIONS['insert_gallery_video_in_post_editor'] = function($trigger, $form)
+$_TINYMCE_ADDON_FUNCTIONS['insert_gallery_video_in_tinymce'] = function($trigger, $form)
 {
     var editor_id = $form.find('textarea.tinymce').attr('id');
     var editor    = tinymce.get(editor_id);
@@ -33,7 +27,7 @@ $_POST_ADDON_FUNCTIONS['insert_gallery_video_in_post_editor'] = function($trigge
         $(window).width() - 20,
         $(window).height() - 60,
         'video',
-        'inject_selected_gallery_video_in_post_editor'
+        'inject_selected_gallery_video_in_tinymce'
     );
 };
 
@@ -70,7 +64,7 @@ function load_media_browser_in_tinymce_dialog(editor, width, height, media_type_
  * @param height
  * @param embed_width
  */
-function inject_selected_gallery_image_in_post_editor(
+function inject_selected_gallery_image_in_tinymce(
     id_media, type, file_url, thumbnail_url, width, height, embed_width
 ) {
     var $strings = $('#post_gallery_embed_strings');
@@ -102,7 +96,7 @@ function inject_selected_gallery_image_in_post_editor(
  * @param height
  * @param embed_width
  */
-function inject_selected_gallery_video_in_post_editor(
+function inject_selected_gallery_video_in_tinymce(
     id_media, type, file_url, thumbnail_url, width, height, embed_width
 ) {
     var $strings = $('#post_gallery_embed_strings');

@@ -16,10 +16,6 @@
 <script type="text/javascript" src="<?= $config->full_root_path ?>/lib/jquery.exptextarea.js"></script>
 <script type="text/javascript">$(document).ready(function() { $('.expandible_textarea').expandingTextArea() });</script>
 
-<script type="text/javascript" src="<?= $config->full_root_path ?>/lib/tinymce-4.4.0/tinymce.min.js"></script>
-<script type="text/javascript" src="<?= $config->full_root_path ?>/media/init_tinymce~v<?=$config->scripts_version?>.js"></script>
-<script type="text/javascript"> tinymce.init(tinymce_defaults) </script>
-
 <link rel="stylesheet" type="text/css" href="<?= $config->full_root_path ?>/gallery/media/styles~v<?=$config->scripts_version?>.css">
 <script type="text/javascript"          src="<?= $config->full_root_path ?>/gallery/media/functions~v<?=$config->scripts_version?>.js"></script>
 
