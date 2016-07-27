@@ -169,7 +169,7 @@ function hide_media_form()
 function prepare_media_form_serialization()
 {
     var $form = $('#media_form');
-    $form.find('textarea.tinymce').each(function()
+    $form.find('textarea[class*="tinymce"]').each(function()
     {
         var id      = $(this).attr('id');
         var editor  = tinymce.get(id);
