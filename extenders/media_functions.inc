@@ -43,8 +43,10 @@ function convert_video_tag($element)
     $height   = is_numeric($height) ? "height: {$height}px;" : "";
     
     $item = $media_repository->get($id_media);
-    if( is_null($item) || $item->status != "published" )
-        $markup = "<div class='missing_media_item' style='{$width} {$height}'>{$href}<br>{$language->file_not_found}</div>";
+    if( is_null($item) )
+        $markup = "<div class='missing_media_item' style='{$width} {$height}'>{$href}<br>{$language->resource_not_found}</div>";
+    elseif( $item->status != "published" )
+        $markup = "<div class='missing_media_item' style='{$width} {$height}'>{$href}<br>{$language->resource_unavailable}</div>";
     else
         $markup = "<video poster='{$item->get_thumbnail_url(true)}' style='{$width} {$height}' controls>" 
             . "<source src='{$item->get_item_url(true)}'>" 
