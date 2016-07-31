@@ -214,5 +214,11 @@
         <caption>Video</caption>
         <title>Insert video from media gallery</title>
     </tinymce_addon>
-    
+
+    <user_profile_tabs>
+        <tab mode="images" priority="201">Images</tab>
+        <tab mode="videos" priority="202">Videos</tab>
+        <tab mode="media"  priority="203">All media</tab>
+    </user_profile_tabs>
+
 </language>
