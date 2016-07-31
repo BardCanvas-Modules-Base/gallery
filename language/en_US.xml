@@ -25,7 +25,12 @@
             <no_records>No items have been found for this date range.</no_records>
         </by_date>
         <by_author>
-            <title>Media published by {$author}</title>
+            <title>{$type} published by {$author}</title>
+            <types>
+                <any>Media</any>
+                <image>Images</image>
+                <video>Videos</video>
+            </types>
             <no_records>No items have been published by this author.</no_records>
         </by_author>
     </pages>

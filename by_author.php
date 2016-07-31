@@ -23,10 +23,13 @@ if( empty($_GET["slug"]) ) throw_fake_404();
 $author = new account($_GET["slug"]);
 if( ! $author->_exists ) throw_fake_404();
 
+$type = empty($_GET["type"]) ? "any" : $_GET["type"];
 $template->set("showing_archive", true);
 $template->page_contents_include = "by_author.inc";
 $template->set_page_title(replace_escaped_vars(
-    $current_module->language->pages->by_author->title, '{$author}', $author->display_name
+    $current_module->language->pages->by_author->title,
+    array('{$type}', '{$author}'),
+    array($current_module->language->pages->by_author->types->{$type}, $author->display_name)
 ));
 $template->append("additional_body_attributes", " data-listing-type='archive'");
 include "{$template->abspath}/main.php";
