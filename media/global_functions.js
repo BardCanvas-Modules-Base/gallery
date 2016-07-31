@@ -3,9 +3,9 @@
 tinymce_default_css_files[tinymce_default_css_files.length]
     = $_FULL_ROOT_PATH + '/gallery/media/tinymce_internal_styles~v' + $_SCRIPTS_VERSION + '.css';
 
-$_TINYMCE_ADDON_FUNCTIONS['insert_gallery_image_in_tinymce'] = function($trigger, $form)
+$_TINYMCE_ADDON_FUNCTIONS['insert_gallery_image_in_tinymce'] = function($trigger, $container)
 {
-    var editor_id = $form.find('textarea[class*="tinymce"]').attr('id');
+    var editor_id = $container.find('textarea[class*="tinymce"]').attr('id');
     var editor    = tinymce.get(editor_id);
     
     load_media_browser_in_tinymce_dialog(
@@ -17,9 +17,9 @@ $_TINYMCE_ADDON_FUNCTIONS['insert_gallery_image_in_tinymce'] = function($trigger
     );
 };
 
-$_TINYMCE_ADDON_FUNCTIONS['insert_gallery_video_in_tinymce'] = function($trigger, $form)
+$_TINYMCE_ADDON_FUNCTIONS['insert_gallery_video_in_tinymce'] = function($trigger, $container)
 {
-    var editor_id = $form.find('textarea[class*="tinymce"]').attr('id');
+    var editor_id = $container.find('textarea[class*="tinymce"]').attr('id');
     var editor    = tinymce.get(editor_id);
     
     load_media_browser_in_tinymce_dialog(
