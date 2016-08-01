@@ -31,6 +31,7 @@ switch($_GET["type"])
     default:      $tab = "media";  break;
 }
 
+$template->set("page_tag", "media_author_index");
 $template->set("showing_archive", true);
 $template->set("show_user_profile_heading", true);
 $template->set("user_profile_account", $author);
