@@ -162,6 +162,8 @@
     
     <tinymce_strings>
         <browser_dialog_title>Media gallery browser</browser_dialog_title>
+        <insert_image>Insert image from media gallery</insert_image>
+        <insert_video>Insert video from media gallery</insert_video>
         <media_type_not_supported>Sorry, but the item type you selected isn't currently supported. It can't be inserted.</media_type_not_supported>
         <invalid_type_selected>The item type is invalid. Please select an image.</invalid_type_selected>
     </tinymce_strings>
@@ -205,16 +207,6 @@
         
     </settings_data>
     
-    <tinymce_addon function="insert_gallery_image_in_tinymce" icon="fa-file-image-o">
-        <caption>Image</caption>
-        <title>Insert image from media gallery</title>
-    </tinymce_addon>
-    
-    <tinymce_addon function="insert_gallery_video_in_tinymce" icon="fa-file-video-o">
-        <caption>Video</caption>
-        <title>Insert video from media gallery</title>
-    </tinymce_addon>
-
     <user_profile_tabs>
         <tab mode="images" priority="201">Images</tab>
         <tab mode="videos" priority="202">Videos</tab>

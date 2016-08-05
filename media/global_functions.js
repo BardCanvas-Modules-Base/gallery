@@ -1,36 +1,4 @@
 
-// Styles to add to tinymce
-tinymce_default_css_files[tinymce_default_css_files.length]
-    = $_FULL_ROOT_PATH + '/gallery/media/tinymce_internal_styles~v' + $_SCRIPTS_VERSION + '.css';
-
-$_TINYMCE_ADDON_FUNCTIONS['insert_gallery_image_in_tinymce'] = function($trigger, $container)
-{
-    var editor_id = $container.find('textarea[class*="tinymce"]').attr('id');
-    var editor    = tinymce.get(editor_id);
-    
-    load_media_browser_in_tinymce_dialog(
-        editor,
-        $(window).width() - 20,
-        $(window).height() - 60,
-        'image',
-        'inject_selected_gallery_image_in_tinymce'
-    );
-};
-
-$_TINYMCE_ADDON_FUNCTIONS['insert_gallery_video_in_tinymce'] = function($trigger, $container)
-{
-    var editor_id = $container.find('textarea[class*="tinymce"]').attr('id');
-    var editor    = tinymce.get(editor_id);
-    
-    load_media_browser_in_tinymce_dialog(
-        editor,
-        $(window).width() - 20,
-        $(window).height() - 60,
-        'video',
-        'inject_selected_gallery_video_in_tinymce'
-    );
-};
-
 function load_media_browser_in_tinymce_dialog(editor, width, height, media_type_filter, callback)
 {
     var $messages = $('#gallery_strings_for_tinymce');

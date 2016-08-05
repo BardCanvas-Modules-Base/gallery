@@ -34,4 +34,11 @@
         <!--<post_rendering></post_rendering>-->
     </template_includes>
     
+    <tinymce_additions>
+        <css>media/tinymce_internal_styles~v1.css</css>
+        <plugin name="insert_gallery_image_in_tinymce">media/image_plugin~v1.2.js</plugin>
+        <plugin name="insert_gallery_video_in_tinymce">media/video_plugin~v1.2.js</plugin>
+        <toolbar>insert_gallery_image_in_tinymce insert_gallery_video_in_tinymce</toolbar>
+    </tinymce_additions>
+    
 </module>

@@ -1,3 +1,10 @@
+<?php
+/**
+ * @var config $config
+ */
+
+use hng2_base\config;
+?>
 
 <!-- gallery :: html head include -->
 
