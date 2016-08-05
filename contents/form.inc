@@ -5,8 +5,12 @@
  * @package    BardCanvas
  * @subpackage gallery
  * @author     Alejandro Caballero - lava.caballero@gmail.com
+ *
+ * @var settings          $settings
+ * @var \SimpleXMLElement $language
  */
 
+use hng2_base\settings;
 use hng2_modules\categories\categories_repository;
 
 $categories_repository = new categories_repository();
@@ -65,7 +69,7 @@ $types_list = implode(", ", $types_list);
     </div>
     
     <div class="field" data-field="description">
-        <textarea name="description" id="media_description_editor" class="tinymce"
+        <textarea name="description" id="media_description_editor" class="expandible_textarea"
                   placeholder="<?= $current_module->language->form->fields->description->placeholder ?>"></textarea>
     </div>
     
