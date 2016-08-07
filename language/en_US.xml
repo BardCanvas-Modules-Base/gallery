@@ -212,5 +212,10 @@
         <tab mode="videos" priority="202">Videos</tab>
         <tab mode="media"  priority="203">All media</tab>
     </user_profile_tabs>
-
+    
+    <rss_feed_generator>
+        <title>{$website_name} media feed</title>
+        <description>Latest media items published by all authors of {$website_name}</description>
+    </rss_feed_generator>
+    
 </language>

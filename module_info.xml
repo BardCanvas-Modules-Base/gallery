@@ -13,6 +13,7 @@
     
     <php_includes>
         <bootstrap>extenders/media_functions.inc</bootstrap>
+        <document_handler>extenders/document_handler.inc</document_handler>
         <rss_feed_generator handle_pattern="^media$">extenders/rss_feed_generator.inc</rss_feed_generator>
     </php_includes>
     
