@@ -145,6 +145,8 @@
         <invalid>
             <file>The file you uploaded isn't valid. Please make sure you're uploading a valid file type.</file>
             <upload>Invalid upload detected. Please try again.</upload>
+            <invalid_type_for_image>Please select an image.</invalid_type_for_image>
+            <invalid_type_for_video>Please select a video file.</invalid_type_for_video>
         </invalid>
         <item_not_found>The item wasn't found in the database</item_not_found>
         <item_exists>The media item you're uploading already exists in the database</item_exists>
@@ -167,6 +169,8 @@
         <insert_video>Insert video from media gallery</insert_video>
         <media_type_not_supported>Sorry, but the item type you selected isn't currently supported. It can't be inserted.</media_type_not_supported>
         <invalid_type_selected>The item type is invalid. Please select an image.</invalid_type_selected>
+        <select_image>Select image from media gallery</select_image>
+        <select_video>Select video from media gallery</select_video>
     </tinymce_strings>
     
     <settings_data>
@@ -218,5 +222,10 @@
         <title>{$website_name} media feed</title>
         <description>Latest media items published by all authors of {$website_name}</description>
     </rss_feed_generator>
+    
+    <settings_image_selector>
+        <set>Set</set>
+        <remove>Remove</remove>
+    </settings_image_selector>
     
 </language>
