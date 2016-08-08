@@ -199,8 +199,8 @@
             <description><![CDATA[
                 This number is the default set to
                 images and videos at the time they're inserted in the HTML editor.<br>
-                <span class="fa fa-info-circle"></span>
-                Defaults to 720px. This 
+                Defaults to 720px.<br>
+                <span class="fa fa-info-circle"></span> This maximum may be overrriden by any responsive template.
             ]]></description>
             <type>number</type>
         </specs>
