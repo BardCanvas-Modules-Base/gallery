@@ -140,13 +140,14 @@
             <id>Please provide an item id</id>
             <title>Please specify a title for the item</title>
             <main_category>Please specify a main category for the item</main_category>
-            <file>YOu haven't chosen a file to upload.</file>
+            <file>You haven't chosen a file to upload.</file>
         </missing>
         <invalid>
-            <file>The file you uploiaded isn't valid. Please make sure you're uploading a valid file type.</file>
+            <file>The file you uploaded isn't valid. Please make sure you're uploading a valid file type.</file>
             <upload>Invalid upload detected. Please try again.</upload>
         </invalid>
         <item_not_found>The item wasn't found in the database</item_not_found>
+        <item_exists>The media item you're uploading already exists in the database</item_exists>
         <media_manager_exception><![CDATA[
             The media manager has thrown an exception:
              
