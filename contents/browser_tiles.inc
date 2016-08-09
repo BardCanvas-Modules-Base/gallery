@@ -16,7 +16,7 @@ use hng2_media\media_record;
 <div id="media_browser_table" class="tiles_container clearfix <?= $embedded_mode_class ?>">
     <? foreach( $records as $row ): ?>
         
-        <div class="tile record pseudo_link"
+        <div class="tile record"
              <? if( $_GET["embedded_mode"] == "true" ): ?>onclick="prepare_item_for_embedded_callback(this)"<? endif; ?>
              data-record-id="<?= $row->id_media ?>" data-type="<?= $row->type ?>"
              data-width="<?= $row->get_item_width() ?>" data-height="<?= $row->get_item_height() ?>"

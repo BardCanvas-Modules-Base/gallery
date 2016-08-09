@@ -16,7 +16,10 @@ use hng2_base\config;
 use hng2_media\media_repository;
 use hng2_tools\record_browser;
 
-$browser    = new record_browser("{$config->website_key}_{$current_module->name}");
+$record_browser_key = "{$config->website_key}_{$current_module->name}";
+if( $_GET["embedded_mode"] == "true" ) $record_browser_key .= "_embedded";
+$browser = new record_browser($record_browser_key);
+
 $repository = new media_repository();
 
 /**
@@ -95,7 +98,9 @@ switch( $order )
 $records = $repository->find($where, $limit, $offset, $sqlorder);
 #endregion
 
-if( empty($account->engine_prefs["gallery_browser_layout"]) )
+if( $_GET["embedded_mode"] == "true" )
+    $account->engine_prefs["gallery_browser_layout"] = "tiles";
+else if( empty($account->engine_prefs["gallery_browser_layout"]) )
     $account->engine_prefs["gallery_browser_layout"] = "table";
 ?>
 
@@ -107,12 +112,14 @@ if( empty($account->engine_prefs["gallery_browser_layout"]) )
     
     <?= $current_module->language->index->title; ?>
     
-    <span id="media_browser_mode_switches" data-current-mode="<?= $account->engine_prefs["gallery_browser_layout"] ?>">
-        <span class="pseudo_link fa fa-th-large" onclick="switch_media_browser_mode('tiles')"
-              data-trigger-for="tiles" title="<?= $current_module->language->record_nav->modes->tiles ?>"></span>
-        <span class="pseudo_link fa fa-th-list" onclick="switch_media_browser_mode('table')"
-              data-trigger-for="table" title="<?= $current_module->language->record_nav->modes->table ?>"></span>
-    </span>
+    <? if( $_GET["embedded_mode"] != "true" ): ?>
+        <span id="media_browser_mode_switches" data-current-mode="<?= $account->engine_prefs["gallery_browser_layout"] ?>">
+            <span class="pseudo_link fa fa-th-large" onclick="switch_media_browser_mode('tiles')"
+                  data-trigger-for="tiles" title="<?= $current_module->language->record_nav->modes->tiles ?>"></span>
+            <span class="pseudo_link fa fa-th-list" onclick="switch_media_browser_mode('table')"
+                  data-trigger-for="table" title="<?= $current_module->language->record_nav->modes->table ?>"></span>
+        </span>
+    <? endif; ?>
     
     <button onclick="prepare_media_addition()">
         <span class="fa fa-upload"></span>
@@ -142,7 +149,8 @@ if( empty($account->engine_prefs["gallery_browser_layout"]) )
                value="<?= htmlspecialchars($search_for) ?>" size="46"
                placeholder="<?= $current_module->language->record_nav->search_placeholder ?>">
         
-        <select name="search_type">
+        <? $style = ( ! empty($_GET["embedded_mode"]) && ! empty($_GET["search_type"]) ) ? "display: none;" : ""; ?>
+        <select name="search_type" style="<?= $style ?>">
             <option <? if($search_type == "") echo "selected"; ?> value="">
                 &lt;<?= $current_module->language->media_types->all ?>&gt;
             </option>
