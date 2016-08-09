@@ -13,7 +13,7 @@
  */
 
 use hng2_base\config;
-use hng2_base\repository\media_repository;
+use hng2_media\media_repository;
 use hng2_tools\record_browser;
 
 $browser    = new record_browser("{$config->website_key}_{$current_module->name}");

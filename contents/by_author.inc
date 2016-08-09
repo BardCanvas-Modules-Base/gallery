@@ -16,7 +16,7 @@
 
 use hng2_base\account;
 use hng2_base\config;
-use hng2_base\repository\media_repository;
+use hng2_media\media_repository;
 use hng2_base\template;
 
 $media_repository      = new media_repository();

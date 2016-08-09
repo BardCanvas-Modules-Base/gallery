@@ -12,7 +12,7 @@
  */
 
 use hng2_base\config;
-use hng2_base\repository\media_repository;
+use hng2_media\media_repository;
 use hng2_base\template;
 use hng2_modules\categories\category_record;
 

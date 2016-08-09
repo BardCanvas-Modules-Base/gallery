@@ -7,7 +7,7 @@
  * @author     Alejandro Caballero - lava.caballero@gmail.com
  */
 
-use hng2_base\repository\media_repository;
+use hng2_media\media_repository;
 
 /**
  * Converts all media tags inserted from the editor into actual embeds.

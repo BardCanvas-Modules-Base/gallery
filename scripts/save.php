@@ -7,7 +7,7 @@
  * @author     Alejandro Caballero - lava.caballero@gmail.com
  */
 
-use hng2_base\repository\media_repository;
+use hng2_media\media_repository;
 
 include "../../config.php";
 include "../../includes/bootstrap.inc";

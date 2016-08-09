@@ -9,7 +9,7 @@
  * @param embedded_mode
  */
 
-use hng2_base\repository\media_record;
+use hng2_media\media_record;
 ?>
 
 <? $embedded_mode_class = $_GET["embedded_mode"] == "true" ? "embedded_mode" : ""; ?>

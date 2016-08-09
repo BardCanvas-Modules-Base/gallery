@@ -1,7 +1,7 @@
 <?php
 namespace hng2_modules\gallery;
 
-use hng2_base\repository\media_record;
+use hng2_media\media_record;
 use hng2_tools\record_browser;
 
 class items_data
