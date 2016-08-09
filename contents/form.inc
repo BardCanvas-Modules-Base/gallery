@@ -40,7 +40,7 @@ $types_list = implode(", ", $types_list);
     <input type="hidden" name="status" value="draft">
     
     <div class="field" data-field="title">
-        <textarea name="title" class="expandible_textarea no_fw_font" 
+        <textarea name="title" class="expandible_textarea no_fw_font"
                   placeholder="<?= $current_module->language->form->fields->title->placeholder ?>"></textarea>
     </div>
     
@@ -70,6 +70,7 @@ $types_list = implode(", ", $types_list);
     
     <div class="field" data-field="description">
         <textarea name="description" id="media_description_editor" class="expandible_textarea"
+                  style="font-size: 12pt; line-height: 12pt; min-height: 45pt;"
                   placeholder="<?= $current_module->language->form->fields->description->placeholder ?>"></textarea>
     </div>
     
@@ -79,19 +80,21 @@ $types_list = implode(", ", $types_list);
             <?= $language->cancel ?>
         </button>
         
-        <button type="submit" data-save-type="save_draft"
-                onclick="$('#media_form').find('input[name=status]').val('draft')">
-            <span class="fa fa-check"></span>
-            <?= $current_module->language->form->buttons->save_draft ?>
-        </button>
+        <span style="display: none;">
+            <button type="submit" data-save-type="save_draft"
+                    onclick="$('#media_form').find('input[name=status]').val('draft')">
+                <span class="fa fa-save"></span>
+                <?= $current_module->language->form->buttons->save_draft ?>
+            </button>
+        </span>
         <button type="submit" data-save-type="save">
-            <span class="fa fa-check"></span>
+            <span class="fa fa-save"></span>
             <?= $language->save ?>
         </button>
         <button type="submit" data-save-type="publish"
                 onclick="$('#media_form').find('input[name=status]').val('published')">
-            <span class="fa fa-check"></span>
             <?= $current_module->language->form->buttons->publish ?>
+            <span class="fa fa-play"></span>
         </button>
     </p>
     
