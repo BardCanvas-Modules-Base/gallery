@@ -82,7 +82,7 @@ function fill_media_form($form, record)
     $form.find('input[name="id_media"]').val( record.id_media );
     $form.find('input[name="status"]').val( record.status );
     $form.find('textarea[name="title"]').val( record.title );
-    $form.find('textarea[name="media_description_editor"]').val( record.description );
+    $form.find('textarea[name="description"]').val( record.description );
 }
 
 function update_category_selector(preselected_id)

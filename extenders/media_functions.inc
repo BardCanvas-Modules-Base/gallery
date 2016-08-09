@@ -34,10 +34,12 @@ function convert_video_tag($element)
     if( empty($media_repository) ) $media_repository = new media_repository();
     
     $element = pq($element);
-    $href     = $element->attr("data-href");
-    $id_media = $element->attr("data-id-media");
-    $width    = $element->attr("width");
-    $height   = $element->attr("height");
+    
+    list($href, $id_media, $width, $height) = extract_video_tag_data($element);
+    //$href     = $element->attr("data-href");
+    //$id_media = $element->attr("data-id-media");
+    //$width    = $element->attr("width");
+    //$height   = $element->attr("height");
     
     $width    = is_numeric($width)  ? "width: {$width}px;"   : "";
     $height   = is_numeric($height) ? "height: {$height}px;" : "";
@@ -53,4 +55,38 @@ function convert_video_tag($element)
             . "</video>";
     
     $element->replaceWith($markup);
+}
+
+/**
+ * Extracts media items from contents and returns detected IDs in an array
+ *
+ * @param string $type     media|video
+ * @param string $contents html markup
+ *
+ * @return array
+ */
+function extract_media_items($type, $contents)
+{
+    if( ! class_exists("phpQuery") ) require_once ABSPATH . "/lib/phpQuery-onefile.php";
+    
+    $document = phpQuery::newDocument($contents);
+    $ids      = array();
+    
+    foreach( $document->find("img[data-media-type='$type']") as $item )
+        $ids[] = pq($item)->attr("data-id-media");
+    
+    $ids = array_unique($ids);
+    
+    return $ids;
+}
+
+function extract_video_tag_data($element)
+{
+    $element = pq($element);
+    $href     = $element->attr("data-href");
+    $id_media = $element->attr("data-id-media");
+    $width    = $element->attr("width");
+    $height   = $element->attr("height");
+    
+    return array($href, $id_media, $width, $height);
 }

@@ -45,7 +45,7 @@ function inject_selected_gallery_image_in_tinymce(
         return;
     }
     
-    var html = '<img data-id-media="' + id_media + '" src="' + file_url + '" width="' + embed_width + '">';
+    var html = '<img data-id-media="' + id_media + '" data-media-type="image" src="' + file_url + '" width="' + embed_width + '">';
     
     top.tinymce.activeEditor.insertContent(html);
     top.tinymce.activeEditor.windowManager.close();
