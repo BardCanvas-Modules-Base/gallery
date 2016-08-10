@@ -33,6 +33,12 @@
             </types>
             <no_records>No items have been published by this author.</no_records>
         </by_author>
+        <by_tag>
+            <title>Media tagged with #{$tag}</title>
+            <no_records><![CDATA[
+                No media items have been found with this tag. Try looking into <a href="{$link}">post tags</a>!
+            ]]></no_records>
+        </by_tag>
     </pages>
     
     <media_types>
