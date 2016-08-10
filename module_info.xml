@@ -49,6 +49,11 @@
                 <image_selector>extenders/settings_image_selector.inc</image_selector>
             </specs_renderer>
         </settings>
+        <search>
+            <search_by_tag>
+                <collection_builder>extenders/search_by_tag_builder.inc</collection_builder>
+            </search_by_tag>
+        </search>
     </extends_to>
     
 </module>

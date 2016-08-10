@@ -41,6 +41,12 @@
         </by_tag>
     </pages>
     
+    <extenders>
+        <search_by_tag_builder>
+            <collection_heading>Images/videos</collection_heading>
+        </search_by_tag_builder>
+    </extenders>
+    
     <media_types>
         <all>All media types</all>
         <media type="image">
