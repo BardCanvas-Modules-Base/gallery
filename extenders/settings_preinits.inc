@@ -16,7 +16,6 @@
 use hng2_base\module;
 ?>
 
-<!--suppress CssUnusedSymbol -->
 <style type="text/css">
     .settings_image_selector { border: 1px solid; width: 100%; }
 </style>
@@ -29,7 +28,7 @@ use hng2_base\module;
 
 <script type="text/javascript">
     var selected_image_trigger = null;
-    var image_dialog_title = '<?= $this_module->language->tinymce_strings->select_image ?>';
+    var image_dialog_title     = '<?= $this_module->language->tinymce_strings->select_image ?>';
     var invalid_type_for_image = '';
     
     function set_image(trigger)
