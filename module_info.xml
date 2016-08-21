@@ -41,6 +41,10 @@
         <plugin name="insert_gallery_video_in_tinymce">media/video_plugin~v1.2.js</plugin>
         <toolbar>insert_gallery_image_in_tinymce insert_gallery_video_in_tinymce</toolbar>
     </tinymce_additions>
+
+    <extension_areas_info><![CDATA[
+        Saving: post item saving.
+    ]]></extension_areas_info>
     
     <extends_to>
         <settings>
