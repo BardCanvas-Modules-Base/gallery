@@ -19,7 +19,9 @@ if( empty($_POST["id_media"]) && empty($_FILES) )
     die($current_module->language->messages->missing->file);
 
 $repository = new media_repository();
+$old_item = empty($_POST["id_media"]) ? null : $repository->get($_POST["id_media"]);
 $res = $repository->receive_and_save($_POST, $_FILES["file"], true);
 if( ! is_object($res) ) die($res);
 $item = $res;
 $current_module->load_extensions("save_item", "after_saving");
+echo "OK";
