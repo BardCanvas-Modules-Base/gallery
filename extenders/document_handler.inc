@@ -30,8 +30,9 @@ $item = $repository->get($id_media);
 if( is_null($item) ) return;
 
 $template->set_page_title($item->title);
-$template->set("is_single_post", true);
-$template->set("page_tag", "single_post");
+$template->set("is_single_post", false);
+$template->set("is_media_item_page", true);
+$template->set("page_tag", "single_media_item");
 
 $template->set("current_item",           $item);
 $template->set("current_category_slug",  $item->main_category_slug);
