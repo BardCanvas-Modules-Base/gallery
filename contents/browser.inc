@@ -36,7 +36,8 @@ $built_vars = $browser->build_vars(20, 4);
 foreach($built_vars as $key => $val) $$key = $val;
 
 $where = array("status <> 'trashed'");
-if( $account->level < config::MODERATOR_USER_LEVEL ) $where[] = "id_author = '{$account->id_account}'";
+if( $_GET["embedded_mode"] != "true" && $account->level < config::MODERATOR_USER_LEVEL )
+    $where[] = "id_author = '{$account->id_account}'";
 
 $search_for = empty($search_for) ? "" : trim($search_for);
 if( ! empty($search_for) )
