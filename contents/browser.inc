@@ -105,6 +105,11 @@ else if( empty($account->engine_prefs["gallery_browser_layout"]) )
     $account->engine_prefs["gallery_browser_layout"] = "table";
 ?>
 
+<? if( ! empty($_GET["edit_item"]) ): ?>
+    <script type="text/javascript"> $(document).ready(function() { edit_media('<?= $_GET["edit_item"] ?>') }); </script>
+<? endif; ?>
+
+
 <h1 class="clearfix">
     <button id="refresh_media_browser" class="pull-right" onclick="$('#filter_form').submit()">
         <span class="fa fa-refresh"></span>
