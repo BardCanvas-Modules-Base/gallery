@@ -161,6 +161,7 @@
             <invalid_type_for_video>Please select a video file.</invalid_type_for_video>
         </invalid>
         <item_not_found>The item wasn't found in the database</item_not_found>
+        <item_not_yours>You can't get this item data this way. It must be yours.</item_not_yours>
         <item_exists>The media item you're uploading already exists in the database</item_exists>
         <media_manager_exception><![CDATA[
             The media manager has thrown an exception:
