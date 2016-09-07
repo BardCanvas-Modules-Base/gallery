@@ -20,7 +20,7 @@ $icon = empty($this_module->language->icon) ? "" : ("<span class='fa " . trim($t
 $template->add_menu_item(
     $this_module->language->browser->menu_caption,
     "
-    <a class='main_menu_item {$added_class}' href='{$config->full_root_path}/gallery/'>
+    <a class='main_menu_item {$added_class}' data-module='gallery' href='{$config->full_root_path}/gallery/'>
         $icon {$this_module->language->index->menu_caption}
     </a>
     "
