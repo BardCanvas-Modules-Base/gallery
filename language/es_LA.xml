@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<language>
+    
+    <display_name>Galería de medios</display_name>
+    <icon>fa-picture-o</icon>
+    <description>
+        Subsistema de administración, incrustado y entrega de imágenes y videos.
+    </description>
+    
+    <index>
+        <title>Galería de medios</title>
+        <menu_caption>Medios</menu_caption>
+        <buttons>
+            <add>Subir</add>
+        </buttons>
+    </index>
+    
+    <pages>
+        <by_category>
+            <title>Medios en {$category}</title>
+            <no_records>No hay elementos para esta categoría.</no_records>
+        </by_category>
+        <by_date>
+            <title>Medios publicados en {$date}</title>
+            <no_records>No se han encontrado elementos para este periodo.</no_records>
+        </by_date>
+        <by_author>
+            <title>{$type} publicado por {$author}</title>
+            <types>
+                <any>Medios</any>
+                <image>Imágenes</image>
+                <video>Videos</video>
+            </types>
+            <no_records>NO hay elementos publicados por este usuario.</no_records>
+        </by_author>
+        <by_tag>
+            <title>Medios etiquetados con #{$tag}</title>
+            <no_records><![CDATA[
+                No se han encontrado medios con esta etiqueta. Intenta buscar en <a href="{$link}">entradas</a>
+            ]]></no_records>
+        </by_tag>
+    </pages>
+    
+    <extenders>
+        <search_by_tag_builder>
+            <collection_heading>Imágenes/videos</collection_heading>
+        </search_by_tag_builder>
+    </extenders>
+    
+    <media_types>
+        <all>Todos los medios</all>
+        <media type="image">
+            <caption>Imagen</caption>
+            <plural>Imágenes</plural>
+        </media>
+        <media type="video">
+            <caption>Video</caption>
+            <plural>Videos</plural>
+        </media>
+    </media_types>
+    
+    <record_nav>
+        <modes>
+            <tiles>Cambiar a modo de mosaico</tiles>
+            <table>Cambiar a modo de tabla</table>
+        </modes>
+        <search_placeholder>Buscar por id, slug, título o descripción</search_placeholder>
+        <columns>
+            <title>
+                <caption>Título</caption>
+                <layout xnowrap="true" />
+            </title>
+            <description>
+                <caption><![CDATA[ Descripción y detalles ]]></caption>
+                <layout xnowrap="true" />
+            </description>
+            <author>
+                <caption>Autor</caption>
+                <layout xnowrap="true" />
+            </author>
+            <publishing_date>
+                <caption>Publicado</caption>
+                <layout xnowrap="true" />
+                <order_asc  id="1">Ordenar por fecha de publicación ascendente</order_asc>
+                <order_desc id="2">Ordenar por fecha de publicación descendente</order_desc>
+            </publishing_date>
+            <last_update>
+                <caption>Actividad</caption>
+                <layout xnowrap="true" />
+                <order_asc  id="3">Ordenar por última actualización de actividad ascendente</order_asc>
+                <order_desc id="4">Ordenar por última actualización de actividad descendente</order_desc>
+            </last_update>
+            <views>
+                <caption><![CDATA[ <span class="fa fa-eye fa-fw"></span> ]]></caption>
+                <layout xnowrap="true" />
+                <order_asc  id="5">Ordenar por vistas ascendente</order_asc>
+                <order_desc id="6">Ordenar por vistas descendente</order_desc>
+            </views>
+            <comments>
+                <caption><![CDATA[ <span class="fa fa-comments-o fa-fw"></span> ]]></caption>
+                <layout xnowrap="true" />
+                <order_asc  id="7">Ordenar por cantidad de comentarios ascendente</order_asc>
+                <order_desc id="8">Ordenar por cantidad de comentarios descendente</order_desc>
+            </comments>
+            <featured_image>
+                <caption>Vista previa</caption>
+                <layout xnowrap="true" xalign="center" xwidth="200"/>
+            </featured_image>
+        </columns>
+        <actions>
+            <edit>Editar</edit>
+            <trash>Borrar</trash>
+        </actions>
+    </record_nav>
+    
+    <status_labels>
+        <draft>Borrador</draft>
+        <published>Publicado</published>
+        <reviewing>En revisión</reviewing>
+        <hidden>Oculto</hidden>
+        <trashed>Eliminado</trashed>
+    </status_labels>
+    
+    <form>
+        <add_title>Subir medio</add_title>
+        <edit_title>Editando detalles de medio</edit_title>
+        <fields>
+            <title>
+                <placeholder>Introduce un título para el elemento</placeholder>
+            </title>
+            <file>
+                <caption>Selecciona un archivo a subir:</caption>
+                <info><![CDATA[
+                    Selecciona un archivo a subir.
+                    No debe exceder los <span class="framed_content inlined">{$size} MB</span>
+                    y debe ser de cualquiera de los siguientes tipos: {$types}
+                ]]></info>
+            </file>
+            <description>
+                <placeholder>Introduce una breve descripción del elemento.</placeholder>
+            </description>
+        </fields>
+        
+        <buttons>
+            <save_draft>Guardar borrador</save_draft>
+            <publish>Publicar</publish>
+        </buttons>
+    </form>
+    
+    <messages>
+        <missing>
+            <id>No has proporcionado un identificador de medio</id>
+            <title>Favor de especificar un título para el medio</title>
+            <main_category>Favor de especificar una categoría principal para el medio</main_category>
+            <file>No has elegido un archivo a subir</file>
+        </missing>
+        <invalid>
+            <file>El archivo que has subido no es válido. Asegúrate de subir un archivo de tipo permitido.</file>
+            <upload>Subida inválida detectada. Por favor intenta de nuevo.</upload>
+            <invalid_type_for_image>No has elegido una imagen.</invalid_type_for_image>
+            <invalid_type_for_video>No has elegido un video.</invalid_type_for_video>
+        </invalid>
+        <item_not_found>No se ha encontrado el elemento en la base de datos.</item_not_found>
+        <item_not_yours>No puedes obtener los datos de este elemento por esta vía.</item_not_yours>
+        <item_exists>El medio que estás subiendo ya existe en la base de datos.</item_exists>
+        <media_manager_exception><![CDATA[
+            El administrador de medios ha lanzado una excepción:
+             
+            Clase invocada:
+                {$class}
+             
+            Mensaje:
+                {$exception}
+             
+            Favor de contactar al personal de soporte técnico.
+        ]]></media_manager_exception>
+    </messages>
+    
+    <tinymce_strings>
+        <browser_dialog_title>Navegador de medios</browser_dialog_title>
+        <insert_image>Insertar imagen de la galería</insert_image>
+        <insert_video>Insertar video de la galería</insert_video>
+        <media_type_not_supported>Disculpa, pero el tipo de medio que has seleccionado no está soportado. No se puede insertar.</media_type_not_supported>
+        <invalid_type_selected>El tipo de medio es inválido. Selecciona una imagen.</invalid_type_selected>
+        <select_image>Seleccionar imagen de la galería</select_image>
+        <select_video>Seleccionar video de la galería</select_video>
+    </tinymce_strings>
+    
+    <settings_data>
+        <title>Medios</title>
+        <specs key="items_per_page">
+            <title>Elementos a mostrar por página de índice</title>
+            <description><![CDATA[
+                Cantidad de elementos a mostrar en cada página de índice principal, de histórico, de categorías, etc.<br>
+                Valor por defecto: <code>30</code>.
+            ]]></description>
+            <type>number</type>
+            <options>
+                <min>1</min>
+                <max>255</max>
+            </options>
+        </specs>
+        <specs key="excerpt_length">
+            <title>Tamaño del extracto</title>
+            <description><![CDATA[
+                Cantidad de caracteres a mostrar para la descripción del medio en índices.<br>
+                Valor por defecto: <code>30</code>.
+            ]]></description>
+            <type>number</type>
+            <options>
+                <min>30</min>
+                <max>255</max>
+            </options>
+        </specs>
+        <specs key="max_item_width">
+            <title>Ancho máximo del medio en pantalla</title>
+            <description><![CDATA[
+                Este número es el valor por defecto para imágenes y videos
+                al momento de insertarlos en el editor HTML.<br>
+                Valor por defecto: <code>720</code>px.<br>
+                <span class="fa fa-info-circle"></span>
+                Este valor puede ser redefinido por una plantilla responsiva.
+            ]]></description>
+            <type>number</type>
+        </specs>
+        
+    </settings_data>
+    
+    <user_profile_tabs>
+        <tab mode="images" priority="201">Imágenes</tab>
+        <tab mode="videos" priority="202">Videos</tab>
+        <tab mode="media"  priority="203">Todos los medios</tab>
+    </user_profile_tabs>
+    
+    <rss_feed_generator>
+        <title>Feed RSS de medios de {$website_name}</title>
+        <description>Últimos medios publicados por todos los usuarios de {$website_name}</description>
+    </rss_feed_generator>
+    
+    <settings_image_selector>
+        <set>Definir</set>
+        <remove>Remover</remove>
+    </settings_image_selector>
+    
+</language>

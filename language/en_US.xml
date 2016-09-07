@@ -191,8 +191,8 @@
         <specs key="items_per_page">
             <title>Items to show per index page</title>
             <description><![CDATA[
-                Amount of media items to show per index (home, archives, etc.).
-                Defaults to 30.
+                Amount of media items to show per index (home, archives, etc.).<br>
+                Defaults to <code>30</code>.
             ]]></description>
             <type>number</type>
             <options>
@@ -203,8 +203,8 @@
         <specs key="excerpt_length">
             <title>Description excerpt length</title>
             <description><![CDATA[
-                Amount of characters to show from the item description on index pages.
-                Defaults to 30.
+                Amount of characters to show from the item description on index pages.<br>
+                Defaults to <code>30</code>.
             ]]></description>
             <type>number</type>
             <options>
@@ -217,8 +217,9 @@
             <description><![CDATA[
                 This number is the default set to
                 images and videos at the time they're inserted in the HTML editor.<br>
-                Defaults to 720px.<br>
-                <span class="fa fa-info-circle"></span> This maximum may be overrriden by any responsive template.
+                Defaults to <code>720</code>px.<br>
+                <span class="fa fa-info-circle"></span>
+                This value may be overrriden by any responsive template.
             ]]></description>
             <type>number</type>
         </specs>
