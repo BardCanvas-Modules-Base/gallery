@@ -36,7 +36,7 @@
         <by_tag>
             <title>Medios etiquetados con #{$tag}</title>
             <no_records><![CDATA[
-                No se han encontrado medios con esta etiqueta. Intenta buscar en <a href="{$link}">entradas</a>
+                No se han encontrado medios con esta etiqueta. Intenta buscar en <a href="{$link}">entradas</a>.
             ]]></no_records>
         </by_tag>
     </pages>
@@ -137,7 +137,7 @@
                 ]]></info>
             </file>
             <description>
-                <placeholder>Introduce una breve descripción del elemento.</placeholder>
+                <placeholder>Introduce una breve descripción del elemento. Puedes añadir #etiquetas como haces en cualquier otro lado.</placeholder>
             </description>
         </fields>
         
@@ -201,7 +201,7 @@
             </options>
         </specs>
         <specs key="excerpt_length">
-            <title>Tamaño del extracto</title>
+            <title>Tamaño del resumen</title>
             <description><![CDATA[
                 Cantidad de caracteres a mostrar para la descripción del medio en índices.<br>
                 Valor por defecto: <code>30</code>.
