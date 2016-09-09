@@ -28,12 +28,15 @@ use hng2_base\module;
 
 <script type="text/javascript">
     var selected_image_trigger = null;
+    var return_image_size      = 'full';
     var image_dialog_title     = '<?= $this_module->language->tinymce_strings->select_image ?>';
     var invalid_type_for_image = '';
     
-    function set_image(trigger)
+    function set_image(trigger, select_image_size)
     {
         selected_image_trigger = trigger;
+        
+        if( typeof select_image_size != 'undefined' ) return_image_size = select_image_size;
         
         var url = $_FULL_ROOT_PATH
             + '/gallery/index.php'
@@ -60,10 +63,12 @@ use hng2_base\module;
     
         $('#image_selector_dialog').dialog('close');
         
+        var image_to_return = return_image_size == 'full' ? file_url : thumbnail_url;
+        
         var $container = $(selected_image_trigger).closest('.image_selector_container');
-        $container.find('input.src_image_value').val(thumbnail_url);
-        $container.find('.settings_image_selector').attr('src', thumbnail_url);
-        $container.find('.settings_image_selector').closest('a').attr('href', thumbnail_url);
+        $container.find('input.src_image_value').val(image_to_return);
+        $container.find('.settings_image_selector').attr('src', image_to_return);
+        $container.find('.settings_image_selector').closest('a').attr('href', image_to_return);
     }
     
     function remove_image(trigger)
