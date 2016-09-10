@@ -29,6 +29,7 @@ $item = $repository->get($id_media);
 
 if( is_null($item) ) return;
 
+$repository->increment_views($item->id_media);
 $template->set_page_title($item->title);
 $template->set("is_single_post", false);
 $template->set("is_media_item_page", true);
