@@ -95,9 +95,6 @@ use hng2_media\media_record;
                 <td align="right">
                     <?= $row->views ?>
                 </td>
-                <td align="right">
-                    <?= $row->comments_count ?>
-                </td>
                 <td>
                     <? if( $_GET["embedded_mode"] != "true" ): ?>
                         <? if($row->type == "image"): ?>

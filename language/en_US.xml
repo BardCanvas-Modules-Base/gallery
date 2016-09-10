@@ -96,12 +96,6 @@
                 <order_asc  id="5">Order by views ascending</order_asc>
                 <order_desc id="6">Order by views descending</order_desc>
             </views>
-            <comments>
-                <caption><![CDATA[ <span class="fa fa-comments-o fa-fw"></span> ]]></caption>
-                <layout xnowrap="true" />
-                <order_asc  id="7">Order by comments count ascending</order_asc>
-                <order_desc id="8">Order by comments count descending</order_desc>
-            </comments>
             <featured_image>
                 <caption>Preview</caption>
                 <layout xnowrap="true" xalign="center" xwidth="200"/>
