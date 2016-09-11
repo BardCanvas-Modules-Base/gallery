@@ -50,10 +50,12 @@ use hng2_media\media_record;
                     
                     <? if( $_GET["embedded_mode"] != "true" ): ?>
                         <div class="actions">
-                            <span class="action pseudo_link" onclick="edit_media('<?= $row->id_media ?>')">
-                                <span class="fa fa-pencil"></span>
-                                <?= $current_module->language->record_nav->actions->edit ?>
-                            </span>
+                            <? if( $row->can_be_edited() ): ?>
+                                <span class="action pseudo_link" onclick="edit_media('<?= $row->id_media ?>')">
+                                    <span class="fa fa-pencil"></span>
+                                    <?= $current_module->language->record_nav->actions->edit ?>
+                                </span>
+                            <? endif; ?>
                             <span class="action pseudo_link" onclick="trash_media('<?= $row->id_media ?>')">
                                 <span class="fa fa-trash"></span>
                                 <?= $current_module->language->record_nav->actions->trash ?>

@@ -236,4 +236,20 @@
         <remove>Remover</remove>
     </settings_image_selector>
     
+    <reporting>
+        <id_not_set>No has especificado un identificador válido de medios a reportar.</id_not_set>
+        <not_found>El medio que has especificado no se encuentra. Es posible que se haya eliminado.</not_found>
+        <already_processed>El medio ya ha sido procesado y se ha rechazado. No hay necesidad de reportarlo de nuevo.</already_processed>
+        <in_review>El medio está siendo revisado. No hay necesidad de reportarlo de nuevo.</in_review>
+        <subject>Reporte de spam/contenido inapropiado para medio "{$item_title}" de {$item_author}</subject>
+        <content><![CDATA[
+            <p><b>Describe porqué este medio debería ser revisada:</b></p>
+            <ul><li><i>Escribe tus razones aquí</i></li></ul>
+            <hr>
+            Medio enviado por {$item_author} en {$date}:<br>
+            <a href='{$permalink}'>{$permalink}</a>
+            <blockquote>{$description}</blockquote>
+        ]]></content>
+    </reporting>
+    
 </language>
