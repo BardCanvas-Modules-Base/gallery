@@ -9,6 +9,7 @@
  * @param embedded_mode
  */
 
+use hng2_base\config;
 use hng2_media\media_record;
 ?>
 
@@ -80,9 +81,13 @@ use hng2_media\media_record;
                     foreach($repository->get_attached_categories($row->id_media) as $category)
                         echo "<span class='category'><span class='fa fa-folder fa-fw'></span>{$category->title}</span> ";
                     
-                    if( ! empty($row->tags_list) )
-                        foreach($row->tags_list as $tag)
+                    if( $account->level < config::MODERATOR_USER_LEVEL )
+                        foreach( $row->get_filtered_tags_list() as $tag)
                             echo "<span class='hashtag'><span class='fa fa-hashtag fa-fw'></span>{$tag}</span> ";
+                    else
+                        if( is_array($row->tags_list) )
+                            foreach( $row->tags_list as $tag)
+                                echo "<span class='hashtag'><span class='fa fa-hashtag fa-fw'></span>{$tag}</span> ";
                     ?>
                 </td>
                 <td>
