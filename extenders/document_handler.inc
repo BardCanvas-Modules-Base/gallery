@@ -28,6 +28,7 @@ $repository = new media_repository();
 $item = $repository->get($id_media);
 
 if( is_null($item) ) return;
+if( $item->status != "published" ) return;
 
 $repository->increment_views($item->id_media);
 $template->set_page_title($item->title);
