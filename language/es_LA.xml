@@ -15,6 +15,14 @@
         </buttons>
     </index>
     
+    <form_initial_info_for_posts><![CDATA[
+        Los medios individuales <b>no son atados a ningún documento o entrada</b> tras ser subidos directamente.<br>
+        Si quieres que estén disponibles en los índices principales,
+        <b>cancela ahora</b> y crea una entrada desde el <u>navegador de entradas</u>.<br>
+        Desde ahí, usa los botones respectivos para subir e insertar imágenes o videos <b>dentro de la entrada</b>.<br>
+        <span style="color: red; font-weight: bold;">De ignorar esto, tus medios no aparecerán en ningún lado.</span>
+    ]]></form_initial_info_for_posts>
+    
     <pages>
         <by_category>
             <title>Medios en {$category}</title>

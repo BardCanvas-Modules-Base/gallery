@@ -15,6 +15,14 @@
         </buttons>
     </index>
     
+    <form_initial_info_for_posts><![CDATA[
+        Individual media items <b>are not tied to any document or post</b> after being uploaded directly.<br>
+        If you want your items to be available on main indexes, <b>cancel now</b> and create a post
+        from the <u>posts browser</u>.<br>
+        From there, use the buttons on the editor toolbar to upload and insert images or videos <b>inside the post</b>.<br>
+        <span style="color: red; font-weight: bold;">Ignoring this will cause your media to be missed by everyone.</span>
+    ]]></form_initial_info_for_posts>
+    
     <pages>
         <by_category>
             <title>Media in {$category}</title>

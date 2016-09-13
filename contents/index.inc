@@ -115,5 +115,12 @@
         <?= $current_module->language->form->edit_title; ?>
     </h1>
     
+    <? if( $_GET["embedded_mode"] != "true" && $modules["posts"]->enabled ): ?>
+        <div id="form_initial_info_for_posts" class="for_addition framed_content state_highlight">
+            <span class="fa fa-warning"></span>
+            <?= $current_module->language->form_initial_info_for_posts ?>
+        </div>
+    <? endif; ?>
+    
     <? include __DIR__ . "/form.inc"; ?>
 </div>
