@@ -260,4 +260,13 @@
         ]]></content>
     </reporting>
     
+    <accounts_nav_columns>
+        <media>
+            <caption><![CDATA[ <span class="fa fa-picture-o fa-fw"></span> ]]></caption>
+            <layout xnowrap="true" xalign="right" />
+            <order_asc  id="media_count_asc">Order by published media count ascending</order_asc>
+            <order_desc id="media_count_desc">Order by published media count descending</order_desc>
+        </media>
+    </accounts_nav_columns>
+    
 </language>
