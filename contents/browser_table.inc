@@ -40,7 +40,7 @@ use hng2_media\media_record;
         
         <tbody>
         <? foreach( $records as $row ): ?>
-            <tr class="record"
+            <tr class="record <? if($row->status == "trashed") echo "deleted"; ?>"
                 <? if( $_GET["embedded_mode"] == "true" ): ?>onclick="prepare_item_for_embedded_callback(this)"<? endif; ?>
                 data-record-id="<?= $row->id_media ?>" data-type="<?= $row->type ?>"
                 data-width="<?= $row->get_item_width() ?>" data-height="<?= $row->get_item_height() ?>" 
