@@ -111,7 +111,7 @@
         </columns>
         <actions>
             <edit>Editar</edit>
-            <trash>Borrar</trash>
+            <trash>Papelera</trash>
         </actions>
     </record_nav>
     
@@ -120,7 +120,7 @@
         <published>Publicado</published>
         <reviewing>En revisión</reviewing>
         <hidden>Oculto</hidden>
-        <trashed>Eliminado</trashed>
+        <trashed>En papelera</trashed>
     </status_labels>
     
     <form>
