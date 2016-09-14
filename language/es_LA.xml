@@ -72,7 +72,7 @@
             <tiles>Cambiar a modo de mosaico</tiles>
             <table>Cambiar a modo de tabla</table>
         </modes>
-        <search_placeholder>Buscar por id, slug, título o descripción</search_placeholder>
+        <search_placeholder>Buscar por id, slug, título, descripción o #etiquetas</search_placeholder>
         <columns>
             <title>
                 <caption>Título</caption>

@@ -72,7 +72,7 @@
             <tiles>Switch to tiles mode</tiles>
             <table>Switch to table mode</table>
         </modes>
-        <search_placeholder>Search by id, parent, slug, title or description</search_placeholder>
+        <search_placeholder>Search by id, slug, title, description or #tags</search_placeholder>
         <columns>
             <title>
                 <caption>Title</caption>
