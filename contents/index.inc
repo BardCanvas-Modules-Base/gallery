@@ -27,6 +27,7 @@
         $form.find('select[name="limit"] option[value="20"]').prop('selected', true);
         $form.find('input[name="offset"]').val('0');
         $form.find('input[name="order"]').val('');
+        $form.find('input[name="search_tag"]').val('');
         
         if( $form.find('select[name="search_type"]').is(':visible') )
             $form.find('select[name="search_type"] option:first').prop('selected', true);

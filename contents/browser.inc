@@ -29,6 +29,7 @@ $repository = new media_repository();
  * @var string $search_state
  * @var string $search_for
  * @var string $search_type
+ * @var string $search_tag
  * 
  */
 #region Nav filters
@@ -57,16 +58,16 @@ if( ! empty($search_for) )
                 $where_line .= "description like '%{$this_term}%'    ";
             }
         }
-        $where[] = $where_line;
+        $where[] = "({$where_line})";
     }
     else
     {
         $search_for = trim($search_for);
         $where[] 
-            = "id_media    =     '{$search_for}'  or "
-            . "path        like '%{$search_for}%' or "
-            . "title       like '%{$search_for}%' or "
-            . "description like '%{$search_for}%'"
+            = "( id_media    =     '{$search_for}'  or "
+            . "  path        like '%{$search_for}%' or "
+            . "  title       like '%{$search_for}%' or "
+            . "  description like '%{$search_for}%' )"
         ;
     }
 }
@@ -76,6 +77,9 @@ if( ! empty($_GET["search_type"]) ) $search_type = $_GET["search_type"];
 
 # Standard evaluation
 if( ! empty($search_type) ) $where[] = "type = '$search_type'";
+
+# By tags
+if( ! empty($search_tag) ) $where[] = "(title like '%#{$search_tag}%' or description like '%#{$search_tag}%')";
 #endregion
 
 #region Nav pointers
@@ -97,6 +101,7 @@ switch( $order )
 }
 
 $records = $repository->find($where, $limit, $offset, $sqlorder);
+# echo "<pre>{$repository->get_last_query()}</pre>";
 #endregion
 
 if( $_GET["embedded_mode"] == "true" )
@@ -141,45 +146,74 @@ else if( empty($account->engine_prefs["gallery_browser_layout"]) )
     <? if( $_GET["embedded_mode"] == "true" ) $url .= "&embedded_mode=true&callback={$_GET["callback"]}"; ?>
     <form name="filter_form" id="filter_form" method="get" action="<?= $url ?>">
         
-        <input type="hidden" name="mode"   value="set_filter">
-        <input type="hidden" name="order"  value="<?= $order ?>">
-        <input type="hidden" name="offset" value="0">
+        <input type="hidden" name="mode"       value="set_filter">
+        <input type="hidden" name="order"      value="<?= $order ?>">
+        <input type="hidden" name="offset"     value="0">
+        <input type="hidden" name="search_tag" value="<?= $search_tag ?>">
         
-        <span style="float: right;">
-            <?= $browser->get_pagination_button("previous", "paginate", $pagination) ?>
-            <?= $language->record_nav->page ?>
-            <?= $pagination["this_page_number"]; ?>/<?= $pagination["total_pages"]; ?>
-            (<?= $pagination["total_records"]; ?> <?= $language->record_nav->entries ?>)
-            <?= $browser->get_pagination_button("next", "paginate", $pagination) ?>
-        </span>
-        
-        <?= $language->record_nav->search ?>
-        <input type="text" name="search_for"
-               value="<?= htmlspecialchars($search_for) ?>" size="46"
-               placeholder="<?= $current_module->language->record_nav->search_placeholder ?>">
-        
-        <? $style = ( ! empty($_GET["embedded_mode"]) && ! empty($_GET["search_type"]) ) ? "display: none;" : ""; ?>
-        <select name="search_type" style="<?= $style ?>">
-            <option <? if($search_type == "") echo "selected"; ?> value="">
-                &lt;<?= $current_module->language->media_types->all ?>&gt;
-            </option>
-            <? foreach($current_module->language->media_types->media as $item): ?>
-                <option <? if($item["type"] == $search_type) echo "selected" ?> value="<?= $item["type"] ?>">
-                    <?= trim($item->plural) ?>
+        <div>
+            <span style="float: right;">
+                <?= $browser->get_pagination_button("previous", "paginate", $pagination) ?>
+                <?= $language->record_nav->page ?>
+                <?= $pagination["this_page_number"]; ?>/<?= $pagination["total_pages"]; ?>
+                (<?= $pagination["total_records"]; ?> <?= $language->record_nav->entries ?>)
+                <?= $browser->get_pagination_button("next", "paginate", $pagination) ?>
+            </span>
+            
+            <?= $language->record_nav->search ?>
+            <input type="text" name="search_for"
+                   value="<?= htmlspecialchars($search_for) ?>" size="46"
+                   placeholder="<?= $current_module->language->record_nav->search_placeholder ?>">
+            
+            <? $style = ( ! empty($_GET["embedded_mode"]) && ! empty($_GET["search_type"]) ) ? "display: none;" : ""; ?>
+            <select name="search_type" style="<?= $style ?>">
+                <option <? if($search_type == "") echo "selected"; ?> value="">
+                    &lt;<?= $current_module->language->media_types->all ?>&gt;
                 </option>
-            <? endforeach; ?>
-        </select>
+                <? foreach($current_module->language->media_types->media as $item): ?>
+                    <option <? if($item["type"] == $search_type) echo "selected" ?> value="<?= $item["type"] ?>">
+                        <?= trim($item->plural) ?>
+                    </option>
+                <? endforeach; ?>
+            </select>
+            
+            <?= $language->record_nav->show ?>
+            <select name="limit">
+                <? foreach(array(5, 10, 20, 30, 40, 50, 100, 200, 300, 400, 500) as $recs): ?>
+                    <option <? if($limit == $recs) echo "selected" ?> value="<?= $recs ?>"><?= $recs ?></option>
+                <? endforeach; ?>
+            </select>
+            <?= $language->record_nav->recs_per_page ?>
+            
+            <button type="submit"><?= $language->record_nav->buttons->apply ?></button>
+            <button type="submit" onclick="reset_filter();"><?= $language->record_nav->buttons->reset ?></button>
+        </div>
         
-        <?= $language->record_nav->show ?>
-        <select name="limit">
-            <? foreach(array(5, 10, 20, 30, 40, 50, 100, 200, 300, 400, 500) as $recs): ?>
-                <option <? if($limit == $recs) echo "selected" ?> value="<?= $recs ?>"><?= $recs ?></option>
-            <? endforeach; ?>
-        </select>
-        <?= $language->record_nav->recs_per_page ?>
+        <?
+        if( $_GET["embedded_mode"] == "true" ):
+            $tags = $repository->get_grouped_tag_counts("", 3, 10);
+            if( count($tags) > 0): ?>
+                <script type="text/javascript">
+                    function set_search_tag(tag)
+                    {
+                        var $form = $('#filter_form');
+                        $form.find('input[name="search_tag"]').val(tag);
+                        $form.submit();
+                    }
+                </script>
+                <div class="records_browser filter_links" style="margin-top: 10px;">
+                    <? foreach($tags as $tag => $count): ?>
+                        <span class="framed_content pseudo_link <? if($search_tag == $tag) echo "state_active"; ?>"
+                              onclick="set_search_tag('<?= $tag ?>')"><span 
+                              class="fa fa-hashtag"></span><?= $tag ?> (<?= $count ?>)</span>
+                    <? endforeach; ?>
+                    <span class="framed_content pseudo_link" onclick="set_search_tag('')"><?= $language->none ?></span>
+                </div>
+            <?
+            endif;
+        endif;
+        ?>
         
-        <button type="submit"><?= $language->record_nav->buttons->apply ?></button>
-        <button type="submit" onclick="reset_filter();"><?= $language->record_nav->buttons->reset ?></button>
     </form>
 </div>
 
