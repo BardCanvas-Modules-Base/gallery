@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <module>
     
-    <version>1.4</version>
+    <version>1.4.2</version>
     <group>System</group>
     
     <working_flags>
@@ -65,9 +65,10 @@
         </contact>
         <accounts>
             <records_browser>
-                <additional_headers priority="110">extenders/accounts/browser_headers.inc</additional_headers>
-                <additional_columns priority="110">extenders/accounts/browser_columns.inc</additional_columns>
-                <presettings_data   priority="110">extenders/accounts/browser_presets.inc</presettings_data>
+                <additional_headers    priority="110">extenders/accounts/browser_headers.inc</additional_headers>
+                <additional_columns    priority="110">extenders/accounts/browser_columns.inc</additional_columns>
+                <presettings_data      priority="110">extenders/accounts/browser_presets.inc</presettings_data>
+                <principal_data_addons priority="110">extenders/accounts/principal_data_addons.inc</principal_data_addons>
             </records_browser>
         </accounts>
     </extends_to>

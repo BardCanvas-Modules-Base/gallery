@@ -22,6 +22,9 @@ function convert_media_tags($contents)
     
     $document = phpQuery::newDocument($contents);
     
+    # Images
+    $document->find('img[data-media-type="image"]')->each("autolink_media_image");
+    
     # Videos
     $document->find('img[data-media-type="video"]')->each("convert_video_tag");
     
@@ -53,6 +56,33 @@ function convert_video_tag($element)
         $markup = "<video poster='{$item->get_thumbnail_url(true)}' style='{$width} {$height}' controls>" 
             . "<source src='{$item->get_item_url(true)}'>" 
             . "</video>";
+    
+    $element->replaceWith($markup);
+}
+
+function autolink_media_image($element)
+{
+    global $media_repository, $language;
+    if( empty($media_repository) ) $media_repository = new media_repository();
+    
+    $element = pq($element);
+    
+    list($href, $id_media, $width, $height) = extract_video_tag_data($element);
+    //$href     = $element->attr("data-href");
+    //$id_media = $element->attr("data-id-media");
+    //$width    = $element->attr("width");
+    //$height   = $element->attr("height");
+    
+    $width    = is_numeric($width)  ? "width: {$width}px;"   : "";
+    $height   = is_numeric($height) ? "height: {$height}px;" : "";
+    
+    $item = $media_repository->get($id_media);
+    if( is_null($item) )
+        $markup = "<div class='missing_media_item' style='{$width} {$height}'>{$href}<br>{$language->resource_not_found}</div>";
+    elseif( $item->status != "published" )
+        $markup = "<div class='missing_media_item' style='{$width} {$height}'>{$href}<br>{$language->resource_unavailable}</div>";
+    else
+        $markup = "<a href='{$item->get_page_url()}' target='_blank'>{$element}</a>";
     
     $element->replaceWith($markup);
 }

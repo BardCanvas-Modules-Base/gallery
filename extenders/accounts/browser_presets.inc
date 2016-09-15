@@ -26,6 +26,10 @@ switch( $order )
 
 $additional_select_columns .= "
     , (select count(id_media) from media where media.id_author = account.id_account ) as _media_count
+    , ( select concat(media.id_media, '\t', media.type, '\t', media.title, '\t', media.publishing_date, '\t', media.status)
+        from media
+        where media.id_author = account.id_account
+        order by media.creation_date desc limit 1 ) as _last_media_item_data
 ";
 
 $config->globals["accounts:nav/presettings_data"] = array( $sqlorder, $additional_select_columns);

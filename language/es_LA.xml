@@ -267,6 +267,9 @@
             <order_asc  id="media_count_asc">Ordenar por cantidad de medios publicados ascendente</order_asc>
             <order_desc id="media_count_desc">Ordenar por cantidad de medios publicados descendente</order_desc>
         </media>
+        <principal_data><![CDATA[
+            Últim medio: [{$time}, {$type}, {$status}] <a href="{$url}" target="_blank">{$title}</a>
+        ]]></principal_data>
     </accounts_nav_columns>
     
 </language>
