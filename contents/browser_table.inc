@@ -68,12 +68,11 @@ use hng2_media\media_record;
                     <?= empty($row->description) ? "―" : convert_emojis(make_excerpt_of($row->description, 100)) ?><br>
                     
                     <?
-                    echo $row->dimensions;
+                    echo empty($row->dimensions) ? "<span class='framed_content inlined state_ko'><span class='fa fa-warning'></span></span>" : $row->dimensions;
                     $amount = number_format($row->size / 1000, 1);
                     $amount = rtrim($amount, "0");
                     $amount = rtrim($amount, ".");
-                    echo " • $amount KB";
-                    echo "<br>";
+                    echo " • $amount KB • ";
                     ?>
                     
                     <span class="framed_content inlined"><?= $current_module->language->status_labels->{$row->status} ?></span>
@@ -88,6 +87,14 @@ use hng2_media\media_record;
                         if( is_array($row->tags_list) )
                             foreach( $row->tags_list as $tag)
                                 echo "<span class='hashtag'><span class='fa fa-hashtag fa-fw'></span>{$tag}</span> ";
+                    
+                    $principal_data_addons = array();
+                    $current_module->load_extensions("records_browser", "principal_data_addons");
+                    if( ! empty($principal_data_addons) ){
+                        echo "<div class='principal_addons' style='margin-top: 5px;'>";
+                        echo implode("", $principal_data_addons);
+                        echo "</div><hr>";
+                    }
                     ?>
                 </td>
                 <td>
