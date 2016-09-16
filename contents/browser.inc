@@ -26,19 +26,35 @@ $repository = new media_repository();
  * @var int    $offset
  * @var int    $limit
  * @var int    $order
- * @var string $search_state
  * @var string $search_for
  * @var string $search_type
  * @var string $search_tag
+ * @var string $search_status
+ * @var string $search_author
  * 
  */
 #region Nav filters
 $built_vars = $browser->build_vars(20, 4);
 foreach($built_vars as $key => $val) $$key = $val;
 
-$where = array("status <> 'trashed'");
-if( $_GET["embedded_mode"] != "true" && $account->level < config::MODERATOR_USER_LEVEL )
-    $where[] = "id_author = '{$account->id_account}'";
+$where = array();
+
+if( $_GET["embedded_mode"] == "true" )
+{
+    $where["status"] = "published";
+}
+else
+{
+    if( $account->level < config::MODERATOR_USER_LEVEL )
+        $where["id_author"] = $account->id_account;
+    elseif( $account->level >= config::MODERATOR_USER_LEVEL && ! empty($search_author) )
+        $where["id_author"] = $search_author;
+    
+    if( $account->level < config::MODERATOR_USER_LEVEL && $search_status == "hidden" )
+        $search_status = "";
+    
+    if( ! empty($search_status) ) $where["status"] = $search_status;
+}
 
 $search_for = empty($search_for) ? "" : trim($search_for);
 if( ! empty($search_for) )
@@ -146,10 +162,12 @@ else if( empty($account->engine_prefs["gallery_browser_layout"]) )
     <? if( $_GET["embedded_mode"] == "true" ) $url .= "&embedded_mode=true&callback={$_GET["callback"]}"; ?>
     <form name="filter_form" id="filter_form" method="get" action="<?= $url ?>">
         
-        <input type="hidden" name="mode"       value="set_filter">
-        <input type="hidden" name="order"      value="<?= $order ?>">
-        <input type="hidden" name="offset"     value="0">
-        <input type="hidden" name="search_tag" value="<?= $search_tag ?>">
+        <input type="hidden" name="mode"          value="set_filter">
+        <input type="hidden" name="order"         value="<?= $order ?>">
+        <input type="hidden" name="offset"        value="0">
+        <input type="hidden" name="search_tag"    value="<?= $search_tag ?>">
+        <input type="hidden" name="search_author" value="<?= $search_author ?>">
+        <input type="hidden" name="search_status" value="<?= $search_status ?>">
         
         <div>
             <span style="float: right;">
@@ -188,33 +206,85 @@ else if( empty($account->engine_prefs["gallery_browser_layout"]) )
             <button type="submit"><?= $language->record_nav->buttons->apply ?></button>
             <button type="submit" onclick="reset_filter();"><?= $language->record_nav->buttons->reset ?></button>
         </div>
-        
-        <?
-        if( $_GET["embedded_mode"] == "true" ):
-            $tags = $repository->get_grouped_tag_counts("", 3, 10);
-            if( count($tags) > 0): ?>
-                <script type="text/javascript">
-                    function set_search_tag(tag)
-                    {
-                        var $form = $('#filter_form');
-                        $form.find('input[name="search_tag"]').val(tag);
-                        $form.submit();
-                    }
-                </script>
-                <div class="records_browser filter_links" style="margin-top: 10px;">
-                    <? foreach($tags as $tag => $count): ?>
-                        <span class="framed_content pseudo_link <? if($search_tag == $tag) echo "state_active"; ?>"
-                              onclick="set_search_tag('<?= $tag ?>')"><span 
-                              class="fa fa-hashtag"></span><?= $tag ?> (<?= $count ?>)</span>
-                    <? endforeach; ?>
-                    <span class="framed_content pseudo_link" onclick="set_search_tag('')"><?= $language->none ?></span>
-                </div>
-            <?
-            endif;
-        endif;
-        ?>
-        
     </form>
+    
+    <script type="text/javascript">
+        function set_filter_var(name, val, send)
+        {
+            if( typeof send == 'undefined' ) send = true;
+        
+            var $form = $('#filter_form');
+            $form.find('input[name="' + name + '"]').val(val);
+            if( send ) $form.submit();
+        }
+    </script>
+    
+    <?
+    if( $_GET["embedded_mode"] == "true" ):
+        $tags = $repository->get_grouped_tag_counts("", 3, 10);
+        if( count($tags) > 0):
+            ?>
+            <div class="records_browser filter_links" style="margin-top: 10px;">
+                <? foreach($tags as $tag => $count): ?>
+                    <span class="framed_content pseudo_link <? if($search_tag == $tag) echo "state_active"; ?>"
+                          onclick="set_filter_var('search_tag', '<?= $tag ?>')"><span 
+                          class="fa fa-hashtag"></span><?= $tag ?> (<?= $count ?>)</span>
+                <? endforeach; ?>
+                <span class="framed_content pseudo_link" onclick="set_filter_var('search_tag', '')"><?= $language->none ?></span>
+            </div>
+            <?
+        endif;
+    else:
+        ?>
+        <div class="records_browser filter_links" style="margin-top: 10px;">
+            <? if($account->level >= config::MODERATOR_USER_LEVEL): ?>
+                <span class="framed_content <? if($search_author == $account->id_account) echo "state_active" ?> pseudo_link"
+                      onclick="set_filter_var('search_status', '', false); set_filter_var('search_author', '<?= $account->id_account ?>')">
+                    <?= $language->mine_sm ?>
+                    (<?= number_format($repository->get_record_count(array("id_author" => $account->id_account))) ?>)
+                </span>
+                <? unset( $where["id_author"] ); ?>
+            <? endif; ?>
+            
+            <? $where_copy = $where; $where_copy["status"] = "published"; ?>
+            <span class="framed_content <? if($search_status == "published") echo "state_active" ?> pseudo_link"
+                  onclick="set_filter_var('search_author', '', false); set_filter_var('search_status', 'published')">
+                <?= $current_module->language->status_labels->published ?>
+                (<?= number_format($repository->get_record_count($where_copy)) ?>)
+            </span>
+            
+            <? $where_copy = $where; $where_copy["status"] = "reviewing";
+               $reviewing = $repository->get_record_count($where_copy); ?>
+            <span class="framed_content <? if($search_status == "reviewing") echo "state_active" ?> <? if($reviewing) echo "state_ko"; ?> pseudo_link"
+                  onclick="set_filter_var('search_author', '', false); set_filter_var('search_status', 'reviewing')">
+                <?= $current_module->language->status_labels->reviewing ?>
+                (<?= number_format($reviewing) ?>)
+            </span>
+            
+            <? $where_copy = $where; $where_copy["status"] = "trashed"; ?>
+            <span class="framed_content <? if($search_status == "trashed") echo "state_active" ?> pseudo_link"
+                  onclick="set_filter_var('search_author', '', false); set_filter_var('search_status', 'trashed')">
+                <?= $current_module->language->status_labels->trashed ?>
+                (<?= number_format($repository->get_record_count($where_copy)) ?>)
+            </span>
+            
+            <? if($account->level >= config::MODERATOR_USER_LEVEL):
+                $where_copy = $where; $where_copy["status"] = "hidden";
+                if($search_pinned == "true") unset($where_copy[0]); ?>
+                <span class="framed_content <? if($search_status == "hidden") echo "state_active" ?> pseudo_link"
+                      onclick="set_filter_var('search_author', '', false); set_filter_var('search_status', 'trashed')">
+                    <?= $current_module->language->status_labels->hidden ?>
+                    (<?= number_format($repository->get_record_count($where_copy)) ?>)
+                </span>
+            <? endif; ?>
+            
+            <span class="framed_content pseudo_link" onclick="set_filter_var('search_author', '', false); set_filter_var('search_status', '')">
+                <?= $language->all_m ?>
+            </span>
+            
+        </div>
+        <?
+    endif; ?>
 </div>
 
 <? if( $record_count == 0 ): ?>

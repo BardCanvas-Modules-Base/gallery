@@ -28,6 +28,8 @@
         $form.find('input[name="offset"]').val('0');
         $form.find('input[name="order"]').val('');
         $form.find('input[name="search_tag"]').val('');
+        $form.find('input[name="search_author"]').val('');
+        $form.find('input[name="search_status"]').val('');
         
         if( $form.find('select[name="search_type"]').is(':visible') )
             $form.find('select[name="search_type"] option:first').prop('selected', true);
