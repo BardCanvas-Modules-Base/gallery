@@ -269,7 +269,10 @@
             <order_desc id="media_count_desc">Ordenar por cantidad de medios publicados descendente</order_desc>
         </media>
         <principal_data><![CDATA[
-            Últim medio: [{$time}, {$type}, {$status}] <a href="{$url}" target="_blank">{$title}</a>
+            <div class="media_bullet">
+                <span class="bullet fa fa-picture-o fa-fw"></span>
+                Último medio: [{$time}, {$type}, {$status}] <a href="{$url}" target="_blank">{$title}</a>
+            </div>
         ]]></principal_data>
     </accounts_nav_columns>
     
