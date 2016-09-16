@@ -18,6 +18,9 @@ if( ! $account->_exists ) die($language->errors->page_requires_login);
 if( empty($_POST["id_media"]) && empty($_FILES) )
     die($current_module->language->messages->missing->file);
 
+if( preg_match('/http|https|www\./i', stripslashes($_POST["title"])) )
+    die($current_module->language->messages->no_urls_in_title);
+
 $repository = new media_repository();
 $old_item = empty($_POST["id_media"]) ? null : $repository->get($_POST["id_media"]);
 $res = $repository->receive_and_save($_POST, $_FILES["file"], true);

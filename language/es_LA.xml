@@ -156,6 +156,7 @@
             <main_category>Favor de especificar una categoría principal para el medio</main_category>
             <file>No has elegido un archivo a subir</file>
         </missing>
+        <no_urls_in_title>No se admiten URLs en el título</no_urls_in_title>
         <invalid>
             <file>El archivo que has subido no es válido. Asegúrate de subir un archivo de tipo permitido.</file>
             <upload>Subida inválida detectada. Por favor intenta de nuevo.</upload>

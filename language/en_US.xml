@@ -156,6 +156,7 @@
             <main_category>Please specify a main category for the item</main_category>
             <file>You haven't chosen a file to upload.</file>
         </missing>
+        <no_urls_in_title>URLs aren't admitted in the title</no_urls_in_title>
         <invalid>
             <file>The file you uploaded isn't valid. Please make sure you're uploading a valid file type.</file>
             <upload>Invalid upload detected. Please try again.</upload>
