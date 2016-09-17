@@ -177,6 +177,8 @@
              
             Please contact the tech support staff.
         ]]></media_manager_exception>
+        <items_hidden>{$count} media items from {$author} have been hidden.</items_hidden>
+        <items_unhidden>{$count} media items from {$author} have been restored.</items_unhidden>
     </messages>
     
     <tinymce_strings>

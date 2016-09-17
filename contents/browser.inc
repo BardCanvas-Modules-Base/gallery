@@ -54,6 +54,9 @@ else
         $search_status = "";
     
     if( ! empty($search_status) ) $where["status"] = $search_status;
+    
+    if( $account->level < config::MODERATOR_USER_LEVEL )
+        $where[] = "status <> 'hidden'";
 }
 
 $search_for = empty($search_for) ? "" : trim($search_for);
@@ -269,10 +272,9 @@ else if( empty($account->engine_prefs["gallery_browser_layout"]) )
             </span>
             
             <? if($account->level >= config::MODERATOR_USER_LEVEL):
-                $where_copy = $where; $where_copy["status"] = "hidden";
-                if($search_pinned == "true") unset($where_copy[0]); ?>
+                $where_copy = $where; $where_copy["status"] = "hidden"; ?>
                 <span class="framed_content <? if($search_status == "hidden") echo "state_active" ?> pseudo_link"
-                      onclick="set_filter_var('search_author', '', false); set_filter_var('search_status', 'trashed')">
+                      onclick="set_filter_var('search_author', '', false); set_filter_var('search_status', 'hidden')">
                     <?= $current_module->language->status_labels->hidden ?>
                     (<?= number_format($repository->get_record_count($where_copy)) ?>)
                 </span>

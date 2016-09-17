@@ -177,6 +177,8 @@
              
             Favor de contactar al personal de soporte técnico.
         ]]></media_manager_exception>
+        <items_hidden>{$count} medios de {$author} han sido ocultados.</items_hidden>
+        <items_unhidden>{$count} medios de {$author} han sido restaurados.</items_unhidden>
     </messages>
     
     <tinymce_strings>
