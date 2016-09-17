@@ -28,7 +28,7 @@
         $form.find('input[name="offset"]').val('0');
         $form.find('input[name="order"]').val('');
         $form.find('input[name="search_tag"]').val('');
-        $form.find('input[name="search_author"]').val('');
+        $form.find('input[name="author"]').val('');
         $form.find('input[name="search_status"]').val('');
         
         if( $form.find('select[name="search_type"]').is(':visible') )
@@ -88,6 +88,7 @@
     if( $_GET["search_type"] )             $url .= "&search_type={$_GET["search_type"]}";
     if( ! empty($_GET["edit_item"]) )      $url .= "&edit_item={$_GET["edit_item"]}";
     if( ! empty($_GET["trash_item"]) )     $url .= "&trash_item={$_GET["trash_item"]}";
+    if( ! empty($_GET["author"]) )         $url .= "&author={$_GET["author"]}";
     ?>
     <div id="media_browser" class="ajax_record_browser" data-src="<?= $url ?>">
         <div class="framed_content state_highlight" style="padding: 100px 0; text-align: center;">

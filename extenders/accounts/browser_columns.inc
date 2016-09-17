@@ -17,5 +17,10 @@ use hng2_base\module;
 global $row;
 ?>
 <td nowrap align="right">
-    <?= empty($row->_media_count) ? "&mdash;" : number_format($row->_media_count) ?>
+    <?
+    if( empty($row->_media_count) )
+        echo "&mdash;";
+    else
+        echo "<a href='/gallery/?author={$row->id_account}'>" . number_format($row->_media_count) . "</a>";
+    ?>
 </td>

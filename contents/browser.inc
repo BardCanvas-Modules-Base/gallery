@@ -12,6 +12,7 @@
  * @param search_type
  */
 
+use hng2_base\account;
 use hng2_base\config;
 use hng2_media\media_repository;
 use hng2_tools\record_browser;
@@ -30,7 +31,6 @@ $repository = new media_repository();
  * @var string $search_type
  * @var string $search_tag
  * @var string $search_status
- * @var string $search_author
  * 
  */
 #region Nav filters
@@ -47,8 +47,8 @@ else
 {
     if( $account->level < config::MODERATOR_USER_LEVEL )
         $where["id_author"] = $account->id_account;
-    elseif( $account->level >= config::MODERATOR_USER_LEVEL && ! empty($search_author) )
-        $where["id_author"] = $search_author;
+    elseif( $account->level >= config::MODERATOR_USER_LEVEL && ! empty($_GET["author"]) )
+        $where["id_author"] = $_GET["author"];
     
     if( $account->level < config::MODERATOR_USER_LEVEL && $search_status == "hidden" )
         $search_status = "";
@@ -145,6 +145,15 @@ else if( empty($account->engine_prefs["gallery_browser_layout"]) )
     
     <?= $current_module->language->index->title; ?>
     
+    <?
+    if( ! empty($_GET["author"]) )
+    {
+        $author = new account($_GET["author"]);
+        if( ! $author->_exists ) echo " ~ #{$_GET["author"]}";
+        else                     echo " ~ " . convert_emojis($author->display_name);
+    }
+    ?>
+    
     <? if( $_GET["embedded_mode"] != "true" ): ?>
         <span id="media_browser_mode_switches" data-current-mode="<?= $account->engine_prefs["gallery_browser_layout"] ?>">
             <span class="pseudo_link fa fa-th-large" onclick="switch_media_browser_mode('tiles')"
@@ -168,8 +177,8 @@ else if( empty($account->engine_prefs["gallery_browser_layout"]) )
         <input type="hidden" name="mode"          value="set_filter">
         <input type="hidden" name="order"         value="<?= $order ?>">
         <input type="hidden" name="offset"        value="0">
+        <input type="hidden" name="author"        value="<?= $_GET["author"] ?>">
         <input type="hidden" name="search_tag"    value="<?= $search_tag ?>">
-        <input type="hidden" name="search_author" value="<?= $search_author ?>">
         <input type="hidden" name="search_status" value="<?= $search_status ?>">
         
         <div>
@@ -241,8 +250,8 @@ else if( empty($account->engine_prefs["gallery_browser_layout"]) )
         ?>
         <div class="records_browser filter_links" style="margin-top: 10px;">
             <? if($account->level >= config::MODERATOR_USER_LEVEL): ?>
-                <span class="framed_content <? if($search_author == $account->id_account) echo "state_active" ?> pseudo_link"
-                      onclick="set_filter_var('search_status', '', false); set_filter_var('search_author', '<?= $account->id_account ?>')">
+                <span class="framed_content <? if($_GET["author"] == $account->id_account) echo "state_active" ?> pseudo_link"
+                      onclick="set_filter_var('search_status', '', false); set_filter_var('author', '<?= $account->id_account ?>')">
                     <?= $language->mine_sm ?>
                     (<?= number_format($repository->get_record_count(array("id_author" => $account->id_account))) ?>)
                 </span>
@@ -251,7 +260,7 @@ else if( empty($account->engine_prefs["gallery_browser_layout"]) )
             
             <? $where_copy = $where; $where_copy["status"] = "published"; ?>
             <span class="framed_content <? if($search_status == "published") echo "state_active" ?> pseudo_link"
-                  onclick="set_filter_var('search_author', '', false); set_filter_var('search_status', 'published')">
+                  onclick="set_filter_var('author', '', false); set_filter_var('search_status', 'published')">
                 <?= $current_module->language->status_labels->published ?>
                 (<?= number_format($repository->get_record_count($where_copy)) ?>)
             </span>
@@ -259,14 +268,14 @@ else if( empty($account->engine_prefs["gallery_browser_layout"]) )
             <? $where_copy = $where; $where_copy["status"] = "reviewing";
                $reviewing = $repository->get_record_count($where_copy); ?>
             <span class="framed_content <? if($search_status == "reviewing") echo "state_active" ?> <? if($reviewing) echo "state_ko"; ?> pseudo_link"
-                  onclick="set_filter_var('search_author', '', false); set_filter_var('search_status', 'reviewing')">
+                  onclick="set_filter_var('author', '', false); set_filter_var('search_status', 'reviewing')">
                 <?= $current_module->language->status_labels->reviewing ?>
                 (<?= number_format($reviewing) ?>)
             </span>
             
             <? $where_copy = $where; $where_copy["status"] = "trashed"; ?>
             <span class="framed_content <? if($search_status == "trashed") echo "state_active" ?> pseudo_link"
-                  onclick="set_filter_var('search_author', '', false); set_filter_var('search_status', 'trashed')">
+                  onclick="set_filter_var('author', '', false); set_filter_var('search_status', 'trashed')">
                 <?= $current_module->language->status_labels->trashed ?>
                 (<?= number_format($repository->get_record_count($where_copy)) ?>)
             </span>
@@ -274,13 +283,13 @@ else if( empty($account->engine_prefs["gallery_browser_layout"]) )
             <? if($account->level >= config::MODERATOR_USER_LEVEL):
                 $where_copy = $where; $where_copy["status"] = "hidden"; ?>
                 <span class="framed_content <? if($search_status == "hidden") echo "state_active" ?> pseudo_link"
-                      onclick="set_filter_var('search_author', '', false); set_filter_var('search_status', 'hidden')">
+                      onclick="set_filter_var('author', '', false); set_filter_var('search_status', 'hidden')">
                     <?= $current_module->language->status_labels->hidden ?>
                     (<?= number_format($repository->get_record_count($where_copy)) ?>)
                 </span>
             <? endif; ?>
             
-            <span class="framed_content pseudo_link" onclick="set_filter_var('search_author', '', false); set_filter_var('search_status', '')">
+            <span class="framed_content pseudo_link" onclick="set_filter_var('author', '', false); set_filter_var('search_status', '')">
                 <?= $language->all_m ?>
             </span>
             
