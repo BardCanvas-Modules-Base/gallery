@@ -115,6 +115,12 @@
             <edit>Editar</edit>
             <trash>Papelera</trash>
         </actions>
+        <filters>
+            <from_everyone>Por cualquiera</from_everyone>
+            <mine>Míos</mine>
+            <from_user>Por {$user}</from_user>
+            <any_status>Todo</any_status>
+        </filters>
     </record_nav>
     
     <status_labels>
