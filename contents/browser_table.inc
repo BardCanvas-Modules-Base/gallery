@@ -47,21 +47,35 @@ use hng2_media\media_record;
                 data-href="<?= $row->get_item_url(false) ?>"
                 data-thumbnail-url="<?= $row->get_thumbnail_url() ?>">
                 <td width="25%">
-                    <div class="principal_data"><?= convert_emojis($row->title) ?></div>
+                    <div class="principal_data">
+                        <? $icon = $row->type == "image" ? "fa-picture-o" : "fa-video-camera"; ?>
+                        <span class="fa <?= $icon ?>"></span>
+                        <?= convert_emojis($row->title) ?>
+                    </div>
                     
                     <? if( $_GET["embedded_mode"] != "true" ): ?>
                         <div class="actions">
+                            <? if( in_array($row->status, array("published", "draft")) ): ?>
+                                <a href="<?= $row->get_page_url() ?>" target="_blank">
+                                    <span class="fa fa-link"></span>
+                                    <?= $language->permalink ?>
+                                </a>
+                            <? endif; ?>
+                            
                             <? if( $row->can_be_edited() ): ?>
                                 <span class="action pseudo_link" onclick="edit_media('<?= $row->id_media ?>')">
                                     <span class="fa fa-pencil"></span>
                                     <?= $current_module->language->record_nav->actions->edit ?>
                                 </span>
                             <? endif; ?>
-                            <span class="action pseudo_link" onclick="trash_media('<?= $row->id_media ?>')">
-                                <span class="fa fa-trash"></span>
-                                <?= $current_module->language->record_nav->actions->trash ?>
-                            </span>
+                            <? if( $row->status != "trashed" ): ?>
+                                <span class="action pseudo_link" onclick="trash_media('<?= $row->id_media ?>')">
+                                    <span class="fa fa-trash"></span>
+                                    <?= $current_module->language->record_nav->actions->trash ?>
+                                </span>
+                            <? endif; ?>
                         </div>
+                        
                     <? endif; ?>
                 </td>
                 <td>
@@ -91,9 +105,9 @@ use hng2_media\media_record;
                     $principal_data_addons = array();
                     $current_module->load_extensions("records_browser", "principal_data_addons");
                     if( ! empty($principal_data_addons) ){
-                        echo "<div class='principal_addons' style='margin-top: 5px;'>";
+                        echo "<hr><div class='principal_addons' style='margin-top: 5px;'>";
                         echo implode("", $principal_data_addons);
-                        echo "</div><hr>";
+                        echo "</div>";
                     }
                     ?>
                 </td>

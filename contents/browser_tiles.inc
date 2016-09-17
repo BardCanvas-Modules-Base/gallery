@@ -44,9 +44,11 @@ use hng2_media\media_record;
                                 <span class="fa fa-pencil fa-2x fa-fw"></span>
                             </span>
                         <? endif; ?>
-                        <span class="action pseudo_link" onclick="trash_media('<?= $row->id_media ?>')">
-                            <span class="fa fa-trash fa-2x fa-fw"></span>
-                        </span>
+                        <? if( $row->status != "trashed" ): ?>
+                            <span class="action pseudo_link" onclick="trash_media('<?= $row->id_media ?>')">
+                                <span class="fa fa-trash fa-2x fa-fw"></span>
+                            </span>
+                        <? endif; ?>
                     </div>
                 <? endif; ?>
             </div>

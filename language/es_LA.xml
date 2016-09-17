@@ -58,10 +58,12 @@
     <media_types>
         <all>Todos los medios</all>
         <media type="image">
+            <icon>fa-picture-o</icon>
             <caption>Imagen</caption>
             <plural>Imágenes</plural>
         </media>
         <media type="video">
+            <icon>fa-video-camera</icon>
             <caption>Video</caption>
             <plural>Videos</plural>
         </media>
