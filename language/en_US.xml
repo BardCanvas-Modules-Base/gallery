@@ -158,6 +158,7 @@
     </form>
     
     <messages>
+        <pending>There are {$amount} items flagged for review. Click here to see them.</pending>
         <missing>
             <id>Please provide an item id</id>
             <title>Please specify a title for the item</title>

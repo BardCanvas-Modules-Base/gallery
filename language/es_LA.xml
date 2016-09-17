@@ -158,6 +158,7 @@
     </form>
     
     <messages>
+        <pending>Hay {$amount} elementos marcados para revisión. Da click aquí para revisarlos.</pending>
         <missing>
             <id>No has proporcionado un identificador de medio</id>
             <title>Favor de especificar un título para el medio</title>

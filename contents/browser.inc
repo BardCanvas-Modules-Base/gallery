@@ -275,6 +275,23 @@ else if( empty($account->engine_prefs["gallery_browser_layout"]) )
     <? return; ?>
 <? endif;  ?>
 
+<?
+if( $_GET["embedded_mode"] != "true" && $account->level >= config::MODERATOR_USER_LEVEL && $search_status != "reviewing" ):
+    $pending = $repository->get_record_count(array("status" => "reviewing"));
+    if( $pending > 0 ):
+        $message = replace_escaped_vars($current_module->language->messages->pending, '{$amount}', $pending);
+        ?>
+        <div class="framed_content state_ko">
+            <span class="pseudo_link" onclick="var $form = $('#filter_form'); reset_filter(); $form.find('select[name=search_status] option[value=reviewing]').prop('selected', true); $form.submit();">
+                <span class="fa fa-warning"></span>
+                <?= $message ?>
+            </span>
+        </div>
+        <?
+    endif;
+endif;
+?>
+
 <? include __DIR__ . "/browser_{$account->engine_prefs["gallery_browser_layout"]}.inc"; ?>
 
 <div class="pagination">
