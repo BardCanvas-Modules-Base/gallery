@@ -114,6 +114,8 @@
         <actions>
             <edit>Editar</edit>
             <trash>Papelera</trash>
+            <approve>Aprobar</approve>
+            <reject>Rechazar</reject>
         </actions>
         <filters>
             <from_everyone>Por cualquiera</from_everyone>
@@ -188,6 +190,18 @@
         ]]></media_manager_exception>
         <items_hidden>{$count} medios de {$author} han sido ocultados.</items_hidden>
         <items_unhidden>{$count} medios de {$author} han sido restaurados.</items_unhidden>
+        <toolbox>
+            <invalid_action>La acción especificada es inválida</invalid_action>
+            <action_not_allowed>Disculpa, pero no tienes privilegios para ejecutar esta acción</action_not_allowed>
+            <published_ok><![CDATA[
+                El medio "{$title}" ha sido aceptado.<br>
+                <a href="{$link}">Da click aquí para checarlo.</a>
+            ]]></published_ok>
+            <rejected_ok><![CDATA[
+                El medio "{$title}" ha sido rechazado y removido de la vista pública..<br>
+                Si crees que esta decisión es incorrecta, contacta al personal usando la página de contacto.
+            ]]></rejected_ok>
+        </toolbox>
     </messages>
     
     <tinymce_strings>

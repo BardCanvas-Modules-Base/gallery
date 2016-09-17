@@ -40,7 +40,7 @@ use hng2_media\media_record;
         
         <tbody>
         <? foreach( $records as $row ): ?>
-            <tr class="record <? if($row->status == "trashed") echo "deleted"; ?>"
+            <tr class="record <? if($row->status == "trashed") echo "deleted"; elseif($row->status == "hidden") echo "disabled"; ?>"
                 <? if( $_GET["embedded_mode"] == "true" ): ?>onclick="prepare_item_for_embedded_callback(this)"<? endif; ?>
                 data-record-id="<?= $row->id_media ?>" data-type="<?= $row->type ?>"
                 data-width="<?= $row->get_item_width() ?>" data-height="<?= $row->get_item_height() ?>" 
@@ -68,6 +68,23 @@ use hng2_media\media_record;
                                     <?= $current_module->language->record_nav->actions->edit ?>
                                 </span>
                             <? endif; ?>
+                            
+                            <? if( $account->level >= config::MODERATOR_USER_LEVEL
+                                   && in_array($row->status, array("reviewing")) ): ?>
+                                <span class="action pseudo_link greengo" onclick="publish_media('<?= $row->id_media ?>')">
+                                    <span class="fa fa-check"></span>
+                                    <?= $current_module->language->record_nav->actions->approve ?>
+                                </span>
+                            <? endif; ?>
+                            
+                            <? if( $account->level >= config::MODERATOR_USER_LEVEL
+                                   && in_array($row->status, array("published", "reviewing")) ): ?>
+                                <span class="action pseudo_link important" onclick="reject_media('<?= $row->id_media ?>')">
+                                    <span class="fa fa-times"></span>
+                                    <?= $current_module->language->record_nav->actions->reject ?>
+                                </span>
+                            <? endif; ?>
+                            
                             <? if( $row->status != "trashed" ): ?>
                                 <span class="action pseudo_link" onclick="trash_media('<?= $row->id_media ?>')">
                                     <span class="fa fa-trash"></span>

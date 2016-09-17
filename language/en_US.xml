@@ -114,6 +114,8 @@
         <actions>
             <edit>Edit</edit>
             <trash>Trash</trash>
+            <approve>Approve</approve>
+            <reject>Reject</reject>
         </actions>
         <filters>
             <from_everyone>By everyone</from_everyone>
@@ -188,6 +190,18 @@
         ]]></media_manager_exception>
         <items_hidden>{$count} media items from {$author} have been hidden.</items_hidden>
         <items_unhidden>{$count} media items from {$author} have been restored.</items_unhidden>
+        <toolbox>
+            <invalid_action>The provided action is invalid</invalid_action>
+            <action_not_allowed>Sorry, but your privileges aren't enough to carry on this action</action_not_allowed>
+            <published_ok><![CDATA[
+                Media item "{$title}" has been accepted.<br>
+                <a href="{$link}">Click here to check it.</a>
+            ]]></published_ok>
+            <rejected_ok><![CDATA[
+                Media item "{$title}" has been rejected. It has been removed from public view.<br>
+                If you think this was an error, please contact the staff using the contact page.
+            ]]></rejected_ok>
+        </toolbox>
     </messages>
     
     <tinymce_strings>

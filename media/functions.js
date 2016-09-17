@@ -145,6 +145,60 @@ function trash_media(id_media)
     });
 }
 
+function publish_media(id_media)
+{
+    var url = $_FULL_ROOT_PATH + '/gallery/scripts/toolbox.php';
+    var params = {
+        'action':   'publish',
+        'id_media': id_media,
+        'wasuuup':  parseInt(Math.random() * 1000000000000000)
+    };
+    
+    var $row = $('#media_browser_table').find('.record[data-record-id="' + id_media + '"]');
+    
+    $row.block(blockUI_smallest_params);
+    $.get(url, params, function(response)
+    {
+        if( response != 'OK' )
+        {
+            alert(response);
+            $row.unblock();
+            
+            return;
+        }
+        
+        $row.unblock();
+        $('#refresh_media_browser').click();
+    });
+}
+
+function reject_media(id_media)
+{
+    var url = $_FULL_ROOT_PATH + '/gallery/scripts/toolbox.php';
+    var params = {
+        'action':   'reject',
+        'id_media': id_media,
+        'wasuuup':  parseInt(Math.random() * 1000000000000000)
+    };
+    
+    var $row = $('#media_browser_table').find('.record[data-record-id="' + id_media + '"]');
+    
+    $row.block(blockUI_smallest_params);
+    $.get(url, params, function(response)
+    {
+        if( response != 'OK' )
+        {
+            alert(response);
+            $row.unblock();
+            
+            return;
+        }
+        
+        $row.unblock();
+        $row.remove();
+    });
+}
+
 function reset_media_form()
 {
     var $form = $('#media_form');
