@@ -43,7 +43,7 @@ use hng2_base\module;
             + '?embedded_mode=true'
             + '&search_type=' + 'image'
             + '&callback='    + 'top.' + 'set_selected_gallery_image'
-            + '&wasuuup='     + parseInt(Math.random() * 1000000000000000);
+            + '&wasuuup='     + wasuuup();
         
         $('#image_selector_target').attr('src', url);
         $('#image_selector_dialog').dialog('open');

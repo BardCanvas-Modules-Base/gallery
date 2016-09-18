@@ -38,7 +38,7 @@ function edit_media(id_media)
     var url    = $_FULL_ROOT_PATH + '/gallery/scripts/get_as_json.php';
     var params = {
         'id_media': id_media,
-        'wasuuup':  parseInt(Math.random() * 1000000000000000)
+        'wasuuup':  wasuuup()
     };
     
     $.blockUI(blockUI_default_params);
@@ -94,7 +94,7 @@ function update_category_selector(preselected_id)
     
     var url = $_FULL_ROOT_PATH + '/categories/scripts/tree_as_json.php'
             + '?with_description=true'
-            + '&wasuuup=' + parseInt(Math.random() * 1000000000000000);
+            + '&wasuuup=' + wasuuup();
     $.getJSON(url, function(data)
     {
         if( data.message != 'OK' )
@@ -124,7 +124,7 @@ function trash_media(id_media)
     var url = $_FULL_ROOT_PATH + '/gallery/scripts/trash.php';
     var params = {
         'id_media': id_media,
-        'wasuuup':  parseInt(Math.random() * 1000000000000000)
+        'wasuuup':  wasuuup()
     };
     
     var $row = $('#media_browser_table').find('.record[data-record-id="' + id_media + '"]');
@@ -151,7 +151,7 @@ function publish_media(id_media)
     var params = {
         'action':   'publish',
         'id_media': id_media,
-        'wasuuup':  parseInt(Math.random() * 1000000000000000)
+        'wasuuup':  wasuuup()
     };
     
     var $row = $('#media_browser_table').find('.record[data-record-id="' + id_media + '"]');
@@ -178,7 +178,7 @@ function reject_media(id_media)
     var params = {
         'action':   'reject',
         'id_media': id_media,
-        'wasuuup':  parseInt(Math.random() * 1000000000000000)
+        'wasuuup':  wasuuup()
     };
     
     var $row = $('#media_browser_table').find('.record[data-record-id="' + id_media + '"]');

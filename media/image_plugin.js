@@ -10,7 +10,7 @@ tinymce.PluginManager.add('insert_gallery_image_in_tinymce', function(ed, url)
         + '?embedded_mode=true'
         + '&search_type=' + 'image'
         + '&callback='    + 'inject_selected_gallery_image_in_tinymce'
-        + '&wasuuup='     + parseInt(Math.random() * 1000000000000000);
+        + '&wasuuup='     + wasuuup();
     
     var width  = $(window).width()  - 20;
     var height = $(window).height() - 60;

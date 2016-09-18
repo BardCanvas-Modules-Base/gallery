@@ -9,7 +9,7 @@ function load_media_browser_in_tinymce_dialog(editor, width, height, media_type_
         + '?embedded_mode=true'
         + '&search_type=' + media_type_filter
         + '&callback='    + callback
-        + '&wasuuup='     + parseInt(Math.random() * 1000000000000000);
+        + '&wasuuup='     + wasuuup();
     
     editor.windowManager.open({
         title:  title,
