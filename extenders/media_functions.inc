@@ -18,7 +18,7 @@ use hng2_media\media_repository;
  */
 function convert_media_tags($contents)
 {
-    if( ! class_exists("phpQuery") ) require_once ABSPATH . "/lib/phpQuery-onefile.php";
+    if( ! class_exists("phpQuery") ) require_once ROOTPATH . "/lib/phpQuery-onefile.php";
     
     $document = phpQuery::newDocument($contents);
     
@@ -97,7 +97,7 @@ function autolink_media_image($element)
  */
 function extract_media_items($type, $contents)
 {
-    if( ! class_exists("phpQuery") ) require_once ABSPATH . "/lib/phpQuery-onefile.php";
+    if( ! class_exists("phpQuery") ) require_once ROOTPATH . "/lib/phpQuery-onefile.php";
     
     $document = phpQuery::newDocument($contents);
     $ids      = array();
