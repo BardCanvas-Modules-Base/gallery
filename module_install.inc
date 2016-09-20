@@ -49,18 +49,25 @@ $tables = array(
             creation_location varchar(255) not null default '',
             
             publishing_date   datetime default null,
-            views             int unsigned not null default 0,
             comments_count    int unsigned not null default 0,
             tags              varchar(255) not null default '',
             
             last_update       datetime default null,
-            last_viewed       datetime default null,
             last_commented    datetime default null,
             
             primary key        ( id_media ),
             index   by_path    ( path(5) ),
             index   by_author  ( id_author )
             
+        ) engine=InnoDB default charset=utf8mb4 collate='utf8mb4_unicode_ci'
+    ",
+    "media_views" => "
+        create table if not exists media_views (
+            id_media          varchar(32) not null default '',
+            views             int unsigned not null default 0,
+            last_viewed       datetime default null,
+            
+            primary key        ( id_media )
         ) engine=InnoDB default charset=utf8mb4 collate='utf8mb4_unicode_ci'
     ",
     "media_tags" => "
