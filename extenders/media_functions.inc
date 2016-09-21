@@ -38,7 +38,7 @@ function convert_video_tag($element)
     
     $element = pq($element);
     
-    list($href, $id_media, $width, $height) = extract_video_tag_data($element);
+    list($id_media, $width, $height) = extract_video_tag_data($element);
     //$href     = $element->attr("data-href");
     //$id_media = $element->attr("data-id-media");
     //$width    = $element->attr("width");
@@ -49,12 +49,12 @@ function convert_video_tag($element)
     
     $item = $media_repository->get($id_media);
     if( is_null($item) )
-        $markup = "<div class='missing_media_item' style='{$width} {$height}'>{$href}<br>{$language->resource_not_found}</div>";
+        $markup = "<div class='missing_media_item' style='{$width} {$height}'>{$id_media}<br>{$language->resource_not_found}</div>";
     elseif( $item->status != "published" )
-        $markup = "<div class='missing_media_item' style='{$width} {$height}'>{$href}<br>{$language->resource_unavailable}</div>";
+        $markup = "<div class='missing_media_item' style='{$width} {$height}'>{$id_media}<br>{$language->resource_unavailable}</div>";
     else
         $markup = "<video poster='{$item->get_thumbnail_url(true)}' style='{$width} {$height}' controls>" 
-            . "<source src='{$item->get_item_url(true)}'>" 
+            . "<source src='{$item->get_item_url(true)}' />" 
             . "</video>";
     
     $element->replaceWith($markup);
@@ -67,7 +67,7 @@ function autolink_media_image($element)
     
     $element = pq($element);
     
-    list($href, $id_media, $width, $height) = extract_video_tag_data($element);
+    list($id_media, $width, $height) = extract_video_tag_data($element);
     //$href     = $element->attr("data-href");
     //$id_media = $element->attr("data-id-media");
     //$width    = $element->attr("width");
@@ -78,9 +78,9 @@ function autolink_media_image($element)
     
     $item = $media_repository->get($id_media);
     if( is_null($item) )
-        $markup = "<div class='missing_media_item' style='{$width} {$height}'>{$href}<br>{$language->resource_not_found}</div>";
+        $markup = "<div class='missing_media_item' style='{$width} {$height}'>{$id_media}<br>{$language->resource_not_found}</div>";
     elseif( $item->status != "published" )
-        $markup = "<div class='missing_media_item' style='{$width} {$height}'>{$href}<br>{$language->resource_unavailable}</div>";
+        $markup = "<div class='missing_media_item' style='{$width} {$height}'>{$id_media}<br>{$language->resource_unavailable}</div>";
     else
         $markup = "<a href='{$item->get_page_url()}' target='_blank'>{$element}</a>";
     
@@ -113,10 +113,9 @@ function extract_media_items($type, $contents)
 function extract_video_tag_data($element)
 {
     $element = pq($element);
-    $href     = $element->attr("data-href");
     $id_media = $element->attr("data-id-media");
     $width    = $element->attr("width");
     $height   = $element->attr("height");
     
-    return array($href, $id_media, $width, $height);
+    return array($id_media, $width, $height);
 }
