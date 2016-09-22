@@ -20,8 +20,8 @@ $tables = array(
     "media" => "
         create table if not exists media (
             
-            id_media          varchar(32) not null default '',
-            id_author         varchar(32) not null default '',
+            id_media          bigint unsigned not null default 0,
+            id_author         bigint unsigned not null default 0,
             
             # Path is relative to the /media_server directory, E.G.:
             # Relative> /year/month/username_mediatitle_randomseed.png
@@ -63,7 +63,7 @@ $tables = array(
     ",
     "media_views" => "
         create table if not exists media_views (
-            id_media          varchar(32) not null default '',
+            id_media          bigint unsigned not null default 0,
             views             int unsigned not null default 0,
             last_viewed       datetime default null,
             
@@ -73,7 +73,7 @@ $tables = array(
     "media_tags" => "
         create table if not exists media_tags (
             
-            id_media       varchar(32) not null default '',
+            id_media       bigint unsigned not null default 0,
             tag            varchar(100) not null default '',
             date_attached  datetime,
             order_attached double unsigned not null default 0,
@@ -85,7 +85,7 @@ $tables = array(
     "media_categories" => "
         create table if not exists media_categories (
             
-            id_media       varchar(32) not null default '',
+            id_media       bigint unsigned not null default 0,
             id_category    varchar(32) not null default '',
             date_attached  datetime,
             order_attached double unsigned not null default 0,
@@ -97,8 +97,8 @@ $tables = array(
     "media_mentions" => "
         create table if not exists media_mentions (
             
-            id_media       varchar(32) not null default '',
-            id_account     varchar(32) not null default '',
+            id_media       bigint unsigned not null default 0,
+            id_account     bigint unsigned not null default 0,
             date_attached  datetime,
             order_attached double unsigned not null default 0,
             
