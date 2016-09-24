@@ -52,10 +52,16 @@ if( ! empty($search_for) )
             $this_term = trim($this_term);
             if( ! empty($this_term) )
             {
-                $where_line .= "id_media    =     '{$this_term}'  or ";
-                $where_line .= "path        like '%{$this_term}%' or ";
-                $where_line .= "title       like '%{$this_term}%' or ";
-                $where_line .= "description like '%{$this_term}%'    ";
+                if( is_numeric($this_term) )
+                {
+                    $where_line .= "id_media    =     '{$this_term}'     ";
+                }
+                else
+                {
+                    $where_line .= "path        like '%{$this_term}%' or ";
+                    $where_line .= "title       like '%{$this_term}%' or ";
+                    $where_line .= "description like '%{$this_term}%'    ";
+                }
             }
         }
         $where[] = "({$where_line})";
@@ -63,12 +69,16 @@ if( ! empty($search_for) )
     else
     {
         $search_for = trim($search_for);
-        $where[] 
-            = "( id_media    =     '{$search_for}'  or "
-            . "  path        like '%{$search_for}%' or "
-            . "  title       like '%{$search_for}%' or "
-            . "  description like '%{$search_for}%' )"
-        ;
+        if( is_numeric($search_for) )
+            $where[] 
+                = "( id_media    =     '{$search_for}'  )"
+            ;
+        else
+            $where[] 
+                = "( path        like '%{$search_for}%' or "
+                . "  title       like '%{$search_for}%' or "
+                . "  description like '%{$search_for}%' )"
+            ;
     }
 }
 
@@ -169,7 +179,7 @@ else if( empty($account->engine_prefs["gallery_browser_layout"]) )
         
         <input type="hidden" name="mode"          value="set_filter">
         <input type="hidden" name="order"         value="<?= $order ?>">
-        <input type="hidden" name="offset"        value="0">
+        <input type="hidden" name="offset"        value="<?= $offset ?>">
         <input type="hidden" name="search_tag"    value="<?= $search_tag ?>">
         
         <div>
