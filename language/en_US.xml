@@ -20,7 +20,7 @@
         If you want your items to be available on main indexes, <b>cancel now</b> and create a post
         from the <u>posts browser</u>.<br>
         From there, use the buttons on the editor toolbar to upload and insert images or videos <b>inside the post</b>.<br>
-        <span style="color: red; font-weight: bold;">Ignoring this will cause your media to be missed by everyone.</span>
+        <span style="color: red; font-weight: bold;">Ignoring this will cause your media to be ignored in the main indexes.</span>
     ]]></form_initial_info_for_posts>
     
     <pages>
