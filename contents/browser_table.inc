@@ -85,8 +85,8 @@ use hng2_media\media_record;
                                 </span>
                             <? endif; ?>
                             
-                            <? if( $row->status != "trashed" ): ?>
-                                <span class="action pseudo_link" onclick="trash_media('<?= $row->id_media ?>')">
+                            <? if( $row->can_be_deleted() ): ?>
+                                <span class="action pseudo_link" onclick="if( confirm('<?= $language->confirm_action ?>') ) trash_media('<?= $row->id_media ?>')">
                                     <span class="fa fa-trash"></span>
                                     <?= $current_module->language->record_nav->actions->trash ?>
                                 </span>
