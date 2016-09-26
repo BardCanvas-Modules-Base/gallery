@@ -26,7 +26,7 @@ $principal_data_addons[] = replace_escaped_vars(
         "{$config->full_root_path}/media/{$id}",
         current($this_module->language->xpath("//media_types/media[@type='$type']/caption/text()")),
         convert_emojis($title),
-        $date == "0000-00-00 00:00:00" ? "&mdash;" : get_minimized_date($date),
+        $date == "0000-00-00 00:00:00" ? "&mdash;" : time_mini_string($date),
         $this_module->language->status_labels->{$status},
     )
 );
