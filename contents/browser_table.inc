@@ -85,7 +85,7 @@ use hng2_media\media_record;
                                 </span>
                             <? endif; ?>
                             
-                            <? if( $row->can_be_deleted() ): ?>
+                            <? if( $row->can_be_deleted() && $row->status != "trashed" ): ?>
                                 <span class="action pseudo_link" onclick="if( confirm('<?= $language->confirm_action ?>') ) trash_media('<?= $row->id_media ?>')">
                                     <span class="fa fa-trash"></span>
                                     <?= $current_module->language->record_nav->actions->trash ?>
@@ -129,7 +129,41 @@ use hng2_media\media_record;
                     ?>
                 </td>
                 <td>
-                    <?= convert_emojis($row->author_display_name) ?>
+                    <span class="user_display_name" data-user-level="<?= $row->author_level ?>">
+                        <span class="fa fa-user fa-fw"></span>
+                        <?= $row->get_processed_author_display_name() ?>
+                    </span><br>
+    
+                    <? if( $account->level >= config::MODERATOR_USER_LEVEL ): ?>
+                        <span>
+                            <span class="fa fa-cloud fa-fw"></span>
+                            <?= $row->creation_ip ?>
+                        </span><br>
+        
+                        <?
+                        $parts   = explode("; ", $row->creation_location);
+                        $isp      = array_pop($parts);
+                        $country  = array_pop($parts);
+                        $city     = implode("; ", $parts);
+                        if( $city != "N/A; N/A") : ?>
+                            <span>
+                                <span class="fa fa-map-marker fa-fw"></span>
+                                <?= $city ?>
+                            </span><br>
+                        <? endif; ?>
+                        <? if($country != "N/A"): ?>
+                            <span>
+                                <span class="fa fa-globe fa-fw"></span>
+                                <?= $country ?>
+                            </span><br>
+                        <? endif; ?>
+                        <? if($isp != "N/A"): ?>
+                            <span>
+                                <span class="fa fa-building fa-fw"></span>
+                                <?= $isp ?>
+                            </span><br>
+                        <? endif; ?>
+                    <? endif; ?>
                 </td>
                 <td>
                     <?= time_elapsed_string($row->publishing_date) ?>

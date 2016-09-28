@@ -92,14 +92,15 @@ else
     {
         if( $search_status == "hidden" ) $search_status = "";
         
-        if( empty($search_status) ) $where[] = "status <> 'hidden'";
+        if( empty($search_status) ) $where[] = "status not in ('trashed', 'hidden')";
         else                        $where[] = "status = '$search_status'";
         $where["id_author"] = $account->id_account;
     }
     else
     {
         if( ! empty($search_author) ) $where["id_author"] = $_REQUEST["search_author"];
-        if( ! empty($search_status) ) $where["status"]    = $search_status;
+        if( empty($search_status) )   $where[] = "status not in ('trashed', 'hidden')";
+        else                          $where[] = "status = '$search_status'";
     }
 }
 
