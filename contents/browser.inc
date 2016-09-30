@@ -236,6 +236,8 @@ else if( empty($account->engine_prefs["gallery_browser_layout"]) )
                 <option <? if($search_status == "trashed")   echo "selected"; ?> value="trashed"  ><?= $current_module->language->status_labels->trashed ?></option>
             </select>
             
+            <br>
+            
             <?= $language->record_nav->show ?>
             <select name="limit" onchange="$('#filter_form').submit();">
                 <? foreach(array(5, 10, 20, 30, 40, 50, 100, 200, 300, 400, 500) as $recs): ?>
