@@ -32,9 +32,10 @@ foreach($items_data->items as $item)
         "type"      => $item->type,
         "url"       => $item->get_page_url(),
         "title"     => $item->get_processed_title(false),
-        "excerpt"   => $item->get_description_excerpt(),
+        "excerpt"   => "[".time_today_string($item->publishing_date)."] " . $item->get_description_excerpt(),
         "thumbnail" => $item->get_thumbnail_url(),
     ));
 
 $key = trim($this_module->language->extenders->search_by_tag_builder->collection_heading);
 $config->globals["search_by_tag_collections"][$key] = $collection;
+$config->globals["search_by_tag_counts"][$key]      = $items_data->count;
