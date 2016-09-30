@@ -165,11 +165,17 @@ use hng2_media\media_record;
                         <? endif; ?>
                     <? endif; ?>
                 </td>
-                <td>
-                    <?= time_elapsed_string($row->publishing_date) ?>
+                <td align="center">
+                    <? if( $row->publishing_date == "0000-00-00 00:00:00" ): ?>
+                        &mdash;
+                    <? else: ?>
+                        <?= time_mini_string($row->publishing_date) ?><br>
+                        (<?= time_elapsed_string($row->publishing_date) ?>)
+                    <? endif; ?>
                 </td>
-                <td>
-                    <?= time_elapsed_string($row->last_update) ?>
+                <td align="center">
+                    <?= time_mini_string($row->last_update) ?><br>
+                    (<?= time_elapsed_string($row->last_update) ?>)
                 </td>
                 <td align="right">
                     <?= $row->views ?>

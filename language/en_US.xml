@@ -90,13 +90,13 @@
             </author>
             <publishing_date>
                 <caption>Published</caption>
-                <layout xnowrap="true" />
+                <layout xalign="center" xnowrap="true" />
                 <order_asc  id="1">Order by publishing date ascending</order_asc>
                 <order_desc id="2">Order by publishing date descending</order_desc>
             </publishing_date>
             <last_update>
                 <caption>Last activity</caption>
-                <layout xnowrap="true" />
+                <layout xalign="center" xnowrap="true" />
                 <order_asc  id="3">Order by last activity update ascending</order_asc>
                 <order_desc id="4">Order by last activity update descending</order_desc>
             </last_update>
