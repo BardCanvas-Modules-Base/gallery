@@ -10,6 +10,7 @@
  * @param id_media
  */
 
+use hng2_base\config;
 use hng2_media\media_repository;
 
 include "../../config.php";
@@ -21,10 +22,20 @@ if( ! $account->_exists ) die($language->errors->page_requires_login);
 if( empty($_GET["id_media"]) ) die($current_module->language->messages->missing->id);
 
 $repository = new media_repository();
-$count      = $repository->get_record_count(array("id_media" => $_GET["id_media"]));
+$item       = $repository->get($_GET["id_media"]);
 
-if( $count == 0 ) die($current_module->language->messages->item_not_found);
+if( is_null($res) ) die($current_module->language->messages->item_not_found);
+
+if( $account->level < config::MODERATOR_USER_LEVEL && $account->id_account != $item->id_author )
+    die($current_module->language->messages->item_not_yours);
 
 $repository->trash($_GET["id_media"]);
+
+if( $account->id_account != $item->id_author )
+    send_notification($item->id_author, "warning", replace_escaped_vars(
+        $current_module->language->messages->toolbox->trashed_ok,
+        '{$title}',
+        convert_emojis($item->title)
+    ));
 
 echo "OK";

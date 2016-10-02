@@ -15,10 +15,32 @@ use hng2_media\media_record;
 
 <? $embedded_mode_class = $_GET["embedded_mode"] == "true" ? "embedded_mode" : ""; ?>
 <div class="table_wrapper">
+    
+    <div class="multi_record_actions" style="font-family: arial, helvetica, sans-serif; margin-bottom: 5px;">
+        <span class="fixed_font">&nbsp;┌──</span>
+        <button onclick="launch_multirecord_actions(this, 'trash')">
+            <?= $current_module->language->multi_actions->trash ?>
+        </button>
+        <? if( $account->level >= config::MODERATOR_USER_LEVEL ): ?>
+            <button onclick="launch_multirecord_actions(this, 'reject')">
+                <?= $current_module->language->multi_actions->reject ?>
+            </button>
+            <button onclick="launch_multirecord_actions(this, 'review')">
+                <?= $current_module->language->multi_actions->review ?>
+            </button>
+            <button onclick="launch_multirecord_actions(this, 'publish')">
+                <?= $current_module->language->multi_actions->publish ?>
+            </button>
+        <? endif; ?>
+    </div>
+    
     <table id="media_browser_table" class="nav_table evened <?= $embedded_mode_class ?>">
         
         <thead>
         <tr>
+            <th nowrap>
+                <input type="checkbox" name="record_selections_trigger" onchange="toggle_record_selections(this)">
+            </th>
             <? foreach( $browser->build_table_header($current_module->language->record_nav->columns) as $this_cell ): ?>
                 <th align="<?= $this_cell->xalign ?>" <? if( $this_cell->xnowrap == true ) echo "nowrap "; ?>
                     <? if( ! empty($this_cell->xwidth) ) echo "width='$this_cell->xwidth' "; ?> class="<?= $this_cell->xclass ?>"><?
@@ -46,7 +68,15 @@ use hng2_media\media_record;
                 data-width="<?= $row->get_item_width() ?>" data-height="<?= $row->get_item_height() ?>" 
                 data-href="<?= $row->get_item_url(false) ?>"
                 data-thumbnail-url="<?= $row->get_thumbnail_url() ?>">
+                
+                <td nowrap>
+                    <input type="checkbox" class="record_selector" name="record_selections[]" value="<?= $row->id_media ?>">
+                </td>
                 <td width="25%">
+                    <div class="pseudo_link clipboard-copy" data-clipboard-text="<?= $row->id_media ?>">
+                        <code>#<?= $row->id_media ?><span class="fa fa-copy fa-fw"></span></code>
+                    </div>
+                    
                     <div class="principal_data">
                         <? $icon = $row->type == "image" ? "fa-picture-o" : "fa-video-camera"; ?>
                         <span class="fa <?= $icon ?>"></span>

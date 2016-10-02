@@ -92,15 +92,30 @@ else
     {
         if( $search_status == "hidden" ) $search_status = "";
         
-        if( empty($search_status) ) $where[] = "status not in ('trashed', 'hidden')";
-        else                        $where[] = "status = '$search_status'";
+        if( empty($search_for) )
+        {
+            if( empty($search_status) ) $where[] = "status not in ('trashed', 'hidden')";
+            else                        $where[] = "status = '$search_status'";
+        }
+        else
+        {
+            if( empty($search_status) ) $where[] = "status not in ('hidden')";
+            else                        $where[] = "status = '$search_status'";
+        }
         $where["id_author"] = $account->id_account;
     }
     else
     {
         if( ! empty($search_author) ) $where["id_author"] = $_REQUEST["search_author"];
-        if( empty($search_status) )   $where[] = "status not in ('trashed', 'hidden')";
-        else                          $where[] = "status = '$search_status'";
+        if( empty($search_for) )
+        {
+            if( empty($search_status) )   $where[] = "status not in ('trashed', 'hidden')";
+            else                          $where[] = "status = '$search_status'";
+        }
+        else
+        {
+            if( ! empty($search_status) ) $where[] = "status = '$search_status'";
+        }
     }
 }
 
@@ -151,7 +166,8 @@ else if( empty($account->engine_prefs["gallery_browser_layout"]) )
 <? endif; ?>
 
 <h1 class="clearfix">
-    <button id="refresh_media_browser" class="pull-right" onclick="$('#filter_form').submit()">
+    <button id="refresh_media_browser" class="pull-right multirecord_actions_table_refresher"
+            onclick="$('#filter_form').submit()">
         <span class="fa fa-refresh"></span>
         <?= $language->refresh ?>
     </button>
