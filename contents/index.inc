@@ -34,8 +34,8 @@
         
         $form.find('select[name="search_status"] option:first').prop('selected', true);
         
-        if( $form.find('select[name="search_type"]').is(':visible') )
-            $form.find('select[name="search_type"] option:first').prop('selected', true);
+        if( $form.find('input[name="search_status"]:first').is(':visible') )
+            $form.find('input[name="search_status"][value=""]').prop('checked', true);
     }
     
     //noinspection JSUnusedGlobalSymbols
