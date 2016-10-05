@@ -219,7 +219,7 @@ else if( empty($account->engine_prefs["gallery_browser_layout"]) )
             
             <?= $language->record_nav->search ?>
             <input type="text" name="search_for"
-                   value="<?= htmlspecialchars($search_for) ?>" size="46"
+                   value="<?= htmlspecialchars($search_for) ?>" size="37"
                    placeholder="<?= $current_module->language->record_nav->search_placeholder ?>">
             
             <? $style = ( ! empty($_GET["embedded_mode"]) && ! empty($_GET["search_type"]) ) ? "display: none;" : ""; ?>
