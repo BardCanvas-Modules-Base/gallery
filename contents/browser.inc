@@ -107,10 +107,7 @@ else
     else
     {
         if( ! empty($search_author) ) $where["id_author"] = $_REQUEST["search_author"];
-        
-        if( empty($search_for) )
-            if( ! empty($search_status) )
-                $where[] = "status = '$search_status'";
+        if( ! empty($search_status) ) $where[] = "status = '$search_status'";
     }
 }
 
@@ -350,7 +347,7 @@ if( $_GET["embedded_mode"] != "true" && $account->level >= config::MODERATOR_USE
         $message = replace_escaped_vars($current_module->language->messages->pending, '{$amount}', $pending);
         ?>
         <div class="framed_content state_ko">
-            <span class="pseudo_link" onclick="var $form = $('#filter_form'); reset_filter(); $form.find('select[name=search_status] option[value=reviewing]').prop('selected', true); $form.submit();">
+            <span class="pseudo_link" onclick="var $form = $('#filter_form'); reset_filter(); $form.find('input[name=search_status][value=reviewing]').prop('checked', true); $form.submit();">
                 <span class="fa fa-warning"></span>
                 <?= $message ?>
             </span>

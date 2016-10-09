@@ -86,7 +86,7 @@ use hng2_media\media_record;
                     <? if( $_GET["embedded_mode"] != "true" ): ?>
                         <div class="actions">
                             <? if( in_array($row->status, array("published", "draft")) ): ?>
-                                <a href="<?= $row->get_page_url() ?>" target="_blank">
+                                <a class="action" href="<?= $row->get_page_url() ?>" target="_blank">
                                     <span class="fa fa-link"></span>
                                     <?= $language->permalink ?>
                                 </a>
@@ -96,6 +96,14 @@ use hng2_media\media_record;
                                 <span class="action pseudo_link" onclick="edit_media('<?= $row->id_media ?>')">
                                     <span class="fa fa-pencil"></span>
                                     <?= $current_module->language->record_nav->actions->edit ?>
+                                </span>
+                            <? endif; ?>
+                            
+                            <? if( $account->id_account != $row->id_author ): ?>
+                                <span class="action pseudo_link" onclick="send_pm(this, '<?= $row->author_user_name ?>', '<?= htmlspecialchars($row->author_display_name) ?>')"
+                                      title="<?= replace_escaped_vars( $language->contact->pm->title, '{$website_name}', $settings->get("engine.website_name") ) ?>">
+                                    <span class="fa fa-inbox"></span>
+                                    <?= $language->pm_author ?>
                                 </span>
                             <? endif; ?>
                             
@@ -159,17 +167,17 @@ use hng2_media\media_record;
                     ?>
                 </td>
                 <td>
-                    <span class="user_display_name" data-user-level="<?= $row->author_level ?>">
-                        <span class="fa fa-user fa-fw"></span>
-                        <?= $row->get_processed_author_display_name() ?>
-                    </span><br>
-    
+                    <a class="user_display_name" data-user-level="<?= $row->author_level ?>"
+                       href="<?= $config->full_root_path ?>/author/<?= $row->author_user_name ?>"
+                       target="_blank">
+                        <span class="fa fa-user fa-fw"></span><?= $row->get_processed_author_display_name() ?>
+                    </a><br>
+                    
                     <? if( $account->level >= config::MODERATOR_USER_LEVEL ): ?>
                         <span>
-                            <span class="fa fa-cloud fa-fw"></span>
-                            <?= $row->creation_ip ?>
+                            <span class="fa fa-cloud fa-fw"></span><?= $row->creation_ip ?>
                         </span><br>
-        
+                        
                         <?
                         $parts   = explode("; ", $row->creation_location);
                         $isp      = array_pop($parts);
@@ -177,20 +185,17 @@ use hng2_media\media_record;
                         $city     = implode("; ", $parts);
                         if( $city != "N/A; N/A") : ?>
                             <span>
-                                <span class="fa fa-map-marker fa-fw"></span>
-                                <?= $city ?>
+                                <span class="fa fa-map-marker fa-fw"></span><?= $city ?>
                             </span><br>
                         <? endif; ?>
                         <? if($country != "N/A"): ?>
                             <span>
-                                <span class="fa fa-globe fa-fw"></span>
-                                <?= $country ?>
+                                <span class="fa fa-globe fa-fw"></span><?= $country ?>
                             </span><br>
                         <? endif; ?>
                         <? if($isp != "N/A"): ?>
                             <span>
-                                <span class="fa fa-building fa-fw"></span>
-                                <?= $isp ?>
+                                <span class="fa fa-building fa-fw"></span><?= $isp ?>
                             </span><br>
                         <? endif; ?>
                     <? endif; ?>
