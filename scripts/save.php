@@ -9,6 +9,7 @@
 
 use hng2_base\config;
 use hng2_media\media_repository;
+use hng2_modules\gallery\toolbox;
 
 include "../../config.php";
 include "../../includes/bootstrap.inc";
@@ -35,4 +36,6 @@ $res = $repository->receive_and_save($_POST, $_FILES["file"], true);
 if( ! is_object($res) ) die($res);
 $item = $res;
 $current_module->load_extensions("save_item", "after_saving");
+$toolbox = new toolbox();
+$toolbox->notify_mods_on_media_submission($item);
 echo "OK";

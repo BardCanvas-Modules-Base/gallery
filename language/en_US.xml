@@ -329,4 +329,70 @@
         <done>Todas las solicitudes han sido procesadas. El navegador de registos se actualizará ahora.</done>
     </multi_actions>
     
+    <email_templates>
+        <media_item_submitted>
+            <subject>[{$website_name}/Moderators] New {$type} from {$item_author}: {$title}</subject>
+            <body><![CDATA[
+                <p>{$item_author} has published a {$type} item.</p>
+                
+                <p>Title:</p>
+                <blockquote>
+                    <a href="{$item_url}">{$title}</a>
+                </blockquote>
+                
+                <p>Thumbnail:</p>
+                <blockquote>
+                    <a href="{$item_url}"><img height="200" border="1" src="{$thumbnail}"></a>
+                </blockquote>
+                
+                <p>Description:</p>
+                <blockquote style="background-color: whitesmoke; color: black; border-left: 5px solid silver; padding: 10px;">
+                    {$description}
+                </blockquote>
+                
+                <p>Submission info:</p>
+                <ul>
+                    <li>User IP: {$ip}</li>
+                    <li>Location data: {$location}</li>
+                    <li>Browser: {$user_agent}</li>
+                </ul>
+                
+                <p>Last 12 items from the same network segment during the last 7 days:</p>
+                <blockquote>
+                    {$other_from_segment}
+                </blockquote>
+                
+                <p>Available actions:</p>
+                <ul>
+                    <li><a href="{$item_url}">See the item page</a>.</li>
+                    <li><a href="{$edit_url}"><b>Review</b></a> the item in the editor.</li>
+                    <li><a href="{$preferences}"><b>Edit your preferences</b></a> to disable these notifications.</li>
+                </ul>
+                
+                <p>Regards,<br>
+                {$website_name}</p>
+            ]]></body>
+            <none_found>None found</none_found>
+            <none_defined>None defined</none_defined>
+        </media_item_submitted>
+    </email_templates>
+    
+    <engine_prefs>
+        <title>Gallery notifications</title>
+        
+        <!-- The next ones are for mods and up -->
+        <specs key="moderator_emails_for_media" selector_default="true" min_account_level="200">
+            <title>Email me when new media items are published</title>
+            <description><![CDATA[
+                <span class="framed_content inlined state_highlight">
+                    <span class="fa fa-info-circle"></span>
+                    Mods/admins only
+                </span>
+                Receive an email with the description and a preview of the media item being published (if possible).
+                Applies to submissions from everyone except your own.
+            ]]></description>
+            <type>boolean</type>
+        </specs>
+    </engine_prefs>
+    
 </language>
