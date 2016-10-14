@@ -11,7 +11,7 @@
  * @var \SimpleXMLElement $language
  * 
  * $_GET params:
- * @param string "action"     publish|reject
+ * @param string "action"     publish|reject|trash|review|empty_trash
  * @param string "id_media"
  */
 
@@ -24,12 +24,20 @@ header("Content-Type: text/plain; charset=utf-8");
 include "../../config.php";
 include "../../includes/bootstrap.inc";
 
-if( ! in_array($_GET["action"], array("publish", "reject", "trash", "review")) )
+if( ! in_array($_GET["action"], array("publish", "reject", "trash", "review", "empty_trash")) )
     die($current_module->language->messages->toolbox->invalid_action);
 
-if( empty($_GET["id_media"]) ) die($current_module->language->messages->missing->id);
+if( $_GET["action"] != "empty_trash" && empty($_GET["id_media"]) )
+    die($current_module->language->messages->missing->id);
 
 $repository = new media_repository();
+
+if($_GET["action"] == "empty_trash")
+{
+    if( ! $account->_is_admin ) die($current_module->language->messages->toolbox->action_not_allowed);
+    $repository->empty_trash();
+    die("OK");
+}
 
 $item = $repository->get($_GET["id_media"]);
 if( is_null($item) ) die($current_module->language->messages->item_not_found);

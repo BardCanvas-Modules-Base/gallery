@@ -45,6 +45,27 @@
         $form.find('input[name="offset"]').val(value);
         $form.submit();
     }
+    
+    function empty_trash()
+    {
+        var message = $('#empty_trash_confirmation').text();
+        if( ! confirm(message) ) return;
+        
+        var url = $_FULL_ROOT_PATH + '/gallery/scripts/toolbox.php?action=empty_trash&wasuuup=' + wasuuup();
+        $.blockUI(blockUI_default_params);
+        $.get(url, function(response)
+        {
+            if( response != 'OK' )
+            {
+                alert(response);
+                $.unblockUI();
+                return;
+            }
+            
+            $.unblockUI();
+            $('#refresh_media_browser').click();
+        });
+    }
 </script>
 
 <? if( $_GET["embedded_mode"] == "true" ): ?>
@@ -131,7 +152,6 @@
     
     <? include __DIR__ . "/form.inc"; ?>
 </div>
-
 
 <!-- Multi-record actions -->
 <script type="text/javascript">
@@ -228,8 +248,8 @@
             });
         });
     }
-    
 </script>
 <div id="multirecord_actions_confirmation"  style="display: none;"><?= unindent($current_module->language->multi_actions->confirmation) ?></div>
 <div id="multirecord_actions_none_selected" style="display: none;"><?= unindent($current_module->language->multi_actions->none_selected) ?></div>
 <div id="multirecord_actions_all_done"      style="display: none;"><?= unindent($current_module->language->multi_actions->done) ?></div>
+<div id="empty_trash_confirmation"          style="display: none;"><?= unindent($current_module->language->empty_trash->confirmation) ?></div>

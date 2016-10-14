@@ -293,13 +293,20 @@ else if( empty($account->engine_prefs["gallery_browser_layout"]) )
                     <?= $current_module->language->status_labels->hidden ?>
                 </label>
             <? endif; ?>
-        
+            
             <label class="framed_content inlined <? if($search_status == "trashed") echo "state_active"; ?>">
                 <input type="radio" name="search_status" <? if($search_status == "trashed") echo "checked"; ?> value="trashed"
                        onchange="$('#filter_form').submit()">
                 <?= $current_module->language->status_labels->trashed ?>
             </label>
-    
+            
+            <? if($account->_is_admin && $search_status == "trashed"): ?>
+                <button onclick="empty_trash(); return false;" style="font-size: 12pt; padding: 5px;">
+                    <span class="fa fa-trash"></span>
+                    <?= $current_module->language->empty_trash->caption ?>
+                </button>
+            <? endif; ?>
+            
         </div>
     </form>
     
