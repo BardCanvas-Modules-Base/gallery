@@ -24,7 +24,7 @@ if( empty($_GET["id_media"]) ) die($current_module->language->messages->missing-
 $repository = new media_repository();
 $item       = $repository->get($_GET["id_media"]);
 
-if( is_null($res) ) die($current_module->language->messages->item_not_found);
+if( is_null($item) ) die($current_module->language->messages->item_not_found);
 
 if( $account->level < config::MODERATOR_USER_LEVEL && $account->id_account != $item->id_author )
     die($current_module->language->messages->item_not_yours);
