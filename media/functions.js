@@ -119,32 +119,6 @@ function update_category_selector(preselected_id)
     });
 }
 
-function trash_media(id_media)
-{
-    var url = $_FULL_ROOT_PATH + '/gallery/scripts/trash.php';
-    var params = {
-        'id_media': id_media,
-        'wasuuup':  wasuuup()
-    };
-    
-    var $row = $('#media_browser_table').find('.record[data-record-id="' + id_media + '"]');
-    
-    $row.block(blockUI_smallest_params);
-    $.get(url, params, function(response)
-    {
-        if( response != 'OK' )
-        {
-            alert(response);
-            $row.unblock();
-            
-            return;
-        }
-        
-        $row.unblock();
-        $row.remove();
-    });
-}
-
 function publish_media(id_media)
 {
     var url = $_FULL_ROOT_PATH + '/gallery/scripts/toolbox.php';

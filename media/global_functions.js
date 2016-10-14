@@ -87,3 +87,32 @@ function inject_selected_gallery_video_in_tinymce(
     top.tinymce.activeEditor.insertContent(html);
     top.tinymce.activeEditor.windowManager.close();
 }
+
+function trash_media(id_media, trigger, callback)
+{
+    var url = $_FULL_ROOT_PATH + '/gallery/scripts/trash.php';
+    var params = {
+        'id_media': id_media,
+        'wasuuup':  wasuuup()
+    };
+    
+    var $trigger;
+    if( trigger ) $trigger = $(trigger);
+    else          $trigger = $('#media_browser_table').find('.record[data-record-id="' + id_media + '"]');
+    
+    $trigger.block(blockUI_smallest_params);
+    $.get(url, params, function(response)
+    {
+        if( response != 'OK' )
+        {
+            alert(response);
+            $trigger.unblock();
+            
+            return;
+        }
+        
+        $trigger.unblock();
+        if( callback ) callback();
+        else           $trigger.fadeOut('fast', function() { $(this).remove(); });
+    });
+}
