@@ -29,6 +29,7 @@ tinymce.PluginManager.add('insert_gallery_image_in_tinymce', function(ed, url)
     ed.addButton('insert_gallery_image_in_tinymce', {
         title: _button,
         cmd:   'insert_gallery_image_in_tinymce',
-        image: $_FULL_ROOT_PATH + '/gallery/media/1f4f7.png'
+        image: $_FULL_ROOT_PATH + '/gallery/media/1f4f7.png',
+        classes: 'gallery-module gallery-button gallery-image'
     });
 });
