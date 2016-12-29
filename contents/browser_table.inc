@@ -173,7 +173,7 @@ use hng2_media\media_record;
                         <span class="fa fa-user fa-fw"></span><?= $row->get_processed_author_display_name() ?>
                     </a><br>
                     
-                    <? if( $account->level >= config::MODERATOR_USER_LEVEL ): ?>
+                    <? if( ! empty($row->creation_ip) && $account->level >= config::MODERATOR_USER_LEVEL ): ?>
                         <span>
                             <span class="fa fa-cloud fa-fw"></span><?= $row->creation_ip ?>
                         </span><br>
