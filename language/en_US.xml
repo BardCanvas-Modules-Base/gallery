@@ -177,6 +177,7 @@
         <item_not_found>The item wasn't found in the database</item_not_found>
         <item_not_yours>The item isn't yours.</item_not_yours>
         <item_exists>The media item you're uploading already exists in the database</item_exists>
+        <cannot_create_directory>Can't create media container directory. Please notify the tech support staff.</cannot_create_directory>
         <media_manager_exception><![CDATA[
             The media manager has thrown an exception:
              

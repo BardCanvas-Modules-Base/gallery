@@ -177,6 +177,7 @@
         <item_not_found>No se ha encontrado el elemento en la base de datos.</item_not_found>
         <item_not_yours>Este elemento no te pertenece.</item_not_yours>
         <item_exists>El medio que estás subiendo ya existe en la base de datos.</item_exists>
+        <cannot_create_directory>No es posible crear el directorio contenedor de medios. Favor de comunicarlo al personal de soporte técnico.</cannot_create_directory>
         <media_manager_exception><![CDATA[
             El administrador de medios ha lanzado una excepción:
              
