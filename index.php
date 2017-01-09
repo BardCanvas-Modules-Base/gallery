@@ -22,6 +22,9 @@ include "../config.php";
 include "../includes/bootstrap.inc";
 if( ! $account->_exists ) throw_fake_404();
 
+$current_module->load_extensions("index", "prechecks");
+if( $config->globals["@gallery:abort_index_load"] ) throw_fake_401();
+
 $template->set_page_title($current_module->language->index->title);
 
 if( $_GET["embedded_mode"] == "true" )

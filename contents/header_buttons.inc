@@ -9,6 +9,9 @@
 
 if ( ! $account->_exists) return;
 
+$this_module->load_extensions("header_buttons", "prechecks");
+if( $config->globals["@gallery:abort_menu_buttons_load"] ) return;
+
 $added_class = $current_module->name == $this_module->name ? "current" : "";
 if( $template->get("showing_archive") ) $added_class = "";
 

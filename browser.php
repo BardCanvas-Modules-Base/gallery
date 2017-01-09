@@ -22,6 +22,9 @@ include "../config.php";
 include "../includes/bootstrap.inc";
 if( ! $account->_exists ) throw_fake_404();
 
+$current_module->load_extensions("browser", "prechecks");
+if( $config->globals["@gallery:abort_browser_load"] ) throw_fake_401();
+
 $template->page_contents_include = "contents/browser.inc";
 $template->set_page_title($current_module->language->index->title);
 include "{$template->abspath}/embeddable.php";
