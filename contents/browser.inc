@@ -88,7 +88,7 @@ if( $_GET["embedded_mode"] == "true" )
 }
 else
 {
-    if( $account->level < config::MODERATOR_USER_LEVEL )
+    if( $account->level < config::MODERATOR_USER_LEVEL && ! $account->has_admin_rights_to_module("gallery") )
     {
         if( $search_status == "hidden" ) $search_status = "";
         
@@ -231,7 +231,7 @@ else if( empty($account->engine_prefs["gallery_browser_layout"]) )
                 <? endforeach; ?>
             </select>
             
-            <? if( $account->level >= config::MODERATOR_USER_LEVEL ): ?>
+            <? if( $account->level >= config::MODERATOR_USER_LEVEL || $account->has_admin_rights_to_module("gallery") ): ?>
                 <select name="search_author" onchange="$('#filter_form').submit();">
                     <option <? if( empty($search_author) ) echo "selected"; ?> value="">&lt;<?= $current_module->language->record_nav->filters->from_everyone ?>&gt;</option>
                     <option <? if( $search_author == $account->id_account ) echo "selected"; ?> value="<?= $account->id_account ?>"><?= $current_module->language->record_nav->filters->mine ?></option>
@@ -286,7 +286,7 @@ else if( empty($account->engine_prefs["gallery_browser_layout"]) )
                 <?= $current_module->language->status_labels->reviewing ?>
             </label>
         
-            <? if( $account->level >= config::MODERATOR_USER_LEVEL ): ?>
+            <? if( $account->level >= config::MODERATOR_USER_LEVEL || $account->has_admin_rights_to_module("gallery") ): ?>
                 <label class="framed_content inlined <? if($search_status == "hidden") echo "state_active"; ?>">
                     <input type="radio" name="search_status" <? if($search_status == "hidden") echo "checked"; ?> value="hidden"
                            onchange="$('#filter_form').submit()">
@@ -300,7 +300,7 @@ else if( empty($account->engine_prefs["gallery_browser_layout"]) )
                 <?= $current_module->language->status_labels->trashed ?>
             </label>
             
-            <? if($account->_is_admin && $search_status == "trashed"): ?>
+            <? if($account->has_admin_rights_to_module("gallery") && $search_status == "trashed"): ?>
                 <button onclick="empty_trash(); return false;" style="font-size: 12pt; padding: 5px;">
                     <span class="fa fa-trash"></span>
                     <?= $current_module->language->empty_trash->caption ?>
@@ -348,7 +348,7 @@ else if( empty($account->engine_prefs["gallery_browser_layout"]) )
 <? endif;  ?>
 
 <?
-if( $_GET["embedded_mode"] != "true" && $account->level >= config::MODERATOR_USER_LEVEL && $search_status != "reviewing" ):
+if( $_GET["embedded_mode"] != "true" && ($account->level >= config::MODERATOR_USER_LEVEL || $account->has_admin_rights_to_module("gallery")) && $search_status != "reviewing" ):
     $pending = $repository->get_record_count(array("status" => "reviewing"));
     if( $pending > 0 ):
         $message = replace_escaped_vars($current_module->language->messages->pending, '{$amount}', $pending);

@@ -21,7 +21,7 @@ use hng2_media\media_record;
         <button onclick="launch_multirecord_actions(this, 'trash')">
             <?= $current_module->language->multi_actions->trash ?>
         </button>
-        <? if( $account->level >= config::MODERATOR_USER_LEVEL ): ?>
+        <? if( $account->level >= config::MODERATOR_USER_LEVEL || $account->has_admin_rights_to_module("gallery") ): ?>
             <button onclick="launch_multirecord_actions(this, 'reject')">
                 <?= $current_module->language->multi_actions->reject ?>
             </button>
@@ -107,7 +107,7 @@ use hng2_media\media_record;
                                 </span>
                             <? endif; ?>
                             
-                            <? if( $account->level >= config::MODERATOR_USER_LEVEL
+                            <? if( ($account->level >= config::MODERATOR_USER_LEVEL || $account->has_admin_rights_to_module("gallery"))
                                    && in_array($row->status, array("reviewing")) ): ?>
                                 <span class="action pseudo_link greengo" onclick="publish_media('<?= $row->id_media ?>')">
                                     <span class="fa fa-check"></span>
@@ -115,7 +115,7 @@ use hng2_media\media_record;
                                 </span>
                             <? endif; ?>
                             
-                            <? if( $account->level >= config::MODERATOR_USER_LEVEL
+                            <? if( ($account->level >= config::MODERATOR_USER_LEVEL || $account->has_admin_rights_to_module("gallery"))
                                    && in_array($row->status, array("published", "reviewing")) ): ?>
                                 <span class="action pseudo_link important" onclick="reject_media('<?= $row->id_media ?>')">
                                     <span class="fa fa-times"></span>
@@ -173,7 +173,7 @@ use hng2_media\media_record;
                         <span class="fa fa-user fa-fw"></span><?= $row->get_processed_author_display_name() ?>
                     </a><br>
                     
-                    <? if( ! empty($row->creation_ip) && $account->level >= config::MODERATOR_USER_LEVEL ): ?>
+                    <? if( ! empty($row->creation_ip) && ($account->level >= config::MODERATOR_USER_LEVEL || $account->has_admin_rights_to_module("gallery")) ): ?>
                         <span>
                             <span class="fa fa-cloud fa-fw"></span><?= $row->creation_ip ?>
                         </span><br>

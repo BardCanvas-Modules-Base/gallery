@@ -26,7 +26,8 @@ $item       = $repository->get($_GET["id_media"]);
 
 if( is_null($item) ) die($current_module->language->messages->item_not_found);
 
-if( $account->level < config::MODERATOR_USER_LEVEL && $account->id_account != $item->id_author )
+if( $account->level < config::MODERATOR_USER_LEVEL && ! $account->has_admin_rights_to_module("gallery")
+    && $account->id_account != $item->id_author  )
     die($current_module->language->messages->item_not_yours);
 
 $repository->trash($_GET["id_media"]);

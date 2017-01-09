@@ -25,7 +25,8 @@ $record = $repository->get($_GET["id_media"]);
 
 if( is_null($record) ) die(json_encode(array("message" => $current_module->language->messages->item_not_found )));
 
-if( $account->level < $config::MODERATOR_USER_LEVEL && $account->id_account != $record->id_author )
+if( $account->level < $config::MODERATOR_USER_LEVEL && ! $account->has_admin_rights_to_module("gallery")
+    && $account->id_account != $record->id_author )
     die(json_encode(array("message" => $current_module->language->messages->item_not_yours )));
 
 echo json_encode(array("message" => "OK", "data" => $record->get_as_associative_array()));

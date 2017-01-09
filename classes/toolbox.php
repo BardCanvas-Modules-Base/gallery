@@ -16,7 +16,7 @@ class toolbox
         
         $mem_ttl = 60*60;
         
-        if( $account->level >= config::MODERATOR_USER_LEVEL ) return;
+        if( $account->level >= config::MODERATOR_USER_LEVEL || $account->has_admin_rights_to_module("gallery") ) return;
         if( $item->creation_date > date("Y-m-d H:i:s", strtotime("$item->creation_date + $mem_ttl seconds")) ) return;
         
         $item_author = $item->get_author();

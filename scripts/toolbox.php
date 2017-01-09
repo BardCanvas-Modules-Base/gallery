@@ -34,7 +34,7 @@ $repository = new media_repository();
 
 if($_GET["action"] == "empty_trash")
 {
-    if( ! $account->_is_admin ) die($current_module->language->messages->toolbox->action_not_allowed);
+    if( ! $account->has_admin_rights_to_module("gallery") ) die($current_module->language->messages->toolbox->action_not_allowed);
     $repository->empty_trash();
     die("OK");
 }
@@ -42,12 +42,13 @@ if($_GET["action"] == "empty_trash")
 $item = $repository->get($_GET["id_media"]);
 if( is_null($item) ) die($current_module->language->messages->item_not_found);
 
-if( $account->level < config::MODERATOR_USER_LEVEL && $account->id_account != $item->id_author )
+if( $account->level < config::MODERATOR_USER_LEVEL && ! $account->has_admin_rights_to_module("gallery")
+    && $account->id_account != $item->id_author )
     die($current_module->language->messages->item_not_yours);
 
 if($_GET["action"] == "publish")
 {
-    if($account->level < config::MODERATOR_USER_LEVEL)
+    if( $account->level < config::MODERATOR_USER_LEVEL  && ! $account->has_admin_rights_to_module("gallery") )
         die($current_module->language->messages->toolbox->action_not_allowed);
     
     if( $item->status == "published" ) die("OK");
@@ -68,7 +69,7 @@ if($_GET["action"] == "publish")
 
 if($_GET["action"] == "reject")
 {
-    if($account->level < config::MODERATOR_USER_LEVEL)
+    if( $account->level < config::MODERATOR_USER_LEVEL && ! $account->has_admin_rights_to_module("gallery") )
         die($current_module->language->messages->toolbox->action_not_allowed);
     
     if( $item->status == "hidden" ) die("OK");
@@ -89,7 +90,7 @@ if($_GET["action"] == "reject")
 
 if($_GET["action"] == "review")
 {
-    if($account->level < config::MODERATOR_USER_LEVEL)
+    if( $account->level < config::MODERATOR_USER_LEVEL && ! $account->has_admin_rights_to_module("gallery") )
         die($current_module->language->messages->toolbox->action_not_allowed);
     
     if( $item->status == "reviewing" ) die("OK");
