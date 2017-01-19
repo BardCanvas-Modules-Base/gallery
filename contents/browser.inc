@@ -143,10 +143,9 @@ $records = $repository->find($where, $limit, $offset, $sqlorder);
 # echo "<pre>{$repository->get_last_query()}</pre>";
 #endregion
 
-if( $_GET["embedded_mode"] == "true" )
-    $account->engine_prefs["gallery_browser_layout"] = "tiles";
-else if( empty($account->engine_prefs["gallery_browser_layout"]) )
-    $account->engine_prefs["gallery_browser_layout"] = "table";
+$browser_layout = $account->engine_prefs["gallery_browser_layout"];
+if( empty($browser_layout) ) $browser_layout = "table";
+if( $_GET["embedded_mode"] == "true" ) $browser_layout = "tiles";
 ?>
 
 <? if( ! empty($_GET["edit_item"]) ): ?>
@@ -167,7 +166,7 @@ else if( empty($account->engine_prefs["gallery_browser_layout"]) )
     <?= $current_module->language->index->title; ?>
     
     <? if( $_GET["embedded_mode"] != "true" ): ?>
-        <span id="media_browser_mode_switches" data-current-mode="<?= $account->engine_prefs["gallery_browser_layout"] ?>">
+        <span id="media_browser_mode_switches" data-current-mode="<?= $browser_layout ?>">
             <span class="pseudo_link fa fa-th-large" onclick="switch_media_browser_mode('tiles')"
                   data-trigger-for="tiles" title="<?= $current_module->language->record_nav->modes->tiles ?>"></span>
             <span class="pseudo_link fa fa-th-list" onclick="switch_media_browser_mode('table')"
@@ -364,7 +363,7 @@ if( $_GET["embedded_mode"] != "true" && ($account->level >= config::MODERATOR_US
 endif;
 ?>
 
-<? include __DIR__ . "/browser_{$account->engine_prefs["gallery_browser_layout"]}.inc"; ?>
+<? include __DIR__ . "/browser_{$browser_layout}.inc"; ?>
 
 <div class="pagination">
     <? $browser->render_pagination_controls("paginate", $pagination); ?>
