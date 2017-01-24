@@ -133,6 +133,14 @@
         <trashed>En papelera</trashed>
     </status_labels>
     
+    <visibility_options>
+        <public>Público</public>
+        <private>Privado</private>
+        <users>Usuarios</users>
+        <friends>Amigos</friends>
+        <level_based>Basado en nivel</level_based>
+    </visibility_options>
+    
     <form>
         <add_title>Subir medio</add_title>
         <edit_title>Editando detalles de medio</edit_title>

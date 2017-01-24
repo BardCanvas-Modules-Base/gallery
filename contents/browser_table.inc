@@ -72,6 +72,8 @@ use hng2_media\media_record;
                 <td nowrap>
                     <input type="checkbox" class="record_selector" name="record_selections[]" value="<?= $row->id_media ?>">
                 </td>
+                
+                <!-- Title and links -->
                 <td width="25%">
                     <div class="pseudo_link clipboard-copy" data-clipboard-text="<?= $row->id_media ?>">
                         <code>#<?= $row->id_media ?><span class="fa fa-copy fa-fw"></span></code>
@@ -133,6 +135,8 @@ use hng2_media\media_record;
                         
                     <? endif; ?>
                 </td>
+                
+                <!-- Description -->
                 <td>
                     <?= empty($row->description) ? "―" : convert_emojis(make_excerpt_of($row->description, 100)) ?><br>
                     
@@ -146,6 +150,9 @@ use hng2_media\media_record;
                     
                     <span class="framed_content inlined"><?= $current_module->language->status_labels->{$row->status} ?></span>
                     <?
+                    if( $row->visibility == "private" )
+                        echo "• <span class='framed_content inlined state_ko'><i class='fa fa-eye-slash'></i> {$current_module->language->visibility_options->private}</span>";
+                    
                     foreach($repository->get_attached_categories($row->id_media) as $category)
                         echo "<span class='category'><span class='fa fa-folder fa-fw'></span>{$category->title}</span> ";
                     
@@ -166,6 +173,8 @@ use hng2_media\media_record;
                     }
                     ?>
                 </td>
+                
+                <!-- Author -->
                 <td>
                     <a class="user_display_name" data-user-level="<?= $row->author_level ?>"
                        href="<?= $config->full_root_path ?>/author/<?= $row->author_user_name ?>"
@@ -200,6 +209,8 @@ use hng2_media\media_record;
                         <? endif; ?>
                     <? endif; ?>
                 </td>
+                
+                <!-- Published -->
                 <td align="center">
                     <? if( $row->publishing_date == "0000-00-00 00:00:00" ): ?>
                         &mdash;
@@ -208,13 +219,19 @@ use hng2_media\media_record;
                         (<?= time_elapsed_string($row->publishing_date) ?>)
                     <? endif; ?>
                 </td>
+                
+                <!-- Activity -->
                 <td align="center">
                     <?= time_mini_string($row->last_update) ?><br>
                     (<?= time_elapsed_string($row->last_update) ?>)
                 </td>
+                
+                <!-- Views -->
                 <td align="right">
                     <?= $row->views ?>
                 </td>
+                
+                <!-- Thumbnail -->
                 <td>
                     <? if( $_GET["embedded_mode"] != "true" ): ?>
                         <? if($row->type == "image"): ?>
