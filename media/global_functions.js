@@ -47,8 +47,9 @@ function inject_selected_gallery_image_in_tinymce(
     
     var html = '<img data-id-media="' + id_media + '" data-media-type="image" src="' + file_url + '" width="' + embed_width + '">';
     
-    top.tinymce.activeEditor.insertContent(html);
-    top.tinymce.activeEditor.windowManager.close();
+    var wnd = parent ? parent : self;
+    wnd.tinymce.activeEditor.insertContent(html);
+    wnd.tinymce.activeEditor.windowManager.close();
 }
 
 //noinspection JSUnusedGlobalSymbols,JSUnusedLocalSymbols
@@ -84,8 +85,9 @@ function inject_selected_gallery_video_in_tinymce(
               + '     width="' + width + '" height="' + height + '" '
               + '     style="background-image: url(' + placeholder_url + '), url(' + thumbnail_url + ')">';
     
-    top.tinymce.activeEditor.insertContent(html);
-    top.tinymce.activeEditor.windowManager.close();
+    var wnd = parent ? parent : self;
+    wnd.tinymce.activeEditor.insertContent(html);
+    wnd.tinymce.activeEditor.windowManager.close();
 }
 
 function trash_media(id_media, trigger, callback)

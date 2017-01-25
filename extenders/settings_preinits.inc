@@ -42,7 +42,7 @@ use hng2_base\module;
             + '/gallery/index.php'
             + '?embedded_mode=true'
             + '&search_type=' + 'image'
-            + '&callback='    + 'top.' + 'set_selected_gallery_image'
+            + '&callback='    + 'parent.' + 'set_selected_gallery_image'
             + '&wasuuup='     + wasuuup();
         
         $('#image_selector_target').attr('src', url);
