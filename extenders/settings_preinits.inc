@@ -17,7 +17,7 @@ use hng2_base\module;
 ?>
 
 <style type="text/css">
-    .settings_image_selector { border: 1px solid; width: 100%; }
+    .settings_image_selector { border: 1px solid; max-width: 100%; }
 </style>
 
 <div id="image_selector_dialog" title="<?= $this_module->language->tinymce_strings->select_image ?>"
