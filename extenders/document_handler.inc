@@ -12,6 +12,7 @@
  * @param handle
  */
 
+use hng2_base\config;
 use hng2_base\template;
 use hng2_media\media_repository;
 
@@ -26,11 +27,29 @@ $id_media = $parts[1];
 
 $repository = new media_repository();
 $item = $repository->get($id_media);
-
 if( is_null($item) ) return;
-if( $item->status != "published" ) return;
 
-$repository->increment_views($item->id_media);
+if( $account->level < config::MODERATOR_USER_LEVEL )
+{
+    if( $item->status == "hidden" ) throw_fake_404();
+    if( $item->status == "trashed" ) throw_fake_404();
+    if( $item->status == "draft" && $item->id_author != $account->id_account ) throw_fake_401();
+    if( $item->status == "reviewing" && $item->id_author != $account->id_account ) throw_fake_401();
+    if( $item->visibility == "private" && $account->id_account != $item->id_author ) throw_fake_401();
+}
+
+if( ($item->visibility == "users" || $item->main_category_visibility == "users") && ! $account->_exists )
+    throw_fake_401();
+
+if( $item->visibility == "level_based" && $account->level < $item->author_level )
+    throw_fake_401();
+
+if( $item->main_category_visibility == "level_based" && $account->level < $item->main_category_min_level )
+    throw_fake_401();
+
+if( $item->status == "reviewing" ) $item->allow_comments = 0;
+if( $item->status == "published" ) $repository->increment_views($item->id_media);
+
 $template->set_page_title($item->title);
 $template->set("is_single_post", false);
 $template->set("is_media_item_page", true);
