@@ -11,6 +11,9 @@
 
 use hng2_base\config;
 use hng2_media\media_record;
+
+$per_column_function_hooks = array();
+$current_module->load_extensions("browser", "per_record_function_hooks");
 ?>
 
 <? $embedded_mode_class = $_GET["embedded_mode"] == "true" ? "embedded_mode" : ""; ?>
@@ -207,6 +210,13 @@ use hng2_media\media_record;
                                 <span class="fa fa-building fa-fw"></span><?= $isp ?>
                             </span><br>
                         <? endif; ?>
+                        
+                        <?
+                        if( ! empty($per_column_function_hooks["author_info"]) )
+                            foreach($per_column_function_hooks["author_info"] as $function)
+                                if( function_exists($function) ) $function($row);
+                        ?>
+                        
                     <? endif; ?>
                 </td>
                 
