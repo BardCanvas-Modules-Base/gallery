@@ -1,6 +1,12 @@
 
 # Gallery Module Change Log
 
+## [1.9.13] - 2017-04-11
+
+- Fixed doc error on contact form extender.
+- Added extenders for reporting items to tickets instead of the contact form
+  if Triklet is installed and enabled.
+
 ## [1.9.12] - 2017-04-03
 
 - Added Changelog.
