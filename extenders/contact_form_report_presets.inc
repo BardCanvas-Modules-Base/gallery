@@ -1,7 +1,7 @@
 <?php
 /**
  * Contact extender: sets subject and body when the contact form is invoked
- * via GET with the next arguments: action=report & type=comment & id=xxxxxxx
+ * via GET with the next arguments: action=report & type=media & id=xxxxxxx
  *
  * @package    BardCanvas
  * @subpackage gallery
