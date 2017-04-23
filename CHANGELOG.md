@@ -1,6 +1,10 @@
 
 # Gallery Module Change Log
 
+## [1.9.14] - 2017-04-23
+
+- Added meta tags to single items page.
+
 ## [1.9.13] - 2017-04-11
 
 - Fixed doc error on contact form extender.
