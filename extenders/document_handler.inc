@@ -51,6 +51,10 @@ if( $item->status == "reviewing" ) $item->allow_comments = 0;
 if( $item->status == "published" ) $repository->increment_views($item->id_media);
 
 $template->set_page_title($item->title);
+$template->page_meta_description   = $item->description;
+$template->page_meta_url           = $item->get_permalink(true);
+$template->page_meta_image         = $item->get_thumbnail_url(true);
+
 $template->set("is_single_post", false);
 $template->set("is_media_item_page", true);
 $template->set("page_tag", "single_media_item");
