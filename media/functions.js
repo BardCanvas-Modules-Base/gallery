@@ -207,11 +207,13 @@ function prepare_media_form_serialization()
 
 function prepare_media_form_submission()
 {
-    $.blockUI(blockUI_default_params);
+    $.blockUI(blockUI_big_progress_params);
 }
 
 function process_media_form_response(response)
 {
+    blockUI_progress_complete();
+    
     $.unblockUI();
     if( response != 'OK' )
     {
@@ -229,6 +231,8 @@ $(document).ready(function()
         target:          '#media_form_target',
         beforeSerialize: prepare_media_form_serialization,
         beforeSubmit:    prepare_media_form_submission,
+        beforeSend:      blockUI_progress_init,
+        uploadProgress:  blockUI_progress_update,
         success:         process_media_form_response
     });
 });

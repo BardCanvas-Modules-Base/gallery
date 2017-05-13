@@ -16,8 +16,8 @@
 <script type="text/javascript" src="<?= $config->full_root_path ?>/lib/jquery.exptextarea.js"></script>
 <script type="text/javascript">$(document).ready(function() { $('.expandible_textarea').expandingTextArea() });</script>
 
-<link rel="stylesheet" type="text/css" href="<?= $config->full_root_path ?>/gallery/media/styles~v<?=$config->scripts_version?>.css">
-<script type="text/javascript"          src="<?= $config->full_root_path ?>/gallery/media/functions~v<?=$config->scripts_version?>.js"></script>
+<link rel="stylesheet" type="text/css" href="<?= $config->full_root_path ?>/gallery/media/styles~v1.1.0-1.css">
+<script type="text/javascript"          src="<?= $config->full_root_path ?>/gallery/media/functions~v1.1.0-3.js"></script>
 
 <script type="text/javascript">
     function reset_filter()
