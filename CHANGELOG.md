@@ -1,6 +1,10 @@
 
 # Gallery Module Change Log
 
+## [1.10.0] - 2017-05-13
+
+- Added progress indicators for uploads.
+
 ## [1.9.14] - 2017-04-23
 
 - Added meta tags to single items page.
