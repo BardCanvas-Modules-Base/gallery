@@ -57,6 +57,7 @@ if($_GET["action"] == "publish")
     
     if( empty($res) ) die("OK");
     
+    $current_module->load_extensions("toolbox", "after_publishing");
     $author = $item->get_author();
     send_notification($author->id_account, "information", replace_escaped_vars(
         $current_module->language->messages->toolbox->published_ok,

@@ -44,6 +44,7 @@
 
     <extension_areas_info><![CDATA[
         Saving: post item saving.
+        Toolbox: after publishing.
     ]]></extension_areas_info>
     
     <extends_to>
