@@ -1,6 +1,10 @@
 
 # Gallery Module Change Log
 
+## [1.10.1] - 2017-05-20
+
+- Added missing parameter for Triklet redirector.
+
 ## [1.10.0] - 2017-05-13
 
 - Added progress indicators for uploads.
