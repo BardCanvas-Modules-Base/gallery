@@ -1,6 +1,10 @@
 
 # Gallery Module Change Log
 
+## [1.10.2] - 2017-05-23
+
+- Added extension point after publishing on the toolbox.
+
 ## [1.10.1] - 2017-05-20
 
 - Added missing parameter for Triklet redirector.
