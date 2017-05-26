@@ -1,6 +1,10 @@
 
 # Gallery Module Change Log
 
+## [1.10.3] - 2017-05-25
+
+- Language fixes.
+
 ## [1.10.2] - 2017-05-23
 
 - Added extension point after publishing on the toolbox.
