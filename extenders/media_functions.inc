@@ -54,11 +54,7 @@ function convert_video_tag($element)
         $markup = "<div class='missing_media_item' style='{$width} {$height}'>{$id_media}<br>{$language->resource_unavailable}</div>";
     else
         $markup = "<div class='video_container'><div class='play_trigger pseudo_link'
-                        onclick=\"$(this).closest('.video_container').find('video')[0].play(); $(this).remove();\">
-                        <span class=\"play_icon fa-stack fa-lg\">
-                            <i class=\"fa fa-circle fa-stack-2x\"></i><i class=\"fa fa-play fa-stack-1x fa-inverse\"></i>
-                        </span>
-                   </div>"
+                        onclick=\"$(this).closest('.video_container').find('video')[0].play(); $(this).remove();\"></div>"
                 . "<video poster='{$item->get_thumbnail_url(true)}' style='position: relative; {$width} {$height}' controls>" 
                 . "<source src='{$item->get_item_url(true)}' />" 
                 . "</video>"
