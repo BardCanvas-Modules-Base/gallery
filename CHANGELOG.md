@@ -1,6 +1,14 @@
 
 # Gallery Module Change Log
 
+## [1.11.1] - 2017-08-03
+
+- Changed "play" icon overlay rendering method.
+
+## [1.11.0] - 2017-08-03
+
+- Added support for "play" icon overlay on videos.
+
 ## [1.10.3] - 2017-05-25
 
 - Language fixes.
