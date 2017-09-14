@@ -84,7 +84,8 @@ if( ! empty($search_for) )
 
 if( $_GET["embedded_mode"] == "true" )
 {
-    $where["status"] = "published";
+    $where["status"]     = "published";
+    $where["visibility"] = "public";
 }
 else
 {
