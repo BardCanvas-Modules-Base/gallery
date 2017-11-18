@@ -21,6 +21,7 @@ use hng2_base\template;
 include "../config.php";
 include "../includes/bootstrap.inc";
 if( ! $account->_exists ) throw_fake_404();
+if( $account->state != "enabled" ) throw_fake_401();
 
 $current_module->load_extensions("index", "prechecks");
 if( $config->globals["@gallery:abort_index_load"] ) throw_fake_401();

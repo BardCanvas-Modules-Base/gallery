@@ -41,6 +41,9 @@ if( $account->level < config::MODERATOR_USER_LEVEL )
 if( ($item->visibility == "users" || $item->main_category_visibility == "users") && ! $account->_exists )
     throw_fake_401();
 
+if( ($item->visibility == "users" || $item->main_category_visibility == "users") && $account->state != "enabled" )
+    throw_fake_401();
+
 if( $item->visibility == "level_based" && $account->level < $item->author_level )
     throw_fake_401();
 

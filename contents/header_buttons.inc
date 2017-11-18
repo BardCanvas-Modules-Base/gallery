@@ -8,6 +8,7 @@
  */
 
 if ( ! $account->_exists) return;
+if( $account->state != "enabled" ) return;
 
 $this_module->load_extensions("header_buttons", "prechecks");
 if( $config->globals["@gallery:abort_menu_buttons_load"] ) return;

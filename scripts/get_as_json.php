@@ -17,6 +17,7 @@ include "../../includes/bootstrap.inc";
 
 header("Content-Type: application/json; charset=utf-8");
 if( ! $account->_exists ) die(json_encode(array("message" => $language->errors->page_requires_login )));
+if( $account->state != "enabled" ) die(json_encode(array("message" => $language->errors->access_denied )));
 
 if( empty($_GET["id_media"]) ) die(json_encode(array("message" => $current_module->language->messages->missing->id )));
 
