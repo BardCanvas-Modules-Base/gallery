@@ -1,6 +1,19 @@
 
 # Gallery Module Change Log
 
+## [Todo]
+
+- Apply per-level filters to hide categories as done by the `main_category_selector_exceptions`
+  setting of the posts module.
+
+## [1.12.0] - 2017-11-18
+
+- Fixed missing check for private media items on the embedded browser.
+- Added filters for settings that depend on other modules.
+- Added internal flag to disable click trigger from the video items.
+- Added checks to prevent recently disabled users to access the module.
+- Added option to avoid autolinking of images from the gallery inserted in contents.
+
 ## [1.11.1] - 2017-08-03
 
 - Changed "play" icon overlay rendering method.
