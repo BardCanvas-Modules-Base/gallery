@@ -33,7 +33,7 @@ function convert_media_tags($contents)
 
 function convert_video_tag($element)
 {
-    global $media_repository, $language;
+    global $media_repository, $language, $config;
     if( empty($media_repository) ) $media_repository = new media_repository();
     
     $element = pq($element);
@@ -49,16 +49,30 @@ function convert_video_tag($element)
     
     $item = $media_repository->get($id_media);
     if( is_null($item) )
+    {
         $markup = "<div class='missing_media_item' style='{$width} {$height}'>{$id_media}<br>{$language->resource_not_found}</div>";
+    }
     elseif( $item->status != "published" )
+    {
         $markup = "<div class='missing_media_item' style='{$width} {$height}'>{$id_media}<br>{$language->resource_unavailable}</div>";
+    }
     else
-        $markup = "<div class='video_container'><div class='play_trigger pseudo_link'
-                        onclick=\"$(this).closest('.video_container').find('video')[0].play(); $(this).remove();\"></div>"
-                . "<video poster='{$item->get_thumbnail_url(true)}' style='position: relative; {$width} {$height}' controls>" 
-                . "<source src='{$item->get_item_url(true)}' />" 
-                . "</video>"
-                . "</div>";
+    {
+        if( $config->globals["modules:gallery.export_raw_video_tags"] )
+            $markup = "<div class='video_container'>"
+                    . "<video poster='{$item->get_thumbnail_url(true)}' style='position: relative; {$width} {$height}' controls>" 
+                    . "<source src='{$item->get_item_url(true)}' />" 
+                    . "</video>"
+                    . "</div>";
+        else
+            $markup = "<div class='video_container'><div class='play_trigger pseudo_link'
+                            onclick=\"$(this).closest('.video_container').find('video')[0].play(); $(this).remove();\"></div>"
+                    . "<video poster='{$item->get_thumbnail_url(true)}' style='position: relative; {$width} {$height}' controls>" 
+                    . "<source src='{$item->get_item_url(true)}' />" 
+                    . "</video>"
+                    . "</div>";
+        
+    }
     
     $element->replaceWith($markup);
 }
