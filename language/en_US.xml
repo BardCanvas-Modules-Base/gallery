@@ -268,6 +268,14 @@
             ]]></description>
             <type>number</type>
         </specs>
+        <specs key="avoid_images_autolinking">
+            <title>Avoid images autolinking</title>
+            <description><![CDATA[
+                By default, images from the media gallery inserted in contents are linked to their individual
+                pages. If you enable this option, such links will not be added.
+            ]]></description>
+            <type>boolean</type>
+        </specs>
         <specs key="use_triklet_for_reporting" required_modules="triklet">
             <title>Use Triklet module for reporting media items?</title>
             <description><![CDATA[

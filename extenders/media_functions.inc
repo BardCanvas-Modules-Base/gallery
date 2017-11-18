@@ -79,7 +79,7 @@ function convert_video_tag($element)
 
 function autolink_media_image($element)
 {
-    global $media_repository, $language;
+    global $media_repository, $language, $settings;
     if( empty($media_repository) ) $media_repository = new media_repository();
     
     $element = pq($element);
@@ -95,11 +95,20 @@ function autolink_media_image($element)
     
     $item = $media_repository->get($id_media);
     if( is_null($item) )
+    {
         $markup = "<div class='missing_media_item' style='{$width} {$height}'>{$id_media}<br>{$language->resource_not_found}</div>";
+    }
     elseif( $item->status != "published" )
+    {
         $markup = "<div class='missing_media_item' style='{$width} {$height}'>{$id_media}<br>{$language->resource_unavailable}</div>";
+    }
     else
-        $markup = "<a href='{$item->get_page_url()}' target='_blank'>{$element}</a>";
+    {
+        if( $settings->get("modules:gallery.avoid_images_autolinking") == "true" )
+            $markup = "{$element}";
+        else
+            $markup = "<a href='{$item->get_page_url()}' target='_blank'>{$element}</a>";
+    }
     
     $element->replaceWith($markup);
 }
