@@ -79,7 +79,7 @@ function convert_video_tag($element)
 
 function autolink_media_image($element)
 {
-    global $media_repository, $language, $settings;
+    global $media_repository, $language, $settings, $config;
     if( empty($media_repository) ) $media_repository = new media_repository();
     
     $element = pq($element);
@@ -104,7 +104,8 @@ function autolink_media_image($element)
     }
     else
     {
-        if( $settings->get("modules:gallery.avoid_images_autolinking") == "true" )
+        if( $settings->get("modules:gallery.avoid_images_autolinking") == "true" ||
+            $config->globals["modules:gallery.avoid_images_autolinking"] )
             $markup = "{$element}";
         else
             $markup = "<a href='{$item->get_page_url()}' target='_blank'>{$element}</a>";
