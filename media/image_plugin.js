@@ -9,11 +9,16 @@ tinymce.PluginManager.add('insert_gallery_image_in_tinymce', function(ed, url)
         + '/gallery/index.php'
         + '?embedded_mode=true'
         + '&search_type=' + 'image'
-        + '&callback='    + 'inject_selected_gallery_image_in_tinymce'
-        + '&wasuuup='     + wasuuup();
+        + '&callback='    + 'inject_selected_gallery_image_in_tinymce';
     
-    var width  = $(window).width()  - 20;
-    var height = $(window).height() - 60;
+    if( typeof GLOBAL_AJAX_ADDED_PARAMS !== 'undefined' )
+        for(var i in GLOBAL_AJAX_ADDED_PARAMS)
+            url = url + '&' + i + '=' + encodeURI(GLOBAL_AJAX_ADDED_PARAMS[i]);
+    
+    url = url + '&wasuuup=' + wasuuup();
+    
+    var width  = $(window).width()  - 10;
+    var height = $(window).height() - 50;
     
     ed.addCommand('insert_gallery_image_in_tinymce', function()
     {

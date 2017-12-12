@@ -7,9 +7,9 @@
  * @author     Alejandro Caballero - lava.caballero@gmail.com
  *
  * $_GET params
- * @param embedded_mode
- * @param callback
- * @param search_type
+ * @param "embedded_mode"
+ * @param "callback"
+ * @param "search_type"
  */
 
 use hng2_base\account;
@@ -175,10 +175,12 @@ if( $_GET["embedded_mode"] == "true" ) $browser_layout = "tiles";
         </span>
     <? endif; ?>
     
-    <button onclick="prepare_media_addition()">
-        <span class="fa fa-upload"></span>
-        <?= $current_module->language->index->buttons->add ?>
-    </button>
+    <? if( ! $config->globals["using_bcmobile"] ): ?>
+        <button onclick="prepare_media_addition()">
+            <span class="fa fa-upload"></span>
+            <?= $current_module->language->index->buttons->add ?>
+        </button>
+    <? endif; ?>
 </h1>
 
 <div class="filtering clearfix">
@@ -204,6 +206,12 @@ if( $_GET["embedded_mode"] == "true" ) $browser_layout = "tiles";
         <input type="hidden" name="order"         value="<?= $order ?>">
         <input type="hidden" name="offset"        value="<?= $offset ?>">
         <input type="hidden" name="search_tag"    value="<?= $search_tag ?>">
+        
+        <!-- BCM additions -->
+        <input type="hidden" name="bcm_platform"      value="<?= $_REQUEST["bcm_platform"] ?>">
+        <input type="hidden" name="bcm_access_token"  value="<?= $_REQUEST["bcm_access_token"] ?>">
+        <input type="hidden" name="bcm_force_session" value="<?= $_REQUEST["bcm_force_session"] ?>">
+        <input type="hidden" name="bcm_output_type"   value="<?= $_REQUEST["bcm_output_type"] ?>">
         
         <div>
             <span style="float: right;">

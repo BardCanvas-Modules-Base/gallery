@@ -8,8 +8,13 @@ function load_media_browser_in_tinymce_dialog(editor, width, height, media_type_
         + '/gallery/index.php' 
         + '?embedded_mode=true'
         + '&search_type=' + media_type_filter
-        + '&callback='    + callback
-        + '&wasuuup='     + wasuuup();
+        + '&callback='    + callback;
+    
+    if( typeof GLOBAL_AJAX_ADDED_PARAMS !== 'undefined' )
+        for(var i in GLOBAL_AJAX_ADDED_PARAMS)
+            url = url + '&' + i + '=' + encodeURI(GLOBAL_AJAX_ADDED_PARAMS[i]);
+    
+    url = url + '&wasuuup=' + wasuuup();
     
     editor.windowManager.open({
         title:  title,

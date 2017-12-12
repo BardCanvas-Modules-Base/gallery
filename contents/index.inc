@@ -113,6 +113,13 @@
     if( ! empty($_GET["edit_item"]) )      $url .= "&edit_item={$_GET["edit_item"]}";
     if( ! empty($_GET["trash_item"]) )     $url .= "&trash_item={$_GET["trash_item"]}";
     if( ! empty($_GET["author"]) )         $url .= "&search_author={$_GET["author"]}";
+    
+    # BCM additions
+    if( ! empty($_GET["bcm_platform"]) )      $url .= "&bcm_platform={$_GET["bcm_platform"]}";
+    if( ! empty($_GET["bcm_access_token"]) )  $url .= "&bcm_access_token={$_GET["bcm_access_token"]}";
+    if( ! empty($_GET["bcm_force_session"]) ) $url .= "&bcm_force_session={$_GET["bcm_force_session"]}";
+    if( ! empty($_GET["bcm_output_type"]) )   $url .= "&bcm_output_type={$_GET["bcm_output_type"]}";
+    if( ! empty($_GET["hide_browser"]) )      $url .= "&hide_browser={$_GET["hide_browser"]}";
     ?>
     <div id="media_browser" class="ajax_record_browser" data-src="<?= $url ?>">
         <div class="framed_content state_highlight" style="padding: 100px 0; text-align: center;">
