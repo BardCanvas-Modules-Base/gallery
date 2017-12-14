@@ -6,6 +6,12 @@
 - Apply per-level filters to hide categories as done by the `main_category_selector_exceptions`
   setting of the posts module.
 
+## [1.13.0] - 2017-12-14
+
+- Added extra check for autolinking skips over internal vars for easing module overrides.
+- Added flag to avoid triklet-based redirections when available.
+- Added support for external posts edition (Mobile platform).
+
 ## [1.12.0] - 2017-11-18
 
 - Fixed missing check for private media items on the embedded browser.
