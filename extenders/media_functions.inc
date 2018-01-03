@@ -60,14 +60,14 @@ function convert_video_tag($element)
     {
         if( $config->globals["modules:gallery.export_raw_video_tags"] )
             $markup = "<div class='video_container'>"
-                    . "<video poster='{$item->get_thumbnail_url(true)}' style='position: relative; {$width} {$height}' controls>" 
+                    . "<video poster='{$item->get_thumbnail_url(true)}' style='position: relative; {$width} {$height}' data-id-media='{$id_media}' controls>" 
                     . "<source src='{$item->get_item_url(true)}' />" 
                     . "</video>"
                     . "</div>";
         else
             $markup = "<div class='video_container'><div class='play_trigger pseudo_link'
                             onclick=\"$(this).closest('.video_container').find('video')[0].play(); $(this).remove();\"></div>"
-                    . "<video poster='{$item->get_thumbnail_url(true)}' style='position: relative; {$width} {$height}' controls>" 
+                    . "<video poster='{$item->get_thumbnail_url(true)}' data-id-media='{$id_media}' style='position: relative; {$width} {$height}' controls>" 
                     . "<source src='{$item->get_item_url(true)}' />" 
                     . "</video>"
                     . "</div>";
