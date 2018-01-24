@@ -6,6 +6,10 @@
 - Apply per-level filters to hide categories as done by the `main_category_selector_exceptions`
   setting of the posts module.
 
+## [1.13.1] - 2018-01-24
+
+- Added media id attribute to video tags to ease DOM referencing.
+
 ## [1.13.0] - 2017-12-14
 
 - Added extra check for autolinking skips over internal vars for easing module overrides.
