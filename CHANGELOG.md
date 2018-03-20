@@ -6,6 +6,10 @@
 - Apply per-level filters to hide categories as done by the `main_category_selector_exceptions`
   setting of the posts module.
 
+## [1.13.2] - 2018-03-19
+
+- Passed BCM version on web requests.
+
 ## [1.13.1] - 2018-01-24
 
 - Added media id attribute to video tags to ease DOM referencing.
