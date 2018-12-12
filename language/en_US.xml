@@ -73,6 +73,7 @@
         <modes>
             <tiles>Switch to tiles mode</tiles>
             <table>Switch to table mode</table>
+            <expanded_tiles>Toggle normal/enlarged thumbnails</expanded_tiles>
         </modes>
         <search_placeholder>Search by id, slug, title, description or #tags</search_placeholder>
         <columns>

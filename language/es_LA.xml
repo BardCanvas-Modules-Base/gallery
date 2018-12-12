@@ -73,6 +73,7 @@
         <modes>
             <tiles>Cambiar a modo de mosaico</tiles>
             <table>Cambiar a modo de tabla</table>
+            <expanded_tiles>Cambiar miniaturas normales/expandidas</expanded_tiles>
         </modes>
         <search_placeholder>Buscar por id, slug, título, descripción o #etiquetas</search_placeholder>
         <columns>

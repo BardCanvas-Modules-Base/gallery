@@ -121,8 +121,11 @@
     if( ! empty($_GET["bcm_force_session"]) ) $url .= "&bcm_force_session={$_GET["bcm_force_session"]}";
     if( ! empty($_GET["bcm_output_type"]) )   $url .= "&bcm_output_type={$_GET["bcm_output_type"]}";
     if( ! empty($_GET["hide_browser"]) )      $url .= "&hide_browser={$_GET["hide_browser"]}";
+    
+    $expanded_thumbnails_class = $account->engine_prefs["@gallery:expanded_tile_thumbnails"] == "true" ? "expanded_thumbnails" : "";
     ?>
-    <div id="media_browser" class="ajax_record_browser" data-src="<?= $url ?>">
+    
+    <div id="media_browser" class="ajax_record_browser <?= $expanded_thumbnails_class ?>" data-src="<?= $url ?>">
         <div class="framed_content state_highlight" style="padding: 100px 0; text-align: center;">
             <span class="fa fa-spinner fa-pulse"></span>
             <?= $language->wait ?>

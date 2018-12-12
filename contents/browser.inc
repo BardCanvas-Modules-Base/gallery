@@ -157,6 +157,67 @@ if( $_GET["embedded_mode"] == "true" ) $browser_layout = "tiles";
     <script type="text/javascript"> $(document).ready(function() { trash_media('<?= $_GET["trash_item"] ?>') }); </script>
 <? endif; ?>
 
+<? if( $browser_layout == "tiles" && $_GET["embedded_mode"] != "true" ): ?>
+    <script type="text/javascript">
+        function toggle_expanded_thumbnails()
+        {
+            var $target = $('#media_browser');
+            
+            if( $target.hasClass('expanded_thumbnails') )
+            {
+                $target.removeClass('expanded_thumbnails');
+                set_engine_pref('@gallery:expanded_tile_thumbnails', '');
+            }
+            else
+            {
+                $target.addClass('expanded_thumbnails');
+                set_engine_pref('@gallery:expanded_tile_thumbnails', 'true');
+            }
+        }
+    </script>
+    <style type="text/css">
+        
+        /* Buton styles */
+        
+        #media_browser_mode_switches span[data-trigger-for="expanded_thumbnails"]:hover {
+            background-color: Highlight; color: HighlightText; border-style: outset;
+        }
+        
+        #media_browser.expanded_thumbnails #media_browser_mode_switches span[data-trigger-for="expanded_thumbnails"] {
+            cursor: auto; color: ButtonHighlight; background-color: ButtonShadow; border-style: inset;
+        }
+        
+        /* Default mode */
+        
+        #media_browser.expanded_thumbnails .tiles_container .tile {
+            width: 345px; height: 345px; background-color: black; background-size: contain;
+        }
+        
+        #media_browser.expanded_thumbnails .tiles_container .tile .contents {
+            width: 345px; height: 345px;
+        }
+        
+        #media_browser.expanded_thumbnails .tiles_container .tile .contents .title {
+            width: 335px
+        }
+        
+        /* Landscape mode */
+        
+        body[data-orientation="landscape"] #media_browser.expanded_thumbnails .tiles_container .tile {
+            width: 305px; height: 305px;
+        }
+
+        #media_browser.expanded_thumbnails .tiles_container .tile .contents {
+            width: 305px; height: 305px;
+        }
+
+        #media_browser.expanded_thumbnails .tiles_container .tile .contents .title {
+            width: 295px
+        }
+        
+    </style>
+<? endif; ?>
+
 <h1 class="clearfix">
     <button id="refresh_media_browser" class="pull-right multirecord_actions_table_refresher"
             onclick="$('#filter_form').submit()">
@@ -170,6 +231,12 @@ if( $_GET["embedded_mode"] == "true" ) $browser_layout = "tiles";
         <span id="media_browser_mode_switches" data-current-mode="<?= $browser_layout ?>">
             <span class="pseudo_link fa fa-th-large" onclick="switch_media_browser_mode('tiles')"
                   data-trigger-for="tiles" title="<?= $current_module->language->record_nav->modes->tiles ?>"></span>
+            
+            <? if($browser_layout == "tiles" ): ?>
+                <span class="pseudo_link fa fa-arrows-alt" onclick="toggle_expanded_thumbnails()"
+                      data-trigger-for="expanded_thumbnails" title="<?= $current_module->language->record_nav->modes->expanded_tiles ?>"></span>
+            <? endif; ?>
+            
             <span class="pseudo_link fa fa-th-list" onclick="switch_media_browser_mode('table')"
                   data-trigger-for="table" title="<?= $current_module->language->record_nav->modes->table ?>"></span>
         </span>
