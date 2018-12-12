@@ -6,6 +6,10 @@
 - Apply per-level filters to hide categories as done by the `main_category_selector_exceptions`
   setting of the posts module.
 
+## [1.13.4] - 2018-12-11
+
+- Tuned expanded thumbnails toggle.
+
 ## [1.13.3] - 2018-12-11
 
 - Added expanded thumbnails mode for tiles media browser.
