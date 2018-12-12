@@ -164,15 +164,15 @@ if( $_GET["embedded_mode"] == "true" ) $browser_layout = "tiles";
             var $target = $('#media_browser');
             
             if( $target.hasClass('expanded_thumbnails') )
-            {
-                $target.removeClass('expanded_thumbnails');
-                set_engine_pref('@gallery:expanded_tile_thumbnails', '');
-            }
+                set_engine_pref('@gallery:expanded_tile_thumbnails', '', function() {
+                    $('#refresh_media_browser').click();
+                    $target.removeClass('expanded_thumbnails');
+                });
             else
-            {
-                $target.addClass('expanded_thumbnails');
-                set_engine_pref('@gallery:expanded_tile_thumbnails', 'true');
-            }
+                set_engine_pref('@gallery:expanded_tile_thumbnails', 'true', function() {
+                    $('#refresh_media_browser').click();
+                    $target.addClass('expanded_thumbnails');
+                });
         }
     </script>
     <style type="text/css">
