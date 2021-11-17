@@ -24,6 +24,14 @@ if( count($parts) < 2 ) return;
 if( $parts[0] != "media" ) return;
 
 $id_media = $parts[1];
+try
+{
+    check_sql_injection($id_media);
+}
+catch(\Exception $e)
+{
+    throw_fake_501();
+}
 
 $repository = new media_repository();
 $item = $repository->get($id_media);
