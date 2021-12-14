@@ -23,6 +23,9 @@ include "../includes/bootstrap.inc";
 if( ! $account->_exists ) throw_fake_404();
 if( $account->state != "enabled" ) throw_fake_401();
 
+try { check_sql_injection($_GET); }
+catch(\Exception $e) { throw_fake_501(); }
+
 $current_module->load_extensions("browser", "prechecks");
 if( $config->globals["@gallery:abort_browser_load"] ) throw_fake_401();
 
