@@ -19,7 +19,7 @@ use hng2_modules\search\search_by_tag_item;
 
 global $config, $template;
 
-$tag        = $template->get("current_tag");
+$tag        = addslashes($template->get("current_tag"));
 $repository = new media_repository();
 $items_data = $repository->get_for_tag($tag);
 
