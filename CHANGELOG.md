@@ -6,6 +6,10 @@
 - Apply per-level filters to hide categories as done by the `main_category_selector_exceptions`
   setting of the posts module.
 
+## [1.13.7] - 2021-12-31
+
+- Input sanitization on the "search by tag" builder extender.
+
 ## [1.13.6] - 2021-12-13
 
 - Added SQL injection checks.
