@@ -6,6 +6,10 @@
 - Apply per-level filters to hide categories as done by the `main_category_selector_exceptions`
   setting of the posts module.
 
+## [1.13.9] - 2022-03-07
+
+- Added option to inject descriptions from images embedded from the gallery in post contents.
+
 ## [1.13.8] - 2021-12-31
 
 - Input sanitization on the "search by tag" script.
