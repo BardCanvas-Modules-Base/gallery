@@ -82,6 +82,11 @@
                 <delete>extenders/accounts/account_deletion.inc</delete>
             </accounts_repository>
         </accounts>
+        <posts>
+            <post_record_class>
+                <get_processed_content priority="900">extenders/inject_alt_on_images.inc</get_processed_content>
+            </post_record_class>
+        </posts>
         <triklet>
             <home_form>
                 <presets>extenders/triklet_form_report_presets.inc</presets>

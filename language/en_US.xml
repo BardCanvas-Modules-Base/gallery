@@ -277,6 +277,16 @@
             ]]></description>
             <type>boolean</type>
         </specs>
+        <specs key="inject_alt_from_descriptions">
+            <title><![CDATA[
+                Inject descriptions as <code>alt</code> attributes in post contents
+            ]]></title>
+            <description><![CDATA[
+                If an image from the gallery is embedded in a post and it has a description set,
+                the description will be injected as <code>alt</code> attribute to improve SEO properties.
+            ]]></description>
+            <type>boolean</type>
+        </specs>
         <specs key="use_triklet_for_reporting" required_modules="triklet">
             <title>Use Triklet module for reporting media items?</title>
             <description><![CDATA[

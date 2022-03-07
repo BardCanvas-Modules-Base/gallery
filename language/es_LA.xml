@@ -278,6 +278,17 @@
             ]]></description>
             <type>boolean</type>
         </specs>
+        <specs key="inject_alt_from_descriptions">
+            <title><![CDATA[
+                Inyectar descripciones como atributos <code>alt</code> en contenido de entradas
+            ]]></title>
+            <description><![CDATA[
+                Si una imagen de la galería se inserta en una entrada y tiene una descripción puesta,
+                la descripción se inyectará como atributo <code>alt</code> en la imagen para mejorar
+                las propiedades SEO.
+            ]]></description>
+            <type>boolean</type>
+        </specs>
         <specs key="use_triklet_for_reporting" required_modules="triklet">
             <title>Usar el módulo de Triklet para reportar medios?</title>
             <description><![CDATA[
