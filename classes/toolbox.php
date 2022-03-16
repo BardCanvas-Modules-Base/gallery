@@ -96,7 +96,7 @@ class toolbox
                 $item->title,
                 $item->description,
                 $user_ip,
-                forge_geoip_location($user_ip),
+                get_geoip_location_with_isp($user_ip),
                 $_SERVER["HTTP_USER_AGENT"],
                 $other_from_segment,
                 $item->get_page_url(true),
