@@ -5,6 +5,10 @@
 
 - Apply per-level filters to hide categories as done by the `main_category_selector_exceptions`
   setting of the posts module.
+
+## [1.13.11] - 2022-05-04
+
+- Added input sanitization on contact form presets extender.
   
 ## [1.13.10] - 2022-03-16
 
