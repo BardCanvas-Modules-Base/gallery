@@ -33,7 +33,7 @@ if( empty($_GET["id"]) )
 }
 
 $repository = new media_repository();
-$item       = $repository->get($_GET["id"]);
+$item       = $repository->get(addslashes(stripslashes($_GET["id"])));
 
 if( is_null($item) )
 {
